@@ -20,9 +20,6 @@ import {
   MapPin,
   Send,
   ChevronDown,
-  Star,
-  GitBranch,
-  Trophy,
   Clock,
   Zap,
   Palette,
@@ -136,12 +133,22 @@ const CursorEffects = () => {
   )
 }
 
-// Enhanced Cursor Dot Effect
+// Enhanced Cursor Dot Effect - Updated for better visibility
 const CursorDot = () => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
   const [isHovering, setIsHovering] = useState(false)
+  const [darkMode, setDarkMode] = useState(false)
 
   useEffect(() => {
+    // Check for dark mode
+    const checkDarkMode = () => {
+      setDarkMode(document.documentElement.classList.contains("dark"))
+    }
+
+    checkDarkMode()
+    const observer = new MutationObserver(checkDarkMode)
+    observer.observe(document.documentElement, { attributes: true, attributeFilter: ["class"] })
+
     const handleMouseMove = (e: MouseEvent) => {
       setMousePosition({ x: e.clientX, y: e.clientY })
     }
@@ -149,7 +156,6 @@ const CursorDot = () => {
     const handleMouseEnter = () => setIsHovering(true)
     const handleMouseLeave = () => setIsHovering(false)
 
-    // Add hover listeners to interactive elements
     const interactiveElements = document.querySelectorAll('button, a, input, textarea, [role="button"]')
 
     interactiveElements.forEach((el) => {
@@ -161,6 +167,7 @@ const CursorDot = () => {
 
     return () => {
       window.removeEventListener("mousemove", handleMouseMove)
+      observer.disconnect()
       interactiveElements.forEach((el) => {
         el.removeEventListener("mouseenter", handleMouseEnter)
         el.removeEventListener("mouseleave", handleMouseLeave)
@@ -170,7 +177,7 @@ const CursorDot = () => {
 
   return (
     <motion.div
-      className="fixed pointer-events-none z-50 mix-blend-difference"
+      className="fixed pointer-events-none z-50"
       animate={{
         x: mousePosition.x - 16,
         y: mousePosition.y - 16,
@@ -183,7 +190,11 @@ const CursorDot = () => {
         mass: 0.5,
       }}
     >
-      <div className="w-8 h-8 bg-white rounded-full shadow-lg" />
+      <div
+        className={`w-8 h-8 rounded-full shadow-lg border-2 ${
+          darkMode ? "bg-white border-white" : "bg-gray-900 border-gray-900"
+        }`}
+      />
     </motion.div>
   )
 }
@@ -513,13 +524,6 @@ export default function Portfolio() {
     },
   ]
 
-  const codingStats = [
-    { label: "GitHub Commits", value: "2,847", icon: GitBranch, color: "from-green-400 to-emerald-400" },
-    { label: "LeetCode Solved", value: "542", icon: Trophy, color: "from-yellow-400 to-orange-400" },
-    { label: "Hours Coded", value: "3,256", icon: Clock, color: "from-blue-400 to-cyan-400" },
-    { label: "Projects Built", value: "47", icon: Star, color: "from-purple-400 to-pink-400" },
-  ]
-
   const filteredProjects =
     activeFilter === "all" ? projects : projects.filter((project) => project.category === activeFilter)
 
@@ -656,7 +660,7 @@ export default function Portfolio() {
                   transition={{ duration: 3, repeat: Number.POSITIVE_INFINITY }}
                   data-magnetic
                 >
-                  John
+                  Vince Angelo
                 </motion.span>
                 <br />
                 <motion.span
@@ -667,7 +671,7 @@ export default function Portfolio() {
                   transition={{ duration: 3, repeat: Number.POSITIVE_INFINITY }}
                   data-magnetic
                 >
-                  Developer
+                  Batecan
                 </motion.span>
               </h1>
 
@@ -831,13 +835,13 @@ export default function Portfolio() {
                     <div className="p-2 bg-gradient-to-br from-blue-500 to-purple-500 rounded-lg">
                       <MapPin className="h-4 w-4 text-white" />
                     </div>
-                    <span>San Francisco, CA</span>
+                    <span>Philippines</span>
                   </div>
                   <div className="flex items-center gap-3 text-gray-600 dark:text-gray-300">
                     <div className="p-2 bg-gradient-to-br from-green-500 to-emerald-500 rounded-lg">
                       <Mail className="h-4 w-4 text-white" />
                     </div>
-                    <span>john@example.com</span>
+                    <span>vince@example.com</span>
                   </div>
                 </motion.div>
 
@@ -1122,7 +1126,7 @@ export default function Portfolio() {
           </div>
         </section>
 
-        {/* Coding Stats Section */}
+        {/* Coding Stats Section - Updated with GitHub and WakaTime */}
         <section id="stats" className="py-20 px-4 bg-gray-50/50 dark:bg-gray-800/50 relative z-10">
           <div className="max-w-6xl mx-auto">
             <motion.div
@@ -1136,67 +1140,89 @@ export default function Portfolio() {
                 className="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent"
                 data-magnetic
               >
-                By The Numbers
+                GitHub & Coding Stats
               </h2>
               <div className="w-32 h-1 bg-gradient-to-r from-blue-600 to-purple-600 mx-auto mb-8 rounded-full"></div>
+              <p className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
+                Real-time insights into my coding journey and contributions
+              </p>
             </motion.div>
 
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
-              {codingStats.map((stat, index) => (
+            <div className="grid lg:grid-cols-2 gap-8">
+              {/* GitHub Stats */}
+              <motion.div
+                initial={{ opacity: 0, x: -50 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.8 }}
+                viewport={{ once: true }}
+                className="space-y-6"
+              >
                 <motion.div
-                  key={stat.label}
-                  initial={{ opacity: 0, scale: 0.5, rotateX: -90 }}
-                  whileInView={{ opacity: 1, scale: 1, rotateX: 0 }}
-                  transition={{
-                    duration: 0.8,
-                    delay: index * 0.2,
-                    type: "spring",
-                    stiffness: 100,
-                  }}
-                  viewport={{ once: true }}
-                  whileHover={{
-                    scale: 1.1,
-                    rotateY: 5,
-                    z: 50,
-                  }}
-                  className="group"
+                  whileHover={{ scale: 1.02 }}
+                  className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300"
                   data-magnetic
                 >
-                  <Card className="text-center p-8 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm border-0 shadow-lg hover:shadow-2xl transition-all duration-500 rounded-2xl relative overflow-hidden">
-                    {/* Animated background */}
-                    <motion.div
-                      className={`absolute inset-0 bg-gradient-to-br ${stat.color} opacity-5 group-hover:opacity-10 transition-opacity duration-500`}
-                      animate={{
-                        scale: [1, 1.2, 1],
-                        rotate: [0, 180, 360],
-                      }}
-                      transition={{ duration: 10, repeat: Number.POSITIVE_INFINITY, ease: "linear" }}
-                    />
-
-                    <motion.div
-                      className={`relative z-10 p-6 bg-gradient-to-br ${stat.color} rounded-full w-20 h-20 mx-auto mb-6 flex items-center justify-center shadow-lg`}
-                      whileHover={{
-                        rotate: 360,
-                        scale: 1.1,
-                      }}
-                      transition={{ duration: 0.8 }}
-                    >
-                      <stat.icon className="h-10 w-10 text-white" />
-                    </motion.div>
-
-                    <motion.h3
-                      className="text-4xl font-black mb-3 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent"
-                      initial={{ scale: 0 }}
-                      whileInView={{ scale: 1 }}
-                      transition={{ delay: index * 0.2 + 0.3, type: "spring", stiffness: 200 }}
-                      viewport={{ once: true }}
-                    >
-                      {stat.value}
-                    </motion.h3>
-                    <p className="text-gray-600 dark:text-gray-300 font-medium">{stat.label}</p>
-                  </Card>
+                  <h3 className="text-xl font-bold mb-4 text-center bg-gradient-to-r from-gray-900 to-gray-600 dark:from-white dark:to-gray-300 bg-clip-text text-transparent">
+                    GitHub Statistics
+                  </h3>
+                  <img
+                    src="https://github-readme-stats.vercel.app/api?username=vbatecan&show_icons=true&theme=radical&hide_border=true&bg_color=0D1117&title_color=F85D7F&icon_color=F85D7F&text_color=FFFFFF"
+                    alt="GitHub Stats"
+                    className="w-full rounded-lg"
+                  />
                 </motion.div>
-              ))}
+
+                <motion.div
+                  whileHover={{ scale: 1.02 }}
+                  className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300"
+                  data-magnetic
+                >
+                  <img
+                    src="https://github-readme-streak-stats.herokuapp.com/?user=vbatecan&theme=radical&hide_border=true&background=0D1117&stroke=F85D7F&ring=F85D7F&fire=F85D7F&currStreakLabel=F85D7F"
+                    alt="GitHub Streak"
+                    className="w-full rounded-lg"
+                  />
+                </motion.div>
+              </motion.div>
+
+              {/* WakaTime & Language Stats */}
+              <motion.div
+                initial={{ opacity: 0, x: 50 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.8 }}
+                viewport={{ once: true }}
+                className="space-y-6"
+              >
+                <motion.div
+                  whileHover={{ scale: 1.02 }}
+                  className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300"
+                  data-magnetic
+                >
+                  <h3 className="text-xl font-bold mb-4 text-center bg-gradient-to-r from-gray-900 to-gray-600 dark:from-white dark:to-gray-300 bg-clip-text text-transparent">
+                    Most Used Languages
+                  </h3>
+                  <img
+                    src="https://github-readme-stats.vercel.app/api/top-langs/?username=vbatecan&layout=compact&theme=radical&hide_border=true&bg_color=0D1117&title_color=F85D7F&text_color=FFFFFF"
+                    alt="Top Languages"
+                    className="w-full rounded-lg"
+                  />
+                </motion.div>
+
+                <motion.div
+                  whileHover={{ scale: 1.02 }}
+                  className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300"
+                  data-magnetic
+                >
+                  <h3 className="text-xl font-bold mb-4 text-center bg-gradient-to-r from-gray-900 to-gray-600 dark:from-white dark:to-gray-300 bg-clip-text text-transparent">
+                    WakaTime Stats
+                  </h3>
+                  <img
+                    src="https://github-readme-stats.vercel.app/api/wakatime?username=vbatecan&theme=radical&hide_border=true&bg_color=0D1117&title_color=F85D7F&text_color=FFFFFF"
+                    alt="WakaTime Stats"
+                    className="w-full rounded-lg"
+                  />
+                </motion.div>
+              </motion.div>
             </div>
           </div>
         </section>
@@ -1397,18 +1423,149 @@ export default function Portfolio() {
           </div>
         </section>
 
-        {/* Footer */}
-        <footer className="py-8 px-4 border-t border-gray-200/50 dark:border-gray-700/50 relative z-10">
-          <div className="max-w-6xl mx-auto text-center">
-            <motion.p
-              className="text-gray-600 dark:text-gray-300"
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              transition={{ duration: 0.8 }}
-              viewport={{ once: true }}
-            >
-              © {new Date().getFullYear()} John Developer. Crafted with ❤️ and lots of ☕
-            </motion.p>
+        {/* Footer - Redesigned */}
+        <footer className="bg-slate-800 dark:bg-slate-900 text-white relative z-10">
+          <div className="max-w-7xl mx-auto px-4 py-16">
+            <div className="grid md:grid-cols-3 gap-12">
+              {/* Brand Section */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8 }}
+                viewport={{ once: true }}
+                className="space-y-6"
+              >
+                <div className="flex items-center gap-3">
+                  <div className="w-12 h-12 bg-gradient-to-br from-blue-600 to-purple-600 rounded-xl flex items-center justify-center">
+                    <span className="text-white font-bold text-xl">V</span>
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-bold">Vince Angelo Batecan</h3>
+                    <p className="text-slate-400 text-sm">Full-Stack Developer</p>
+                  </div>
+                </div>
+                <p className="text-slate-300 leading-relaxed">
+                  Empowering digital transformation through innovative technology and dedicated excellence. Building the
+                  future, one project at a time.
+                </p>
+                <p className="text-slate-500 text-sm">
+                  © {new Date().getFullYear()} Vince Angelo Batecan. All rights reserved.
+                </p>
+              </motion.div>
+
+              {/* Quick Links */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.1 }}
+                viewport={{ once: true }}
+                className="space-y-6"
+              >
+                <h4 className="text-lg font-semibold text-white">Quick Links</h4>
+                <div className="space-y-3">
+                  {["About", "Projects", "Skills", "Certificates", "Contact"].map((item) => (
+                    <motion.button
+                      key={item}
+                      onClick={() => scrollToSection(item.toLowerCase())}
+                      className="block text-slate-300 hover:text-blue-400 transition-colors duration-300"
+                      whileHover={{ x: 5 }}
+                      data-magnetic
+                    >
+                      {item}
+                    </motion.button>
+                  ))}
+                </div>
+              </motion.div>
+
+              {/* Contact Info */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.2 }}
+                viewport={{ once: true }}
+                className="space-y-6"
+              >
+                <h4 className="text-lg font-semibold text-white">Contact Info</h4>
+                <div className="space-y-4">
+                  <div className="flex items-start gap-3">
+                    <MapPin className="h-5 w-5 text-blue-400 mt-1 flex-shrink-0" />
+                    <div>
+                      <p className="text-slate-300">Philippines</p>
+                      <p className="text-slate-400 text-sm">Available for remote work</p>
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <Mail className="h-5 w-5 text-blue-400 flex-shrink-0" />
+                    <a
+                      href="mailto:vince@example.com"
+                      className="text-slate-300 hover:text-blue-400 transition-colors"
+                      data-magnetic
+                    >
+                      vince@example.com
+                    </a>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <Clock className="h-5 w-5 text-blue-400 flex-shrink-0" />
+                    <p className="text-slate-300">Mon-Fri: 9AM-6PM (PHT)</p>
+                  </div>
+                </div>
+
+                {/* Google Maps Integration */}
+                <motion.div className="mt-6" whileHover={{ scale: 1.02 }} data-magnetic>
+                  <div className="bg-slate-700 rounded-lg overflow-hidden">
+                    <iframe
+                      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3861.2!2d121.0!3d14.6!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTTCsDM2JzAwLjAiTiAxMjHCsDAwJzAwLjAiRQ!5e0!3m2!1sen!2sph!4v1234567890"
+                      width="100%"
+                      height="150"
+                      style={{ border: 0 }}
+                      allowFullScreen
+                      loading="lazy"
+                      referrerPolicy="no-referrer-when-downgrade"
+                      className="grayscale hover:grayscale-0 transition-all duration-300"
+                    />
+                  </div>
+                </motion.div>
+              </motion.div>
+            </div>
+          </div>
+
+          {/* Bottom Bar */}
+          <div className="border-t border-slate-700">
+            <div className="max-w-7xl mx-auto px-4 py-6">
+              <motion.div
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                transition={{ duration: 0.8 }}
+                viewport={{ once: true }}
+                className="flex flex-col md:flex-row justify-between items-center gap-4"
+              >
+                <p className="text-slate-400 text-sm text-center md:text-left">
+                  Designed with <span className="text-red-400">❤️</span> for modern web experiences
+                </p>
+                <div className="flex gap-4">
+                  <motion.a
+                    href="https://github.com/vbatecan"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-slate-400 hover:text-blue-400 transition-colors"
+                    whileHover={{ scale: 1.1 }}
+                    data-magnetic
+                  >
+                    <Github className="h-5 w-5" />
+                  </motion.a>
+                  <motion.a
+                    href="https://linkedin.com/in/vbatecan"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-slate-400 hover:text-blue-400 transition-colors"
+                    whileHover={{ scale: 1.1 }}
+                    data-magnetic
+                  >
+                    <Linkedin className="h-5 w-5" />
+                  </motion.a>
+                </div>
+              </motion.div>
+            </div>
           </div>
         </footer>
       </div>
