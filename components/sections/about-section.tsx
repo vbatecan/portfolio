@@ -1,7 +1,7 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { MapPin, Mail, Github, Linkedin, Globe, Code2 } from "lucide-react"
+import { MapPin, Mail, Github, Linkedin, Facebook, Globe } from "lucide-react"
 import { Button } from "@/components/ui/button"
 
 export const AboutSection = () => {
@@ -59,24 +59,17 @@ export const AboutSection = () => {
             viewport={{ once: true }}
             className="space-y-6"
           >
-            <motion.div
-              className="p-6 bg-gradient-to-r from-blue-50 to-purple-50 dark:from-gray-800 dark:to-gray-700 rounded-2xl border border-blue-200 dark:border-gray-600"
+            <motion.p
+              className="text-lg text-gray-600 dark:text-gray-300 leading-relaxed"
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               transition={{ delay: 0.2, duration: 0.8 }}
               viewport={{ once: true }}
             >
-              <div className="flex items-center gap-3 mb-4">
-                <Code2 className="h-6 w-6 text-blue-600" />
-                <h3 className="text-xl font-bold text-gray-900 dark:text-white">Core Specialization</h3>
-              </div>
-              <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
-                I'm a software developer specializing in <strong>Java and relational databases</strong>, with a focus on
-                building secure, scalable RESTful APIs using <strong>Spring Boot and Quarkus</strong>. I have experience
-                implementing authentication systems, including <strong>JWT-based security and OAuth2</strong>, to
-                protect application data.
-              </p>
-            </motion.div>
+              I'm a software developer specializing in <strong>Java and relational databases</strong>, with a focus on
+              building secure, scalable RESTful APIs using <strong>Spring Boot and Quarkus</strong>. I have experience
+              implementing authentication systems, including <strong>JWT-based security and OAuth2</strong>.
+            </motion.p>
 
             <motion.p
               className="text-lg text-gray-600 dark:text-gray-300 leading-relaxed"
@@ -87,27 +80,14 @@ export const AboutSection = () => {
             >
               Beyond backend development, I create dynamic, responsive user interfaces with <strong>Angular</strong>,
               seamlessly integrating frontends with API backends for complete full-stack solutions. My work emphasizes{" "}
-              <strong>clean architecture, maintainable code, and security best practices</strong> — delivering projects
-              that are both reliable and maintainable.
-            </motion.p>
-
-            <motion.p
-              className="text-lg text-gray-600 dark:text-gray-300 leading-relaxed"
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              transition={{ delay: 0.6, duration: 0.8 }}
-              viewport={{ once: true }}
-            >
-              When I'm not architecting secure APIs or crafting intuitive interfaces, you'll find me exploring the
-              frontiers of AI/ML, contributing to open-source projects, or mentoring the next generation of developers.
-              I believe in code that not only works but inspires.
+              <strong>clean architecture, maintainable code, and security best practices</strong>.
             </motion.p>
 
             <motion.div
               className="grid grid-cols-2 gap-6 pt-4"
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
-              transition={{ delay: 0.8, duration: 0.8 }}
+              transition={{ delay: 0.6, duration: 0.8 }}
               viewport={{ once: true }}
             >
               <div className="space-y-4">
@@ -142,7 +122,7 @@ export const AboutSection = () => {
               className="flex gap-4 pt-4"
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
-              transition={{ delay: 1.0, duration: 0.8 }}
+              transition={{ delay: 0.8, duration: 0.8 }}
               viewport={{ once: true }}
             >
               <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} data-magnetic>
@@ -155,6 +135,12 @@ export const AboutSection = () => {
                 <Button variant="outline" size="sm" className="rounded-full">
                   <Linkedin className="h-4 w-4 mr-2" />
                   LinkedIn
+                </Button>
+              </motion.div>
+              <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} data-magnetic>
+                <Button variant="outline" size="sm" className="rounded-full">
+                  <Facebook className="h-4 w-4 mr-2" />
+                  Facebook
                 </Button>
               </motion.div>
             </motion.div>

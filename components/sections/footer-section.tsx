@@ -1,7 +1,7 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { MapPin, Mail, Clock, Github, Linkedin } from "lucide-react"
+import { MapPin, Mail, Clock, Github, Linkedin, Facebook, Phone } from "lucide-react"
 
 interface FooterSectionProps {
   scrollToSection: (sectionId: string) => void
@@ -90,6 +90,16 @@ export const FooterSection = ({ scrollToSection }: FooterSectionProps) => {
                 </a>
               </div>
               <div className="flex items-center gap-3">
+                <Phone className="h-5 w-5 text-blue-400 flex-shrink-0" />
+                <a
+                  href="tel:+639123456789"
+                  className="text-slate-300 hover:text-blue-400 transition-colors"
+                  data-magnetic
+                >
+                  +63 912 345 6789
+                </a>
+              </div>
+              <div className="flex items-center gap-3">
                 <Clock className="h-5 w-5 text-blue-400 flex-shrink-0" />
                 <p className="text-slate-300">Mon-Fri: 9AM-6PM (PHT)</p>
               </div>
@@ -147,6 +157,16 @@ export const FooterSection = ({ scrollToSection }: FooterSectionProps) => {
                 data-magnetic
               >
                 <Linkedin className="h-5 w-5" />
+              </motion.a>
+              <motion.a
+                href="https://facebook.com/vbatecan"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-slate-400 hover:text-blue-400 transition-colors"
+                whileHover={{ scale: 1.1 }}
+                data-magnetic
+              >
+                <Facebook className="h-5 w-5" />
               </motion.a>
             </div>
           </motion.div>

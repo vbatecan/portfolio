@@ -4,7 +4,7 @@ import type React from "react"
 
 import { useState } from "react"
 import { motion } from "framer-motion"
-import { Send } from "lucide-react"
+import { Send, CheckCircle, AlertCircle } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
@@ -16,11 +16,35 @@ export const ContactSection = () => {
     email: "",
     message: "",
   })
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [submitStatus, setSubmitStatus] = useState<"idle" | "success" | "error">("idle")
 
-  const handleFormSubmit = (e: React.FormEvent) => {
+  const handleFormSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    console.log("Form submitted:", formData)
-    setFormData({ name: "", email: "", message: "" })
+    setIsSubmitting(true)
+    setSubmitStatus("idle")
+
+    try {
+      const response = await fetch("https://formspree.io/f/myzelnng", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      })
+
+      if (response.ok) {
+        setSubmitStatus("success")
+        setFormData({ name: "", email: "", message: "" })
+      } else {
+        setSubmitStatus("error")
+      }
+    } catch (error) {
+      console.error("Error submitting form:", error)
+      setSubmitStatus("error")
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -72,6 +96,32 @@ export const ContactSection = () => {
               transition={{ duration: 4, repeat: Number.POSITIVE_INFINITY }}
             />
 
+            {submitStatus === "success" && (
+              <motion.div
+                initial={{ opacity: 0, y: -20 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="mb-6 p-4 bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-lg flex items-center gap-3"
+              >
+                <CheckCircle className="h-5 w-5 text-green-600" />
+                <span className="text-green-700 dark:text-green-300">
+                  Thank you! Your message has been sent successfully.
+                </span>
+              </motion.div>
+            )}
+
+            {submitStatus === "error" && (
+              <motion.div
+                initial={{ opacity: 0, y: -20 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="mb-6 p-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg flex items-center gap-3"
+              >
+                <AlertCircle className="h-5 w-5 text-red-600" />
+                <span className="text-red-700 dark:text-red-300">
+                  Sorry, there was an error sending your message. Please try again.
+                </span>
+              </motion.div>
+            )}
+
             <form onSubmit={handleFormSubmit} className="space-y-6 relative z-10">
               <div className="grid md:grid-cols-2 gap-6">
                 <motion.div
@@ -90,6 +140,7 @@ export const ContactSection = () => {
                     onChange={handleInputChange}
                     placeholder="Your Name"
                     required
+                    disabled={isSubmitting}
                     className="rounded-xl border-0 bg-white/50 dark:bg-gray-700/50 backdrop-blur-sm"
                     data-magnetic
                   />
@@ -111,6 +162,7 @@ export const ContactSection = () => {
                     onChange={handleInputChange}
                     placeholder="your.email@example.com"
                     required
+                    disabled={isSubmitting}
                     className="rounded-xl border-0 bg-white/50 dark:bg-gray-700/50 backdrop-blur-sm"
                     data-magnetic
                   />
@@ -133,6 +185,7 @@ export const ContactSection = () => {
                   placeholder="Tell me about your project..."
                   rows={6}
                   required
+                  disabled={isSubmitting}
                   className="rounded-xl border-0 bg-white/50 dark:bg-gray-700/50 backdrop-blur-sm resize-none"
                   data-magnetic
                 />
@@ -148,10 +201,24 @@ export const ContactSection = () => {
               >
                 <Button
                   type="submit"
-                  className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white py-4 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300"
+                  disabled={isSubmitting}
+                  className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white py-4 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 disabled:opacity-50"
                 >
-                  <Send className="h-5 w-5 mr-2" />
-                  Send Message
+                  {isSubmitting ? (
+                    <>
+                      <motion.div
+                        className="h-5 w-5 mr-2 border-2 border-white border-t-transparent rounded-full"
+                        animate={{ rotate: 360 }}
+                        transition={{ duration: 1, repeat: Number.POSITIVE_INFINITY, ease: "linear" }}
+                      />
+                      Sending...
+                    </>
+                  ) : (
+                    <>
+                      <Send className="h-5 w-5 mr-2" />
+                      Send Message
+                    </>
+                  )}
                 </Button>
               </motion.div>
             </form>
