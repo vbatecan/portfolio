@@ -26,7 +26,7 @@ const projects = [
     description:
       "Web-based interface for biometric attendance tracking with real-time processing and automated reporting",
     category: "web",
-    image: "/placeholder.svg?height=200&width=300",
+    image: "/assets/sams/1.png?height=200&width=300",
     technologies: ["Angular", "Quarkus", "PostgreSQL", "TypeScript", "PrimeNG", "JWT"],
     github: "#",
     live: "#",
@@ -54,7 +54,7 @@ const projects = [
     description:
       "Fingerprint-based attendance system with ESP32 microcontroller and AS608 scanner for Punturin Senior High School",
     category: "hardware",
-    image: "/placeholder.svg?height=200&width=300",
+    image: "/assets/Trackattend/1.jpg?height=200&width=300",
     technologies: ["C++", "Arduino", "ESP32", "JavaScript", "HTML", "CSS"],
     github: "#",
     live: "#",
@@ -82,7 +82,7 @@ const projects = [
     description:
       "AI-powered visual detection tool for streamlining sticker location in Silhouette Studio for Shopee orders",
     category: "ai",
-    image: "/placeholder.svg?height=200&width=300",
+    image: "/assets/Sticker Guidance/1.png?height=200&width=300",
     technologies: ["Python", "PyTorch", "YOLO", "Ultralytics", "Roboflow"],
     github: "#",
     live: "#",
@@ -138,7 +138,7 @@ const projects = [
     description:
       "Robust backend solution with dynamic searching capabilities for comprehensive shoe-related data management",
     category: "api",
-    image: "/placeholder.svg?height=200&width=300",
+    image: "/assets/Shoes Search API/1.png?height=200&width=300",
     technologies: ["Spring Boot", "PostgreSQL", "REST API", "Java"],
     github: "#",
     live: "#",
@@ -194,7 +194,7 @@ const projects = [
     description:
       "Refined e-commerce platform for high-quality apparel with secure transaction systems and seamless shopping experience",
     category: "ecommerce",
-    image: "/placeholder.svg?height=200&width=300",
+    image: "/assets/4/1.png?height=200&width=300",
     technologies: ["PHP", "MySQL", "JavaScript", "HTML", "CSS"],
     github: "#",
     live: "#",
@@ -222,7 +222,7 @@ const projects = [
     description:
       "Dynamic forum platform fostering online communities with real-time communication and structured discussions",
     category: "community",
-    image: "/placeholder.svg?height=200&width=300",
+    image: "/assets/Forumania/1.png?height=200&width=300",
     technologies: ["PHP", "MySQL", "JavaScript", "HTML", "CSS"],
     github: "#",
     live: "#",
@@ -250,7 +250,7 @@ const projects = [
     description:
       "Professional static website for soap and disinfectant products with responsive design and brand presentation",
     category: "web",
-    image: "/placeholder.svg?height=200&width=300",
+    image: "/assets/Soapify/1.png?height=200&width=300",
     technologies: ["JavaScript", "HTML", "CSS"],
     github: "#",
     live: "#",
