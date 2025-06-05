@@ -166,7 +166,7 @@ const projects = [
     description:
       "WiFi security testing tool with enhanced browser-based interface for network deauthentication testing",
     category: "security",
-    image: "/assets/esp32-deauther/1.png?height=200&width=300",
+    image: "/placeholder.svg?height=200&width=300",
     technologies: ["C++", "Arduino", "ESP32", "Hardware"],
     github: "#",
     live: "#",

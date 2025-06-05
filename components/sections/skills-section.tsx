@@ -261,8 +261,7 @@ export const SkillsSection = () => {
                 whileInView={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 viewport={{ once: true }}
-                whileHover={{ scale: 1.05, y: -5 }}
-                className="px-6 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 font-semibold"
+                className="px-6 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-xl shadow-lg transition-all duration-300 font-semibold transform hover:scale-105 hover:-translate-y-1 hover:shadow-xl"
                 data-magnetic
               >
                 {spec}
@@ -285,16 +284,11 @@ export const SkillsSection = () => {
                 stiffness: 100,
               }}
               viewport={{ once: true }}
-              whileHover={{
-                scale: 1.05,
-                rotateY: 10,
-                z: 50,
-              }}
               className="group perspective-1000 relative"
               data-magnetic
             >
               <Card
-                className={`relative h-48 overflow-hidden bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm border-0 shadow-lg hover:shadow-2xl transition-all duration-500 rounded-2xl transform-gpu ${
+                className={`relative h-48 overflow-hidden bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm border-0 shadow-lg transition-all duration-500 rounded-2xl transform-gpu group-hover:shadow-2xl group-hover:scale-[1.05] group-hover:rotate-y-10 group-hover:z-50 ${
                   skill.isSpecialty ? "ring-2 ring-blue-500/50" : ""
                 }`}
               >
@@ -318,7 +312,7 @@ export const SkillsSection = () => {
                 />
 
                 {/* Floating particles */}
-                <div className="absolute inset-0 overflow-hidden">
+                <div className="absolute inset-0 overflow-hidden pointer-events-none">
                   {[...Array(4)].map((_, i) => (
                     <motion.div
                       key={i}
@@ -341,16 +335,11 @@ export const SkillsSection = () => {
                 </div>
 
                 <CardContent className="relative z-10 p-4 h-full flex flex-col items-center justify-center text-center">
-                  <motion.div
-                    className={`p-3 bg-gradient-to-br ${skill.color} rounded-2xl mb-3 shadow-lg`}
-                    whileHover={{
-                      rotate: [0, -10, 10, 0],
-                      scale: 1.1,
-                    }}
-                    transition={{ duration: 0.5 }}
+                  <div
+                    className={`p-3 bg-gradient-to-br ${skill.color} rounded-2xl mb-3 shadow-lg transition-transform duration-300 group-hover:scale-110 group-hover:rotate-[-10deg] group-hover:rotate-[10deg] group-hover:rotate-[0deg]`}
                   >
                     <skill.icon className="h-6 w-6 text-white" />
-                  </motion.div>
+                  </div>
 
                   <h3 className="font-bold text-sm mb-2 bg-gradient-to-r from-gray-900 to-gray-600 dark:from-white dark:to-gray-300 bg-clip-text text-transparent">
                     {skill.name}
@@ -384,11 +373,7 @@ export const SkillsSection = () => {
                 </CardContent>
 
                 {/* Enhanced Hover Details Tooltip */}
-                <motion.div
-                  className="absolute inset-0 bg-white/95 dark:bg-gray-800/95 backdrop-blur-sm rounded-2xl p-4 opacity-0 group-hover:opacity-100 transition-all duration-300 z-20 overflow-hidden"
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  whileHover={{ opacity: 1, scale: 1 }}
-                >
+                <div className="absolute inset-0 bg-white/95 dark:bg-gray-800/95 backdrop-blur-sm rounded-2xl p-4 opacity-0 group-hover:opacity-100 transition-all duration-300 ease-in-out z-20 overflow-hidden">
                   <div className="h-full flex flex-col">
                     <div className="flex items-center gap-2 mb-2">
                       <div className={`p-2 bg-gradient-to-br ${skill.color} rounded-lg`}>
@@ -405,16 +390,13 @@ export const SkillsSection = () => {
                     <div className="flex-1 overflow-y-auto mb-2">
                       <ul className="space-y-1">
                         {skill.details.slice(0, 3).map((detail, detailIndex) => (
-                          <motion.li
+                          <li
                             key={detailIndex}
                             className="text-xs text-gray-700 dark:text-gray-300 flex items-start gap-1"
-                            initial={{ opacity: 0, x: -10 }}
-                            whileHover={{ opacity: 1, x: 0 }}
-                            transition={{ delay: detailIndex * 0.05 }}
                           >
                             <span className="text-blue-500 mt-1">•</span>
                             <span>{detail}</span>
-                          </motion.li>
+                          </li>
                         ))}
                         {skill.details.length > 3 && (
                           <li className="text-xs text-gray-500 dark:text-gray-400 italic">
@@ -439,7 +421,7 @@ export const SkillsSection = () => {
                       </div>
                     </div>
                   </div>
-                </motion.div>
+                </div>
               </Card>
             </motion.div>
           ))}
@@ -470,8 +452,7 @@ export const SkillsSection = () => {
                 whileInView={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 viewport={{ once: true }}
-                whileHover={{ scale: 1.05 }}
-                className="px-6 py-3 bg-gradient-to-r from-blue-100 to-purple-100 dark:from-blue-900/30 dark:to-purple-900/30 text-blue-800 dark:text-blue-200 rounded-full border border-blue-200 dark:border-blue-700 shadow-md"
+                className="px-6 py-3 bg-gradient-to-r from-blue-100 to-purple-100 dark:from-blue-900/30 dark:to-purple-900/30 text-blue-800 dark:text-blue-200 rounded-full border border-blue-200 dark:border-blue-700 shadow-md transform hover:scale-105 transition-transform duration-300"
                 data-magnetic
               >
                 <span className="font-medium">{tech}</span>
