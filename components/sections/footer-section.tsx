@@ -82,11 +82,11 @@ export const FooterSection = ({ scrollToSection }: FooterSectionProps) => {
               <div className="flex items-center gap-3">
                 <Mail className="h-5 w-5 text-blue-400 flex-shrink-0" />
                 <a
-                  href="mailto:vince@example.com"
+                  href="mailto:vbatecan@gmail.com"
                   className="text-slate-300 hover:text-blue-400 transition-colors"
                   data-magnetic
                 >
-                  vince@example.com
+                  vbatecan@gmail.com
                 </a>
               </div>
               <div className="flex items-center gap-3">
@@ -96,7 +96,7 @@ export const FooterSection = ({ scrollToSection }: FooterSectionProps) => {
                   className="text-slate-300 hover:text-blue-400 transition-colors"
                   data-magnetic
                 >
-                  +63 912 345 6789
+                  +63 999 821 6556
                 </a>
               </div>
               <div className="flex items-center gap-3">
@@ -149,7 +149,7 @@ export const FooterSection = ({ scrollToSection }: FooterSectionProps) => {
                 <Github className="h-5 w-5" />
               </motion.a>
               <motion.a
-                href="https://linkedin.com/in/vbatecan"
+                href="https://www.linkedin.com/in/vince-batecan/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-slate-400 hover:text-blue-400 transition-colors"
@@ -159,7 +159,7 @@ export const FooterSection = ({ scrollToSection }: FooterSectionProps) => {
                 <Linkedin className="h-5 w-5" />
               </motion.a>
               <motion.a
-                href="https://facebook.com/vbatecan"
+                href="https://www.facebook.com/Nytriii"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-slate-400 hover:text-blue-400 transition-colors"

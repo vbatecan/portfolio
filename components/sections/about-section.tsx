@@ -45,7 +45,7 @@ export const AboutSection = () => {
                 transition={{ duration: 15, repeat: Number.POSITIVE_INFINITY, ease: "linear" }}
               />
               <img
-                src="/placeholder.svg?height=400&width=400"
+                src="/assets/2.jpg?height=400&width=400"
                 alt="Profile"
                 className="w-full max-w-sm mx-auto rounded-2xl shadow-2xl relative z-10"
               />
@@ -101,7 +101,7 @@ export const AboutSection = () => {
                   <div className="p-2 bg-gradient-to-br from-green-500 to-emerald-500 rounded-lg">
                     <Mail className="h-4 w-4 text-white" />
                   </div>
-                  <span>vince@example.com</span>
+                  <span>vbatecan@gmail.com</span>
                 </div>
               </div>
               <div className="space-y-4">
@@ -126,19 +126,19 @@ export const AboutSection = () => {
               viewport={{ once: true }}
             >
               <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} data-magnetic>
-                <Button variant="outline" size="sm" className="rounded-full">
+                <Button variant="outline" size="sm" className="rounded-full" onClick={() => window.open("https://github.com/vbatecan", "_blank")}>
                   <Github className="h-4 w-4 mr-2" />
                   GitHub
                 </Button>
               </motion.div>
               <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} data-magnetic>
-                <Button variant="outline" size="sm" className="rounded-full">
+                <Button variant="outline" size="sm" className="rounded-full" onClick={() => window.open("https://www.linkedin.com/in/vince-batecan/", "_blank")}>
                   <Linkedin className="h-4 w-4 mr-2" />
                   LinkedIn
                 </Button>
               </motion.div>
               <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} data-magnetic>
-                <Button variant="outline" size="sm" className="rounded-full">
+                <Button variant="outline" size="sm" className="rounded-full" onClick={() => window.open("https://www.facebook.com/Nytriii", "_blank")}>
                   <Facebook className="h-4 w-4 mr-2" />
                   Facebook
                 </Button>
