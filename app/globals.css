@@ -55,17 +55,11 @@
   }
   body {
     @apply bg-background text-foreground;
-    cursor: none;
   }
 }
 
 html {
   scroll-behavior: smooth;
-}
-
-/* Hide default cursor */
-* {
-  cursor: none !important;
 }
 
 /* Custom scrollbar */
@@ -151,4 +145,18 @@ html {
 
 .animate-pulse-glow {
   animation: pulse-glow 2s ease-in-out infinite;
+}
+
+/* Smooth transitions for lazy loaded content */
+[data-section] {
+  transition: opacity 0.3s ease-in-out;
+}
+
+/* Optimize rendering performance */
+.will-change-transform {
+  will-change: transform;
+}
+
+.will-change-opacity {
+  will-change: opacity;
 }
