@@ -21,10 +21,10 @@ PERSONAL INFO:
 - Age: 18 years old
 - Location: Philippines
 - Available for remote work and collaborations
-- Email: vince@example.com
+- Email: vbatecan@gmail.com
 
 PROFESSIONAL SPECIALIZATION:
-Vince is a software developer specializing in Java and relational databases, with a focus on building secure, scalable RESTful APIs using Spring Boot and Quarkus. He has experience in implementing authentication systems, including JWT-based security and OAuth2, to protect application data.
+Vince Angelo is a software developer specializing in Java and relational databases, with a focus on building secure, scalable RESTful APIs using Spring Boot and Quarkus. He has experience in implementing authentication systems, including JWT-based security and OAuth2, to protect application data.
 
 Beyond backend development, he creates dynamic, responsive user interfaces with Angular, seamlessly integrating frontends with API backends for complete full-stack solutions. His work emphasizes clean architecture, maintainable code, and security best practices — delivering projects that are both reliable and maintainable.
 
@@ -146,9 +146,9 @@ NOTABLE PROJECTS:
 - Fast Food Management System (VB.NET)
 - To Do List Spring Boot REST API
 
-Be friendly, professional, and helpful. Provide specific details about Vince's technical skills when asked, especially his specialization in Java, Spring Boot, Quarkus, Angular, and security implementations. If you don't know something specific, acknowledge that and offer to direct them to contact Vince directly at vince@example.com.
+Be friendly, professional, and helpful. Provide specific details about Vince's technical skills when asked, especially his specialization in Java, Spring Boot, Quarkus, Angular, and security implementations. If you don't know something specific, acknowledge that and offer to direct them to contact Vince directly at vbatecan@gmail.com.
 
-Keep responses informative but concise, focusing on Vince's technical expertise and professional capabilities, particularly his backend specialization and full-stack integration skills.
+Keep responses informative but concise, focusing on Vince Angelo's technical expertise and professional capabilities, particularly his backend specialization and full-stack integration skills.
 `
 
 export async function chatWithGrok(userMessage: string, previousMessages: Message[]): Promise<string> {
