@@ -14,10 +14,19 @@ import {
   ShoppingCart,
   MessageSquare,
   Sparkles,
+  Lock,
+  LockOpen,
+  AlertCircle,
+  CheckCircle2,
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
+
+// Define project status types
+type RepoStatus = "public" | "private" | "none"
+type LiveStatus = "live" | "offline" | "development" | "archived"
 
 const projects = [
   {
@@ -32,6 +41,8 @@ const projects = [
     live: "#",
     icon: GraduationCap,
     date: "2024",
+    repoStatus: "public" as RepoStatus,
+    liveStatus: "live" as LiveStatus,
     details: {
       overview:
         "The web interface of the Trackattend project, integrating fingerprint biometric authentication for real-time student attendance registration.",
@@ -60,6 +71,8 @@ const projects = [
     live: "#",
     icon: Fingerprint,
     date: "2024",
+    repoStatus: "public" as RepoStatus,
+    liveStatus: "development" as LiveStatus,
     details: {
       overview:
         "A comprehensive Grade 12 research project combining hardware and software to automate student attendance using fingerprint biometric technology.",
@@ -88,6 +101,8 @@ const projects = [
     live: "#",
     icon: Search,
     date: "2024",
+    repoStatus: "private" as RepoStatus,
+    liveStatus: "live" as LiveStatus,
     details: {
       overview:
         "Machine learning solution designed to help editors quickly locate specific stickers within Silhouette Studio software for Shopee product orders.",
@@ -116,6 +131,8 @@ const projects = [
     live: "#",
     icon: Wifi,
     date: "2024",
+    repoStatus: "private" as RepoStatus,
+    liveStatus: "offline" as LiveStatus,
     details: {
       overview:
         "A comprehensive WiFi management system enabling pay-per-use internet access with automated control and monitoring capabilities.",
@@ -144,6 +161,8 @@ const projects = [
     live: "#",
     icon: Server,
     date: "Oct 2024 - Nov 2024",
+    repoStatus: "public" as RepoStatus,
+    liveStatus: "live" as LiveStatus,
     details: {
       overview:
         "A robust backend solution crafted to offer manipulable and dynamic searching capabilities for shoe-related data with comprehensive filtering operations.",
@@ -172,6 +191,8 @@ const projects = [
     live: "#",
     icon: Shield,
     date: "Oct 2024",
+    repoStatus: "public" as RepoStatus,
+    liveStatus: "development" as LiveStatus,
     details: {
       overview:
         "Contributed to the development of the user interface for the ESP32 Deauther project—a tool designed for WiFi network security testing and educational purposes.",
@@ -200,6 +221,8 @@ const projects = [
     live: "#",
     icon: ShoppingCart,
     date: "Aug 2024 - Sep 2024",
+    repoStatus: "private" as RepoStatus,
+    liveStatus: "live" as LiveStatus,
     details: {
       overview:
         "A refined e-commerce platform dedicated to the sale of high-quality apparel, leveraging cutting-edge technology for seamless shopping experiences.",
@@ -228,6 +251,8 @@ const projects = [
     live: "#",
     icon: MessageSquare,
     date: "Jul 2024 - Aug 2024",
+    repoStatus: "private" as RepoStatus,
+    liveStatus: "live" as LiveStatus,
     details: {
       overview:
         "A forum platform designed to facilitate engaging discussions and foster dynamic online communities with advanced technology and user-centric approach.",
@@ -256,6 +281,8 @@ const projects = [
     live: "#",
     icon: Sparkles,
     date: "Mar 2024",
+    repoStatus: "none" as RepoStatus,
+    liveStatus: "live" as LiveStatus,
     details: {
       overview:
         "A static website developed as a commission for a client to present and promote soap and disinfectant products, serving as a digital brand introduction.",
@@ -284,6 +311,8 @@ const projects = [
     live: "#",
     icon: GraduationCap,
     date: "Sep 2023 - Oct 2023",
+    repoStatus: "public" as RepoStatus,
+    liveStatus: "archived" as LiveStatus,
     details: {
       overview:
         "A comprehensive desktop application designed to streamline student enrollment processes and enhance record-keeping in educational institutions, built with C# and equipped with LocalDB.",
@@ -312,6 +341,8 @@ const projects = [
     live: "#",
     icon: ShoppingCart,
     date: "Apr 2022 - Jun 2022",
+    repoStatus: "none" as RepoStatus,
+    liveStatus: "archived" as LiveStatus,
     details: {
       overview:
         "A comprehensive solution designed to streamline operations and enhance efficiency in the fast food industry, managing inventory, sales, staffing, and customer service.",
@@ -340,6 +371,8 @@ const projects = [
     live: "#",
     icon: Server,
     date: "Jan 2022",
+    repoStatus: "public" as RepoStatus,
+    liveStatus: "offline" as LiveStatus,
     details: {
       overview:
         "A RESTful API designed to assist Todo list applications in managing task information, providing comprehensive CRUD operations for task management.",
@@ -370,6 +403,28 @@ const categories = [
   { id: "ecommerce", name: "E-commerce", count: projects.filter((p) => p.category === "ecommerce").length },
   { id: "community", name: "Community Platforms", count: projects.filter((p) => p.category === "community").length },
 ]
+
+// Helper function to get status information
+const getStatusInfo = (status: LiveStatus | RepoStatus) => {
+  switch (status) {
+    case "live":
+      return { icon: CheckCircle2, color: "bg-green-500", text: "Live" }
+    case "offline":
+      return { icon: AlertCircle, color: "bg-red-500", text: "Offline" }
+    case "development":
+      return { icon: AlertCircle, color: "bg-yellow-500", text: "In Development" }
+    case "archived":
+      return { icon: AlertCircle, color: "bg-gray-500", text: "Archived" }
+    case "public":
+      return { icon: LockOpen, color: "bg-blue-500", text: "Public Repository" }
+    case "private":
+      return { icon: Lock, color: "bg-purple-500", text: "Private Repository" }
+    case "none":
+      return { icon: AlertCircle, color: "bg-gray-500", text: "No Repository" }
+    default:
+      return { icon: AlertCircle, color: "bg-gray-500", text: "Unknown" }
+  }
+}
 
 export const ProjectsSection = () => {
   const [activeFilter, setActiveFilter] = useState("all")
@@ -427,89 +482,144 @@ export const ProjectsSection = () => {
         {/* Projects Grid */}
         <motion.div layout className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
           <AnimatePresence>
-            {filteredProjects.map((project, index) => (
-              <motion.div
-                key={project.id}
-                layout
-                initial={{ opacity: 0, scale: 0.9, y: 50 }}
-                animate={{ opacity: 1, scale: 1, y: 0 }}
-                exit={{ opacity: 0, scale: 0.9, y: -50 }}
-                transition={{ duration: 0.5, delay: index * 0.05 }}
-                whileHover={{ y: -10, scale: 1.02 }}
-                className="group cursor-pointer"
-                data-magnetic
-                onClick={() => setSelectedProject(project)}
-              >
-                <Card className="h-full overflow-hidden bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm border-0 shadow-xl hover:shadow-2xl transition-all duration-500 rounded-2xl">
-                  <div className="relative overflow-hidden">
-                    <motion.img
-                      src={project.image || "/placeholder.svg"}
-                      alt={project.title}
-                      className="w-full h-48 object-cover"
-                      whileHover={{ scale: 1.1 }}
-                      transition={{ duration: 0.5 }}
-                    />
-                    <motion.div
-                      className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500 flex items-center justify-center gap-4"
-                      initial={{ opacity: 0 }}
-                      whileHover={{ opacity: 1 }}
-                    >
+            {filteredProjects.map((project, index) => {
+              const liveStatusInfo = getStatusInfo(project.liveStatus)
+              const repoStatusInfo = getStatusInfo(project.repoStatus)
+              const LiveIcon = liveStatusInfo.icon
+              const RepoIcon = repoStatusInfo.icon
+
+              return (
+                <motion.div
+                  key={project.id}
+                  layout
+                  initial={{ opacity: 0, scale: 0.9, y: 50 }}
+                  animate={{ opacity: 1, scale: 1, y: 0 }}
+                  exit={{ opacity: 0, scale: 0.9, y: -50 }}
+                  transition={{ duration: 0.5, delay: index * 0.05 }}
+                  whileHover={{ y: -10, scale: 1.02 }}
+                  className="group cursor-pointer"
+                  data-magnetic
+                  onClick={() => setSelectedProject(project)}
+                >
+                  <Card className="h-full overflow-hidden bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm border-0 shadow-xl hover:shadow-2xl transition-all duration-500 rounded-2xl">
+                    <div className="relative overflow-hidden">
+                      <motion.img
+                        src={project.image || "/placeholder.svg"}
+                        alt={project.title}
+                        className="w-full h-48 object-cover"
+                        whileHover={{ scale: 1.1 }}
+                        transition={{ duration: 0.5 }}
+                      />
                       <motion.div
-                        className="p-3 bg-white/20 backdrop-blur-sm rounded-full"
-                        whileHover={{ scale: 1.1, rotate: 360 }}
-                        transition={{ duration: 0.3 }}
+                        className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500 flex items-center justify-center gap-4"
+                        initial={{ opacity: 0 }}
+                        whileHover={{ opacity: 1 }}
                       >
-                        <project.icon className="h-6 w-6 text-white" />
+                        <motion.div
+                          className="p-3 bg-white/20 backdrop-blur-sm rounded-full"
+                          whileHover={{ scale: 1.1, rotate: 360 }}
+                          transition={{ duration: 0.3 }}
+                        >
+                          <project.icon className="h-6 w-6 text-white" />
+                        </motion.div>
                       </motion.div>
-                    </motion.div>
-                    <div className="absolute top-4 right-4">
-                      <span className="px-3 py-1 bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm rounded-full text-xs font-medium text-gray-700 dark:text-gray-300">
-                        {project.date}
-                      </span>
+
+                      {/* Status indicators */}
+                      <div className="absolute top-4 left-4 flex gap-2">
+                        <TooltipProvider>
+                          <Tooltip>
+                            <TooltipTrigger asChild>
+                              <div
+                                className={`flex items-center gap-1 px-2 py-1 rounded-full ${liveStatusInfo.color} text-white text-xs font-medium`}
+                              >
+                                <LiveIcon className="h-3 w-3" />
+                                <span className="hidden sm:inline">{liveStatusInfo.text}</span>
+                              </div>
+                            </TooltipTrigger>
+                            <TooltipContent>
+                              <p>Status: {liveStatusInfo.text}</p>
+                            </TooltipContent>
+                          </Tooltip>
+                        </TooltipProvider>
+
+                        <TooltipProvider>
+                          <Tooltip>
+                            <TooltipTrigger asChild>
+                              <div
+                                className={`flex items-center gap-1 px-2 py-1 rounded-full ${repoStatusInfo.color} text-white text-xs font-medium`}
+                              >
+                                <RepoIcon className="h-3 w-3" />
+                                <span className="hidden sm:inline">
+                                  {project.repoStatus !== "none" ? project.repoStatus : "No Repo"}
+                                </span>
+                              </div>
+                            </TooltipTrigger>
+                            <TooltipContent>
+                              <p>Repository: {repoStatusInfo.text}</p>
+                            </TooltipContent>
+                          </Tooltip>
+                        </TooltipProvider>
+                      </div>
+
+                      <div className="absolute top-4 right-4">
+                        <span className="px-3 py-1 bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm rounded-full text-xs font-medium text-gray-700 dark:text-gray-300">
+                          {project.date}
+                        </span>
+                      </div>
                     </div>
-                  </div>
-                  <CardHeader className="pb-3">
-                    <CardTitle className="text-lg bg-gradient-to-r from-gray-900 to-gray-600 dark:from-white dark:to-gray-300 bg-clip-text text-transparent">
-                      {project.title}
-                    </CardTitle>
-                    <CardDescription className="text-gray-600 dark:text-gray-400 text-sm">
-                      {project.description}
-                    </CardDescription>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="flex flex-wrap gap-1 mb-4">
-                      {project.technologies.slice(0, 3).map((tech) => (
-                        <Badge
-                          key={tech}
-                          variant="secondary"
-                          className="bg-gradient-to-r from-blue-100 to-purple-100 dark:from-blue-900/30 dark:to-purple-900/30 text-blue-800 dark:text-blue-200 border-0 rounded-full text-xs"
+                    <CardHeader className="pb-3">
+                      <CardTitle className="text-lg bg-gradient-to-r from-gray-900 to-gray-600 dark:from-white dark:to-gray-300 bg-clip-text text-transparent">
+                        {project.title}
+                      </CardTitle>
+                      <CardDescription className="text-gray-600 dark:text-gray-400 text-sm">
+                        {project.description}
+                      </CardDescription>
+                    </CardHeader>
+                    <CardContent>
+                      <div className="flex flex-wrap gap-1 mb-4">
+                        {project.technologies.slice(0, 3).map((tech) => (
+                          <Badge
+                            key={tech}
+                            variant="secondary"
+                            className="bg-gradient-to-r from-blue-100 to-purple-100 dark:from-blue-900/30 dark:to-purple-900/30 text-blue-800 dark:text-blue-200 border-0 rounded-full text-xs"
+                          >
+                            {tech}
+                          </Badge>
+                        ))}
+                        {project.technologies.length > 3 && (
+                          <Badge
+                            variant="secondary"
+                            className="bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 border-0 rounded-full text-xs"
+                          >
+                            +{project.technologies.length - 3}
+                          </Badge>
+                        )}
+                      </div>
+                      <div className="flex gap-2">
+                        <Button
+                          size="sm"
+                          variant="outline"
+                          className="rounded-full flex-1 text-xs"
+                          disabled={project.repoStatus === "none"}
                         >
-                          {tech}
-                        </Badge>
-                      ))}
-                      {project.technologies.length > 3 && (
-                        <Badge
-                          variant="secondary"
-                          className="bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 border-0 rounded-full text-xs"
+                          <Github className="h-3 w-3 mr-1" />
+                          Code
+                        </Button>
+                        <Button
+                          size="sm"
+                          variant="outline"
+                          className="rounded-full flex-1 text-xs"
+                          disabled={project.liveStatus !== "live"}
                         >
-                          +{project.technologies.length - 3}
-                        </Badge>
-                      )}
-                    </div>
-                    <div className="flex gap-2">
-                      <Button size="sm" variant="outline" className="rounded-full flex-1 text-xs">
-                        <Github className="h-3 w-3 mr-1" />
-                        Code
-                      </Button>
-                      <Button size="sm" variant="outline" className="rounded-full flex-1 text-xs">
-                        <ExternalLink className="h-3 w-3 mr-1" />
-                        Details
-                      </Button>
-                    </div>
-                  </CardContent>
-                </Card>
-              </motion.div>
-            ))}
+                          <ExternalLink className="h-3 w-3 mr-1" />
+                          Demo
+                        </Button>
+                      </div>
+                    </CardContent>
+                  </Card>
+                </motion.div>
+              )
+            })}
           </AnimatePresence>
         </motion.div>
 
@@ -536,11 +646,41 @@ export const ProjectsSection = () => {
                       <selectedProject.icon className="h-8 w-8 text-white" />
                     </div>
                     <div className="flex-1">
-                      <div className="flex items-center gap-3 mb-2">
+                      <div className="flex flex-wrap items-center gap-3 mb-2">
                         <h3 className="text-3xl font-bold text-gray-900 dark:text-white">{selectedProject.title}</h3>
                         <span className="px-3 py-1 bg-gray-100 dark:bg-gray-700 rounded-full text-sm text-gray-600 dark:text-gray-300">
                           {selectedProject.date}
                         </span>
+
+                        {/* Status badges in modal */}
+                        <div className="flex gap-2 mt-1 sm:mt-0">
+                          {(() => {
+                            const liveInfo = getStatusInfo(selectedProject.liveStatus)
+                            const LiveModalIcon = liveInfo.icon
+                            return (
+                              <div
+                                className={`flex items-center gap-1 px-2 py-1 rounded-full ${liveInfo.color} text-white text-xs font-medium`}
+                              >
+                                <LiveModalIcon className="h-3 w-3 mr-1" />
+                                {liveInfo.text}
+                              </div>
+                            )
+                          })()}
+
+                          {selectedProject.repoStatus !== "none" &&
+                            (() => {
+                              const repoInfo = getStatusInfo(selectedProject.repoStatus)
+                              const RepoModalIcon = repoInfo.icon
+                              return (
+                                <div
+                                  className={`flex items-center gap-1 px-2 py-1 rounded-full ${repoInfo.color} text-white text-xs font-medium`}
+                                >
+                                  <RepoModalIcon className="h-3 w-3 mr-1" />
+                                  {selectedProject.repoStatus} Repository
+                                </div>
+                              )
+                            })()}
+                        </div>
                       </div>
                       <p className="text-gray-600 dark:text-gray-300 text-lg">{selectedProject.details.overview}</p>
                     </div>
@@ -585,14 +725,17 @@ export const ProjectsSection = () => {
                     </div>
                   </div>
 
-                  <div className="flex gap-4 mt-8 pt-6 border-t border-gray-200 dark:border-gray-700">
-                    <Button className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700">
+                  <div className="flex flex-wrap gap-4 mt-8 pt-6 border-t border-gray-200 dark:border-gray-700">
+                    <Button
+                      className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700"
+                      disabled={selectedProject.repoStatus === "none"}
+                    >
                       <Github className="h-4 w-4 mr-2" />
-                      View Code
+                      {selectedProject.repoStatus === "private" ? "Request Access" : "View Code"}
                     </Button>
-                    <Button variant="outline">
+                    <Button variant="outline" disabled={selectedProject.liveStatus !== "live"}>
                       <ExternalLink className="h-4 w-4 mr-2" />
-                      Live Demo
+                      {selectedProject.liveStatus === "live" ? "Live Demo" : "Not Available"}
                     </Button>
                     <Button variant="ghost" onClick={() => setSelectedProject(null)} className="ml-auto">
                       Close
