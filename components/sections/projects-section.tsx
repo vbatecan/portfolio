@@ -41,8 +41,8 @@ const projects = [
     live: "#",
     icon: GraduationCap,
     date: "2024",
-    repoStatus: "public" as RepoStatus,
-    liveStatus: "live" as LiveStatus,
+    repoStatus: "private" as RepoStatus,
+    liveStatus: "offline" as LiveStatus,
     details: {
       overview:
         "The web interface of the Trackattend project, integrating fingerprint biometric authentication for real-time student attendance registration.",
@@ -71,8 +71,8 @@ const projects = [
     live: "#",
     icon: Fingerprint,
     date: "2024",
-    repoStatus: "public" as RepoStatus,
-    liveStatus: "development" as LiveStatus,
+    repoStatus: "private" as RepoStatus,
+    liveStatus: "offline" as LiveStatus,
     details: {
       overview:
         "A comprehensive Grade 12 research project combining hardware and software to automate student attendance using fingerprint biometric technology.",
@@ -102,7 +102,7 @@ const projects = [
     icon: Search,
     date: "2024",
     repoStatus: "private" as RepoStatus,
-    liveStatus: "live" as LiveStatus,
+    liveStatus: "offline" as LiveStatus,
     details: {
       overview:
         "Machine learning solution designed to help editors quickly locate specific stickers within Silhouette Studio software for Shopee product orders.",
@@ -127,11 +127,11 @@ const projects = [
     category: "system",
     image: "/placeholder.svg?height=200&width=300",
     technologies: ["Python", "Flask", "Docker", "Linux", "REST API"],
-    github: "#",
+    github: "https://github.com/vbatecan/Piso-WiFi",
     live: "#",
     icon: Wifi,
     date: "2024",
-    repoStatus: "private" as RepoStatus,
+    repoStatus: "development" as RepoStatus,
     liveStatus: "offline" as LiveStatus,
     details: {
       overview:
@@ -157,12 +157,12 @@ const projects = [
     category: "api",
     image: "/assets/Shoes Search API/1.png?height=200&width=300",
     technologies: ["Spring Boot", "PostgreSQL", "REST API", "Java"],
-    github: "#",
+    github: "https://github.com/vbatecan/shoes_api",
     live: "#",
     icon: Server,
     date: "Oct 2024 - Nov 2024",
     repoStatus: "public" as RepoStatus,
-    liveStatus: "live" as LiveStatus,
+    liveStatus: "offline" as LiveStatus,
     details: {
       overview:
         "A robust backend solution crafted to offer manipulable and dynamic searching capabilities for shoe-related data with comprehensive filtering operations.",
@@ -185,9 +185,9 @@ const projects = [
     description:
       "WiFi security testing tool with enhanced browser-based interface for network deauthentication testing",
     category: "security",
-    image: "/placeholder.svg?height=200&width=300",
+    image: "/assets/esp32-deauther/1.png?height=200&width=300",
     technologies: ["C++", "Arduino", "ESP32", "Hardware"],
-    github: "#",
+    github: "https://github.com/vbatecan/ESP32-Deauther",
     live: "#",
     icon: Shield,
     date: "Oct 2024",
@@ -221,8 +221,8 @@ const projects = [
     live: "#",
     icon: ShoppingCart,
     date: "Aug 2024 - Sep 2024",
-    repoStatus: "private" as RepoStatus,
-    liveStatus: "live" as LiveStatus,
+    repoStatus: "none" as RepoStatus,
+    liveStatus: "offline" as LiveStatus,
     details: {
       overview:
         "A refined e-commerce platform dedicated to the sale of high-quality apparel, leveraging cutting-edge technology for seamless shopping experiences.",
@@ -252,7 +252,7 @@ const projects = [
     icon: MessageSquare,
     date: "Jul 2024 - Aug 2024",
     repoStatus: "private" as RepoStatus,
-    liveStatus: "live" as LiveStatus,
+    liveStatus: "offline" as LiveStatus,
     details: {
       overview:
         "A forum platform designed to facilitate engaging discussions and foster dynamic online communities with advanced technology and user-centric approach.",
@@ -277,11 +277,11 @@ const projects = [
     category: "web",
     image: "/assets/Soapify/1.png?height=200&width=300",
     technologies: ["JavaScript", "HTML", "CSS"],
-    github: "#",
-    live: "#",
+    github: "https://github.com/vbatecan/soapify",
+    live: "https://vbatecan.github.io/soapify/",
     icon: Sparkles,
     date: "Mar 2024",
-    repoStatus: "none" as RepoStatus,
+    repoStatus: "public" as RepoStatus,
     liveStatus: "live" as LiveStatus,
     details: {
       overview:
@@ -311,7 +311,7 @@ const projects = [
     live: "#",
     icon: GraduationCap,
     date: "Sep 2023 - Oct 2023",
-    repoStatus: "public" as RepoStatus,
+    repoStatus: "none" as RepoStatus,
     liveStatus: "archived" as LiveStatus,
     details: {
       overview:
@@ -337,11 +337,11 @@ const projects = [
     category: "desktop",
     image: "/placeholder.svg?height=200&width=300",
     technologies: ["VB.NET", "Visual Studio", "MySQL", "Desktop Application"],
-    github: "#",
+    github: "https://github.com/vbatecan/AllyFastFood",
     live: "#",
     icon: ShoppingCart,
     date: "Apr 2022 - Jun 2022",
-    repoStatus: "none" as RepoStatus,
+    repoStatus: "public" as RepoStatus,
     liveStatus: "archived" as LiveStatus,
     details: {
       overview:
@@ -367,7 +367,7 @@ const projects = [
     category: "api",
     image: "/placeholder.svg?height=200&width=300",
     technologies: ["Spring Boot", "Java", "REST API", "Database"],
-    github: "#",
+    github: "https://github.com/vbatecan/todolist_api",
     live: "#",
     icon: Server,
     date: "Jan 2022",
