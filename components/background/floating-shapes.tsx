@@ -19,7 +19,7 @@ export const FloatingShapes = () => {
       {shapes.map((shape, index) => (
         <motion.div
           key={index}
-          className={`absolute bg-gradient-to-br ${shape.color} opacity-80`}
+          className={`absolute bg-gradient-to-br ${shape.color} opacity-50`}
           style={{
             width: shape.size,
             height: shape.size,
