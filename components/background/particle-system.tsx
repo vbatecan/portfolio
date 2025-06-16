@@ -40,10 +40,10 @@ export const ParticleSystem = () => {
         particlesRef.current.push({
           x: Math.random() * canvas.width,
           y: Math.random() * canvas.height,
-          vx: (Math.random() - 0.5) * 0.3,
-          vy: (Math.random() - 0.5) * 0.3,
-          size: Math.random() * 10 + 1,
-          opacity: Math.random() * 0.5 + 0.1,
+          vx: (Math.random() - 0.5) * 1.25,
+          vy: (Math.random() - 0.5) * 1.25,
+          size: Math.random() * 10 + 1.25,
+          opacity: Math.random() * 0.6 + 0.1,
           hue: Math.random() * 60 + 200,
         })
       }
@@ -51,7 +51,7 @@ export const ParticleSystem = () => {
 
     const animate = (currentTime: number) => {
       // Throttle to 30fps for particles
-      if (currentTime - lastTimeRef.current < 33.33) {
+      if (currentTime - lastTimeRef.current < 10) {
         animationRef.current = requestAnimationFrame(animate)
         return
       }
