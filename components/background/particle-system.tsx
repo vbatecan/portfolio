@@ -33,7 +33,8 @@ export const ParticleSystem = () => {
     // Initialize particles with better performance
     const initParticles = () => {
       particlesRef.current = []
-      const particleCount = Math.min(30, Math.floor(window.innerWidth / 40))
+      const particleCount = Math.min(50, Math.floor(window.innerWidth / 40))
+      // const particleCount = 50;
 
       for (let i = 0; i < particleCount; i++) {
         particlesRef.current.push({
@@ -41,8 +42,8 @@ export const ParticleSystem = () => {
           y: Math.random() * canvas.height,
           vx: (Math.random() - 0.5) * 0.3,
           vy: (Math.random() - 0.5) * 0.3,
-          size: Math.random() * 2 + 1,
-          opacity: Math.random() * 0.3 + 0.1,
+          size: Math.random() * 10 + 1,
+          opacity: Math.random() * 0.5 + 0.1,
           hue: Math.random() * 60 + 200,
         })
       }

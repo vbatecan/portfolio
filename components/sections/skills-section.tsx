@@ -336,7 +336,7 @@ export const SkillsSection = () => {
 
                 <CardContent className="relative z-10 p-4 h-full flex flex-col items-center justify-center text-center">
                   <div
-                    className={`p-3 bg-gradient-to-br ${skill.color} rounded-2xl mb-3 shadow-lg transition-transform duration-300 group-hover:scale-110 group-hover:rotate-[-10deg] group-hover:rotate-[10deg] group-hover:rotate-[0deg]`}
+                    className={`p-3 bg-gradient-to-br ${skill.color} rounded-2xl mb-3 shadow-lg transition-transform duration-300 group-hover:scale-110 group-hover:rotate-12`}
                   >
                     <skill.icon className="h-6 w-6 text-white" />
                   </div>

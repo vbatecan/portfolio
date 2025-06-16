@@ -12,7 +12,7 @@ const certificates = [
     date: "May 2025",
     credentialId: "58a30888-d92d-4cc3-87b3-4daa1f550789",
     credentialUrl: "https://www.credly.com/badges/58a30888-d92d-4cc3-87b3-4daa1f550789/linked_in_profile",
-    image: "/placeholder.svg?height=100&width=100",
+    image: "/assets/others/cisco.jpg?height=100&width=100",
     description: "Fundamental knowledge of computer hardware components, assembly, and troubleshooting",
     skills: ["Hardware Components", "Computer Assembly", "Troubleshooting", "System Architecture"],
   },
@@ -22,7 +22,7 @@ const certificates = [
     date: "May 2025",
     credentialId: "32f6a9c2-a38f-4973-9567-ace1ccb8f1b1",
     credentialUrl: "https://www.credly.com/badges/32f6a9c2-a38f-4973-9567-ace1ccb8f1b1/linked_in_profile",
-    image: "/placeholder.svg?height=100&width=100",
+    image: "/assets/others/cisco.jpg?height=100&width=100",
     description: "Core concepts of operating systems, including Windows, Linux, and system administration",
     skills: ["Operating Systems", "System Administration", "Linux", "Windows", "Command Line"],
   }
