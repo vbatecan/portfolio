@@ -8,6 +8,10 @@ export const StatsSection = () => {
   const { theme } = useTheme()
   const isDark = theme === "dark"
 
+  const getImageUrl = (baseUrl: string) => {
+    return `${baseUrl}&cache=${Date.now()}`
+  }
+
   const statsConfig = {
     github: {
       light: "https://github-readme-stats.vercel.app/api?username=vbatecan&show_icons=true&theme=default&hide_border=true&bg_color=FFFFFF&title_color=0366d6&icon_color=0366d6&text_color=24292e",
@@ -59,7 +63,7 @@ export const StatsSection = () => {
             <Card className="overflow-hidden border-0 shadow-lg">
               <CardContent className="p-0">
                 <img
-                  src={isDark ? statsConfig.github.dark : statsConfig.github.light}
+                  src={getImageUrl(isDark ? statsConfig.github.dark : statsConfig.github.light)}
                   alt="GitHub Stats"
                   className="w-full rounded-lg"
                   loading="lazy"
@@ -77,7 +81,7 @@ export const StatsSection = () => {
             <Card className="overflow-hidden border-0 shadow-lg">
               <CardContent className="p-0">
                 <img
-                  src={isDark ? statsConfig.streak.dark : statsConfig.streak.light}
+                  src={getImageUrl(isDark ? statsConfig.streak.dark : statsConfig.streak.light)}
                   alt="GitHub Streak"
                   className="w-full rounded-lg"
                   loading="lazy"
@@ -95,7 +99,7 @@ export const StatsSection = () => {
             <Card className="overflow-hidden border-0 shadow-lg">
               <CardContent className="p-0">
                 <img
-                  src={isDark ? statsConfig.languages.dark : statsConfig.languages.light}
+                  src={getImageUrl(isDark ? statsConfig.languages.dark : statsConfig.languages.light)}
                   alt="Top Languages"
                   className="w-full rounded-lg"
                   loading="lazy"
@@ -114,7 +118,7 @@ export const StatsSection = () => {
               <CardContent className="p-0">
                 <div className="h-[350px] overflow-y-auto">
                   <img
-                    src={isDark ? statsConfig.wakatime.dark : statsConfig.wakatime.light}
+                    src={getImageUrl(isDark ? statsConfig.wakatime.dark : statsConfig.wakatime.light)}
                     alt="WakaTime Stats"
                     className="w-full rounded-lg"
                     loading="lazy"
@@ -128,3 +132,4 @@ export const StatsSection = () => {
     </section>
   )
 }
+
