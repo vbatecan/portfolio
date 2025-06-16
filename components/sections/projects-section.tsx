@@ -389,6 +389,38 @@ const projects = [
       skills: ["Spring Boot", "Java", "REST API", "Database Design", "API Development", "Backend Development"],
     },
   },
+  {
+    id: 1,
+    title: "Patient Management System Spring Boot REST API",
+    description:
+      "RESTful API for patient management applications with full CRUD operations for creating, updating, deleting, and managing patients. Additionally, it includes authentication and authorization using JWT tokens. Implemented RBAC for role-based access control.",
+    category: "api",
+    image: "/assets/pms/1.png?height=200&width=300",
+    technologies: ["Spring Boot", "Java", "REST API", "Database", "PostgreSQL", "JWT", "RBAC"],
+    github: "https://github.com/vbatecan/patient-management-system-backend",
+    live: "#",
+    icon: Server,
+    date: "June 2025",
+    repoStatus: "public" as RepoStatus,
+    liveStatus: "offline" as LiveStatus,
+    details: {
+      overview:
+        "A RESTful API designed to assist Patient Management System applications in managing patient information, providing comprehensive CRUD operations for patient management. Additionally, it includes authentication and authorization using JWT tokens. Implemented RBAC for role-based access control.",
+      keyFeatures: [
+        "End-to-end CRUD operations for managing patient records",
+        "Adherence to RESTful API best practices",
+        "Seamless patient registration, updates, and management",
+        "Efficient data retrieval and modification capabilities",
+        "Persistent storage with integrated database support",
+        "Comprehensive API documentation and accessible endpoints",
+        "Secure authentication and authorization powered by JWT tokens",
+        "Role-Based Access Control (RBAC) for granular permission management"
+      ],
+      impact:
+        "Accelerates the development of Patient Management Systems by providing a secure, scalable, and ready-to-use backend API, allowing developers to focus on building user-facing features instead of foundational data management logic.",
+      skills: ["Spring Boot", "Java", "REST API", "Database Design", "API Development", "Backend Development", "Authentication", "Authorization", "RBAC"],
+    },
+  },
 ]
 
 const categories = [
@@ -469,9 +501,8 @@ export const ProjectsSection = () => {
               <Button
                 variant={activeFilter === category.id ? "default" : "outline"}
                 onClick={() => setActiveFilter(category.id)}
-                className={`rounded-full px-4 py-2 text-sm ${
-                  activeFilter === category.id ? "bg-gradient-to-r from-blue-600 to-purple-600 text-white" : ""
-                }`}
+                className={`rounded-full px-4 py-2 text-sm ${activeFilter === category.id ? "bg-gradient-to-r from-blue-600 to-purple-600 text-white" : ""
+                  }`}
               >
                 {category.name} ({category.count})
               </Button>
