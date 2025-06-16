@@ -632,6 +632,12 @@ export const ProjectsSection = () => {
                           variant="outline"
                           className="rounded-full flex-1 text-xs"
                           disabled={project.repoStatus === "none"}
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            if (project.github !== "#") {
+                              window.open(project.github, '_blank');
+                            }
+                          }}
                         >
                           <Github className="h-3 w-3 mr-1" />
                           Code
@@ -760,6 +766,12 @@ export const ProjectsSection = () => {
                     <Button
                       className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700"
                       disabled={selectedProject.repoStatus === "none"}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        if (selectedProject.github !== "#") {
+                          window.open(selectedProject.github, '_blank');
+                        }
+                      }}
                     >
                       <Github className="h-4 w-4 mr-2" />
                       {selectedProject.repoStatus === "private" ? "Request Access" : "View Code"}
