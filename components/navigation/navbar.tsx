@@ -24,7 +24,7 @@ export const Navbar = ({ darkMode, toggleDarkMode, scrollToSection }: NavbarProp
             className="text-2xl font-bold bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent"
             data-magnetic
           >
-            Portfolio
+            Vince Angelo O. Batecan | Portfolio
           </motion.div>
 
           {/* Desktop Navigation */}

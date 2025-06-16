@@ -288,9 +288,8 @@ export const SkillsSection = () => {
               data-magnetic
             >
               <Card
-                className={`relative h-48 overflow-hidden bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm border-0 shadow-lg transition-all duration-500 rounded-2xl transform-gpu group-hover:shadow-2xl group-hover:scale-[1.05] group-hover:rotate-y-10 group-hover:z-50 ${
-                  skill.isSpecialty ? "ring-2 ring-blue-500/50" : ""
-                }`}
+                className={`relative h-64 overflow-hidden bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm border-0 shadow-lg transition-all duration-500 rounded-2xl transform-gpu group-hover:shadow-2xl group-hover:scale-[1.05] group-hover:rotate-y-10 group-hover:z-50 ${skill.isSpecialty ? "ring-2 ring-blue-500/50" : ""
+                  }`}
               >
                 {skill.isSpecialty && (
                   <div className="absolute top-2 right-2 z-20">
