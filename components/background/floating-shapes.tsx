@@ -3,12 +3,12 @@
 import { motion } from "framer-motion"
 
 const shapes = [
-  { type: "circle", size: 60, color: "from-blue-400 to-cyan-400" },
-  { type: "triangle", size: 40, color: "from-purple-400 to-pink-400" },
-  { type: "square", size: 35, color: "from-green-400 to-emerald-400" },
-  { type: "hexagon", size: 50, color: "from-orange-400 to-red-400" },
-  { type: "circle", size: 25, color: "from-indigo-400 to-blue-400" },
-  { type: "triangle", size: 30, color: "from-pink-400 to-rose-400" },
+  { type: "circle", size: 60, color: "from-blue-400 to-cyan-400", left: "27.8%", top: "40.4%" },
+  { type: "triangle", size: 40, color: "from-purple-400 to-pink-400", left: "66.9%", top: "65.8%" },
+  { type: "square", size: 35, color: "from-green-400 to-emerald-400", left: "12.4%", top: "24.8%" },
+  { type: "hexagon", size: 50, color: "from-orange-400 to-red-400", left: "85.2%", top: "35.6%" },
+  { type: "circle", size: 25, color: "from-indigo-400 to-blue-400", left: "45.7%", top: "75.3%" },
+  { type: "triangle", size: 30, color: "from-pink-400 to-rose-400", left: "33.1%", top: "15.9%" },
 ]
 
 export const FloatingShapes = () => {
@@ -21,8 +21,8 @@ export const FloatingShapes = () => {
           style={{
             width: shape.size,
             height: shape.size,
-            left: `${Math.random() * 100}%`,
-            top: `${Math.random() * 100}%`,
+            left: shape.left,
+            top: shape.top,
             clipPath:
               shape.type === "triangle"
                 ? "polygon(50% 0%, 0% 100%, 100% 100%)"
