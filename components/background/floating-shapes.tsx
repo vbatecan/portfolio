@@ -3,12 +3,14 @@
 import { motion } from "framer-motion"
 
 const shapes = [
-  { type: "circle", size: 60, color: "from-blue-700 to-cyan-700", left: "27.8%", top: "40.4%", speed: 0.1 },
-  { type: "triangle", size: 40, color: "from-purple-700 to-pink-700", left: "66.9%", top: "65.8%", speed: 0.2 },
-  { type: "square", size: 35, color: "from-green-700 to-emerald-700", left: "12.4%", top: "24.8%", speed: 0.3 },
-  { type: "hexagon", size: 50, color: "from-orange-700 to-red-700", left: "85.2%", top: "35.6%", speed: 0.4 },
-  { type: "circle", size: 25, color: "from-indigo-700 to-blue-700", left: "45.7%", top: "75.3%", speed: 0.5 },
-  { type: "triangle", size: 30, color: "from-pink-700 to-rose-700", left: "33.1%", top: "15.9%", speed: 0.6 },
+  { type: "circle", size: 60, color: "from-blue-600 to-cyan-600", left: "27.8%", top: "40.4%", speed: 0.1 },
+  { type: "triangle", size: 40, color: "from-purple-600 to-pink-600", left: "66.9%", top: "65.8%", speed: 0.2 },
+  { type: "square", size: 35, color: "from-green-600 to-emerald-600", left: "12.4%", top: "24.8%", speed: 0.3 },
+  { type: "hexagon", size: 50, color: "from-orange-600 to-red-600", left: "85.2%", top: "35.6%", speed: 0.4 },
+  { type: "circle", size: 25, color: "from-indigo-600 to-blue-600", left: "45.7%", top: "75.3%", speed: 0.5 },
+  { type: "triangle", size: 30, color: "from-pink-600 to-rose-600", left: "33.1%", top: "15.9%", speed: 0.6 },
+  { type: "hexagon", size: 50, color: "from-orange-600 to-red-600", left: "55.2%", top: "12.6%", speed: 0.4 },
+  { type: "square", size: 35, color: "from-green-600 to-emerald-600", left: "72.4%", top: "81.8%", speed: 0.3 },
 ]
 
 export const FloatingShapes = () => {
