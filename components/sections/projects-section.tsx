@@ -18,7 +18,7 @@ import { AllProjects } from "../projects"
 
 // Define project status types
 type RepoStatus = "public" | "private" | "none"
-type LiveStatus = "live" | "offline" | "development" | "archived"
+type LiveStatus = "live" | "offline" | "development" | "archived" | "completed"
 
 const projects = AllProjects
 
@@ -44,6 +44,8 @@ const getStatusInfo = (status: LiveStatus | RepoStatus) => {
       return { icon: AlertCircle, color: "bg-red-500", text: "Offline" }
     case "development":
       return { icon: AlertCircle, color: "bg-yellow-500", text: "In Development" }
+    case "completed":
+      return { icon: CheckCircle2, color: "bg-blue-500", text: "Completed" }
     case "archived":
       return { icon: AlertCircle, color: "bg-gray-500", text: "Archived" }
     case "public":
@@ -61,8 +63,13 @@ export const ProjectsSection = () => {
   const [activeFilter, setActiveFilter] = useState("all")
   const [selectedProject, setSelectedProject] = useState<(typeof projects)[0] | null>(null)
 
-  const filteredProjects =
-    activeFilter === "all" ? projects : projects.filter((project) => project.category === activeFilter)
+  // Sort by completed status
+  let filteredProjects =
+    activeFilter === "all" ? projects : projects.filter((project) => project.category === activeFilter);
+  filteredProjects = filteredProjects.sort((a, b) => {
+    const statusOrder = { "live": 0, "completed": 1, "development": 2, "archived": 3, "offline": 4 };
+    return statusOrder[a.liveStatus] - statusOrder[b.liveStatus];
+  });
 
   return (
     <section id="projects" className="py-20 px-4 bg-gray-50/50 dark:bg-gray-800/50 relative z-10">
@@ -246,6 +253,12 @@ export const ProjectsSection = () => {
                           variant="outline"
                           className="rounded-full flex-1 text-xs"
                           disabled={project.liveStatus !== "live"}
+                          onClick={(e) => {
+                            e.stopPropagation()
+                            if (project.live && project.live !== "#") {
+                              window.open(project.live, "_blank", "noreferrer")
+                            }
+                          }}
                         >
                           <ExternalLink className="h-3 w-3 mr-1" />
                           Demo
@@ -375,7 +388,16 @@ export const ProjectsSection = () => {
                       <Github className="h-4 w-4 mr-2" />
                       {selectedProject.repoStatus === "private" ? "Request Access" : "View Code"}
                     </Button>
-                    <Button variant="outline" disabled={selectedProject.liveStatus !== "live"}>
+                    <Button
+                      variant="outline"
+                      disabled={selectedProject.liveStatus !== "live"}
+                      onClick={(e) => {
+                        e.stopPropagation()
+                        if (selectedProject.live && selectedProject.live !== "#") {
+                          window.open(selectedProject.live, "_blank", "noreferrer")
+                        }
+                      }}
+                    >
                       <ExternalLink className="h-4 w-4 mr-2" />
                       {selectedProject.liveStatus === "live" ? "Live Demo" : "Not Available"}
                     </Button>
