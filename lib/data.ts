@@ -18,6 +18,7 @@ import {
   GitBranch,
   Wrench,
   Cloud,
+  LayoutDashboard,
 } from "lucide-react"
 
 export type RepoStatus = "public" | "private" | "none"
@@ -564,6 +565,47 @@ export const AllProjects = [
       "skills": ["Python", "Flask", "Computer Vision", "PyTorch", "YOLO", "Database Design", "WebSocket", "Logging"]
     }
   },
+  {
+    id: 18,
+    title: "Freelancer Project Management",
+    description:
+      "A comprehensive project management solution for freelancers managing clients, projects, invoices, and time tracking in a unified dashboard.",
+    category: "web",
+    image: "/assets/freelance-central/image.png?height=200&width=300",
+    technologies: ["Angular", "Tailwind CSS", "PrimeNG", "Supabase", "Chart.js", "FullCalendar", "Gemini AI"],
+    github: "#",
+    live: "https://freelance-central.netlify.app",
+    icon: LayoutDashboard,
+    date: "2025",
+    repoStatus: "private" as RepoStatus,
+    liveStatus: "development" as LiveStatus,
+    details: {
+      overview:
+        "A comprehensive project management solution designed for freelancers. This application helps you manage clients, projects, invoices, time tracking, and more in a unified dashboard. Built with modern web technologies for performance and user experience.",
+      keyFeatures: [
+        "Centralized dashboard for active projects, tasks, and financial metrics",
+        "Detailed project views with task lists, Kanban boards, and file management",
+        "Client management with dedicated portals and profiles",
+        "Invoicing system to create, manage, and export invoices",
+        "Time tracking for tasks and projects",
+        "Integrated Gemini AI for task automation and message summarization",
+        "Visual analytics and reporting on business performance",
+        "Built-in help center and documentation",
+      ],
+      impact:
+        "Streamlines freelance business operations by consolidating project management, client communication, and financial tracking into a single, AI-enhanced platform.",
+      skills: [
+        "Angular",
+        "Tailwind CSS",
+        "PrimeNG",
+        "Supabase",
+        "Chart.js",
+        "FullCalendar",
+        "Gemini AI",
+        "PDF Generation",
+      ],
+    },
+  },
 ]
 
 export const SkillsData = [
@@ -598,7 +640,7 @@ export const SkillsData = [
       "Frontend-backend integration",
       "Performance optimization and accessibility",
     ],
-    relatedProjects: ["Student Attendance Management System", "Soapify"],
+    relatedProjects: ["Student Attendance Management System", "Soapify", "Freelancer Project Management"],
     isSpecialty: true,
   },
   {
@@ -665,7 +707,7 @@ export const SkillsData = [
       "Model training, validation, and deployment",
       "Computer vision and NLP applications",
     ],
-    relatedProjects: ["Sticker Guidance System"],
+    relatedProjects: ["Sticker Guidance System", "Freelancer Project Management"],
   },
   {
     name: "Cloud & DevOps",
@@ -681,7 +723,7 @@ export const SkillsData = [
       "Linux system administration",
       "Infrastructure as Code (IaC) practices",
     ],
-    relatedProjects: ["PISO WiFi Management System"],
+    relatedProjects: ["PISO WiFi Management System", "Freelancer Project Management"],
   },
   {
     name: "Development Tools",
@@ -761,7 +803,7 @@ export const SkillsData = [
       "Caching strategies and CDN integration",
       "Progressive Web App (PWA) development",
     ],
-    relatedProjects: ["Gold Days Clothing", "Forumania", "PISO WiFi Management System"],
+    relatedProjects: ["Gold Days Clothing", "Forumania", "PISO WiFi Management System", "Freelancer Project Management"],
   },
 
 ]
