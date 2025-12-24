@@ -21,10 +21,10 @@ export const Navbar = ({ darkMode, toggleDarkMode, scrollToSection }: NavbarProp
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
-            className="text-2xl font-bold text-foreground"
+            className="text-2xl font-bold text-blue-500"
             data-magnetic
           >
-            Vince Angelo O. Batecan | Portfolio
+            Vince Angelo O. Batecan
           </motion.div>
 
           {/* Desktop Navigation */}

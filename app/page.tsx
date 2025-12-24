@@ -2,23 +2,18 @@
 
 import { useState, useEffect, lazy } from "react"
 
-// Background Components (lightweight, always loaded)
 import { FloatingShapes } from "@/components/background/floating-shapes"
 import { ParticleSystem } from "@/components/background/particle-system"
 
-// Navigation (critical, always loaded)
 import { Navbar } from "@/components/navigation/navbar"
 
-// Preloading Components
 import { PreloadManager } from "@/components/preloading/preload-manager"
 import { LazySection } from "@/components/preloading/lazy-section"
 import { ResourcePreloader } from "@/components/preloading/resource-preloader"
 
-// Critical components (loaded immediately)
 import { HeroSection } from "@/components/sections/hero-section"
 import { ChatInterface } from "@/components/chat/chat-interface"
 
-// Lazy load components
 const AboutSection = lazy(() =>
   import("@/components/sections/about-section").then((mod) => ({ default: mod.AboutSection })),
 )

@@ -1,222 +1,8 @@
 "use client"
 
 import { motion } from "framer-motion"
-import {
-  Code,
-  Database,
-  Smartphone,
-  Globe,
-  Server,
-  Brain,
-  Shield,
-  Monitor,
-  GitBranch,
-  Wrench,
-  Terminal,
-  Cloud,
-} from "lucide-react"
 import { Card, CardContent } from "@/components/ui/card"
-
-const skills = [
-  {
-    name: "Backend Development",
-    icon: Server,
-    color: "from-green-500 to-emerald-500",
-    items: ["Java", "Spring Boot", "Quarkus", "RESTful APIs", "JWT", "OAuth2"],
-    description: "Specializing in secure, scalable backend systems with Java frameworks and authentication",
-    details: [
-      "Enterprise Java with Spring Boot ecosystem",
-      "Cloud-native applications with Quarkus",
-      "RESTful API design and implementation",
-      "JWT-based authentication systems",
-      "OAuth2 security implementation",
-      "Microservices architecture patterns",
-    ],
-    relatedProjects: ["Student Attendance Management System", "Shoes API", "To Do List Spring Boot REST API"],
-    isSpecialty: true,
-  },
-  {
-    name: "Frontend Development",
-    icon: Code,
-    color: "from-blue-500 to-cyan-500",
-    items: ["Angular", "TypeScript", "JavaScript", "HTML5", "CSS3", "Responsive Design"],
-    description: "Creating dynamic, responsive user interfaces with Angular and modern web technologies",
-    details: [
-      "Angular framework expertise",
-      "TypeScript for type-safe development",
-      "Component-based architecture",
-      "Responsive design and CSS Grid/Flexbox",
-      "Frontend-backend integration",
-      "Performance optimization and accessibility",
-    ],
-    relatedProjects: ["Student Attendance Management System", "Soapify"],
-    isSpecialty: true,
-  },
-  {
-    name: "Database Management",
-    icon: Database,
-    color: "from-orange-500 to-red-500",
-    items: ["PostgreSQL", "MySQL", "MariaDB", "Redis", "SQLite", "Database Design"],
-    description: "Relational database expertise with focus on design, optimization, and data integrity",
-    details: [
-      "Relational database design and normalization",
-      "Query optimization and indexing strategies",
-      "In-memory caching with Redis",
-      "Database migration and backup strategies",
-      "ACID compliance and transaction management",
-      "Data modeling and schema design",
-    ],
-    relatedProjects: ["Student Attendance Management System", "Shoes API", "PISO WiFi Management System"],
-    isSpecialty: true,
-  },
-  {
-    name: "Security & Authentication",
-    icon: Shield,
-    color: "from-red-500 to-pink-500",
-    items: ["JWT", "OAuth2", "API Security", "Secure Development", "Data Protection"],
-    description: "Implementing robust authentication systems and security best practices",
-    details: [
-      "JWT-based authentication implementation",
-      "OAuth2 authorization flows",
-      "API security and rate limiting",
-      "Secure coding practices and OWASP guidelines",
-      "Data encryption and protection",
-      "Security monitoring and compliance",
-    ],
-    relatedProjects: ["Student Attendance Management System", "Shoes API"],
-    isSpecialty: true,
-  },
-  {
-    name: "Mobile & Desktop",
-    icon: Smartphone,
-    color: "from-purple-500 to-pink-500",
-    items: ["Kotlin", "Android Studio", "C#", "VB.NET", "Desktop Apps"],
-    description: "Native and cross-platform application development",
-    details: [
-      "Native Android development with Kotlin",
-      "C# desktop application development",
-      "VB.NET business applications",
-      "Cross-platform development strategies",
-      "Mobile UI/UX best practices",
-      "Desktop application architecture",
-    ],
-    relatedProjects: ["Trackattend Hardware System", "Enrollment System", "Fast Food Management System"],
-  },
-  {
-    name: "AI/ML & Data",
-    icon: Brain,
-    color: "from-indigo-500 to-purple-500",
-    items: ["Python", "TensorFlow", "PyTorch", "Data Analysis", "Machine Learning"],
-    description: "Machine learning models, data analysis, and AI-powered applications",
-    details: [
-      "Deep learning with TensorFlow and PyTorch",
-      "Data preprocessing and feature engineering",
-      "Statistical analysis and visualization",
-      "Neural network architecture design",
-      "Model training, validation, and deployment",
-      "Computer vision and NLP applications",
-    ],
-    relatedProjects: ["Sticker Guidance System"],
-  },
-  {
-    name: "Cloud & DevOps",
-    icon: Cloud,
-    color: "from-teal-500 to-blue-500",
-    items: ["Vercel", "Docker", "CI/CD", "AWS", "Linux Systems"],
-    description: "Cloud infrastructure, containerization, and automated deployment",
-    details: [
-      "Serverless deployment with Vercel",
-      "Containerization with Docker",
-      "Automated CI/CD pipeline setup",
-      "AWS cloud services and architecture",
-      "Linux system administration",
-      "Infrastructure as Code (IaC) practices",
-    ],
-    relatedProjects: ["PISO WiFi Management System"],
-  },
-  {
-    name: "Development Tools",
-    icon: Wrench,
-    color: "from-yellow-500 to-orange-500",
-    items: ["IntelliJ IDEA", "VS Code", "PyCharm", "WebStorm", "Postman"],
-    description: "Professional development environment and productivity tools",
-    details: [
-      "IntelliJ IDEA for Java development",
-      "IDE customization and plugin development",
-      "Code debugging and profiling techniques",
-      "API testing and documentation with Postman",
-      "Code quality analysis and refactoring",
-      "Integrated development workflows",
-    ],
-    relatedProjects: ["All Projects"],
-  },
-  {
-    name: "Operating Systems",
-    icon: Terminal,
-    color: "from-gray-500 to-slate-500",
-    items: ["Linux", "Ubuntu", "Arch", "Windows", "Kali", "Debian"],
-    description: "Multi-platform system administration and command-line proficiency",
-    details: [
-      "Linux system administration and scripting",
-      "Package management across distributions",
-      "System security and hardening",
-      "Network configuration and troubleshooting",
-      "Shell scripting and automation",
-      "Virtualization and dual-boot setups",
-    ],
-    relatedProjects: ["PISO WiFi Management System", "Trackattend Hardware System"],
-  },
-  {
-    name: "Version Control",
-    icon: GitBranch,
-    color: "from-violet-500 to-purple-500",
-    items: ["Git", "GitHub", "Agile", "Collaboration", "Code Review"],
-    description: "Advanced version control workflows and collaborative development",
-    details: [
-      "Git branching strategies and workflows",
-      "Code review processes and best practices",
-      "Agile development methodologies",
-      "Team collaboration and project management",
-      "Merge conflict resolution",
-      "Release management and tagging",
-    ],
-    relatedProjects: ["All Projects"],
-  },
-  {
-    name: "Hardware & IoT",
-    icon: Monitor,
-    color: "from-emerald-500 to-teal-500",
-    items: ["Arduino", "ESP32", "Embedded Systems", "Hardware Programming"],
-    description: "Embedded systems programming and IoT device development",
-    details: [
-      "Arduino programming and circuit design",
-      "ESP32 WiFi and Bluetooth integration",
-      "Sensor interfacing and data collection",
-      "Real-time embedded system development",
-      "Hardware-software integration",
-      "IoT protocol implementation (MQTT, HTTP)",
-    ],
-    relatedProjects: ["Trackattend Hardware System", "ESP32 Deauther"],
-  },
-  {
-    name: "Web Technologies",
-    icon: Globe,
-    color: "from-pink-500 to-rose-500",
-    items: ["PHP", "REST APIs", "GraphQL", "Web Security", "Performance"],
-    description: "Modern web development with focus on security and performance",
-    details: [
-      "RESTful API design and implementation",
-      "GraphQL schema design and optimization",
-      "Web application security best practices",
-      "Performance optimization techniques",
-      "Caching strategies and CDN integration",
-      "Progressive Web App (PWA) development",
-    ],
-    relatedProjects: ["Gold Days Clothing", "Forumania", "PISO WiFi Management System"],
-  },
-]
-
-const coreSpecializations = ["Java", "Spring Boot", "Quarkus", "Angular", "PostgreSQL", "JWT", "OAuth2", "RESTful APIs"]
+import { SkillsData, CoreSpecializations, CurrentlyLearning } from "@/lib/data"
 
 export const SkillsSection = () => {
   return (
@@ -254,7 +40,7 @@ export const SkillsSection = () => {
             Core Specializations
           </h3>
           <div className="flex flex-wrap justify-center gap-4">
-            {coreSpecializations.map((spec, index) => (
+            {CoreSpecializations.map((spec, index) => (
               <motion.div
                 key={spec}
                 initial={{ opacity: 0, scale: 0 }}
@@ -272,7 +58,7 @@ export const SkillsSection = () => {
 
         {/* Skills Grid */}
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mb-16">
-          {skills.map((skill, index) => (
+          {SkillsData.map((skill, index) => (
             <motion.div
               key={skill.name}
               initial={{ opacity: 0, y: 50, rotateY: -90 }}
@@ -296,12 +82,6 @@ export const SkillsSection = () => {
                     <span className="px-2 py-1 bg-blue-600 text-white text-xs rounded-full font-medium">Specialty</span>
                   </div>
                 )}
-
-                {/* Animated background gradient */}
-                {/* Animated background gradient - REMOVED for clean look */}
-
-                {/* Floating particles */}
-                {/* Floating particles - REMOVED for clean look */}
 
                 <CardContent className="relative z-10 p-4 h-full flex flex-col items-center justify-center text-center">
                   <div
@@ -408,13 +188,7 @@ export const SkillsSection = () => {
             Currently Learning
           </h3>
           <div className="flex flex-wrap justify-center gap-4">
-            {[
-              "Advanced Angular",
-              "GraphQL",
-              "Advanced Spring Boot",
-              "Cloud Architecture",
-              "Advanced Cybersecurity",
-            ].map((tech, index) => (
+            {CurrentlyLearning.map((tech, index) => (
               <motion.div
                 key={tech}
                 initial={{ opacity: 0, scale: 0 }}

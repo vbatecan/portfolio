@@ -14,11 +14,10 @@ import {
   LockOpen
 } from "lucide-react"
 import { useState } from "react"
-import { AllProjects } from "../projects"
+import { AllProjects, RepoStatus, LiveStatus } from "@/lib/data"
 
 // Define project status types
-type RepoStatus = "public" | "private" | "none"
-type LiveStatus = "live" | "offline" | "development" | "archived"
+// Imported from @/lib/data
 
 const projects = AllProjects
 

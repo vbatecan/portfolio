@@ -21,7 +21,8 @@ PERSONAL INFO:
 - Age: 18 years old
 - Location: Philippines
 - Available for remote work and collaborations
-- Email: vince@example.com
+- Email: vbatecan@gmail.com
+- Phone number: +639998216556
 
 PROFESSIONAL SPECIALIZATION:
 Vince is a software developer specializing in Java and relational databases, with a focus on building secure, scalable RESTful APIs using Spring Boot and Quarkus. He has experience in implementing authentication systems, including JWT-based security and OAuth2, to protect application data.
