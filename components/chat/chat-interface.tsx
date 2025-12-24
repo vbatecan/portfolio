@@ -77,7 +77,7 @@ export function ChatInterface() {
       >
         <Button
           onClick={() => setIsOpen(true)}
-          className="h-14 w-14 rounded-full bg-gradient-to-r from-blue-600 to-purple-600 p-3 shadow-lg"
+          className="h-14 w-14 rounded-full bg-primary text-primary-foreground p-3 shadow-lg"
           aria-label="Open chat"
           data-magnetic
         >
@@ -97,7 +97,7 @@ export function ChatInterface() {
           >
             <Card className="border-0 shadow-2xl bg-white/90 dark:bg-gray-800/90 backdrop-blur-lg overflow-hidden">
               {/* Chat header */}
-              <div className="bg-gradient-to-r from-blue-600 to-purple-600 p-4 flex justify-between items-center">
+              <div className="bg-primary text-primary-foreground p-4 flex justify-between items-center">
                 <div className="flex items-center gap-2">
                   <Bot className="h-5 w-5 text-white" />
                   <h3 className="font-medium text-white">Ask me about Vince</h3>
@@ -128,8 +128,8 @@ export function ChatInterface() {
                         className={cn(
                           "flex h-8 w-8 shrink-0 select-none items-center justify-center rounded-full text-white",
                           message.role === "user"
-                            ? "bg-gradient-to-r from-blue-600 to-purple-600"
-                            : "bg-gradient-to-r from-gray-500 to-gray-600",
+                            ? "bg-primary"
+                            : "bg-secondary",
                         )}
                       >
                         {message.role === "user" ? <User className="h-5 w-5" /> : <Bot className="h-5 w-5" />}
@@ -138,8 +138,8 @@ export function ChatInterface() {
                         className={cn(
                           "rounded-2xl px-4 py-3 text-sm",
                           message.role === "user"
-                            ? "bg-gradient-to-r from-blue-600 to-purple-600 text-white"
-                            : "bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-gray-100",
+                            ? "bg-primary text-primary-foreground"
+                            : "bg-muted text-muted-foreground",
                         )}
                       >
                         {message.content}
@@ -148,7 +148,7 @@ export function ChatInterface() {
                   ))}
                   {isLoading && (
                     <div className="flex gap-3 max-w-[85%]">
-                      <div className="flex h-8 w-8 shrink-0 select-none items-center justify-center rounded-full bg-gradient-to-r from-gray-500 to-gray-600 text-white">
+                      <div className="flex h-8 w-8 shrink-0 select-none items-center justify-center rounded-full bg-secondary text-secondary-foreground">
                         <Bot className="h-5 w-5" />
                       </div>
                       <div className="rounded-2xl px-4 py-3 text-sm bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-gray-100">
@@ -179,7 +179,7 @@ export function ChatInterface() {
                       type="submit"
                       size="icon"
                       disabled={isLoading || !input.trim()}
-                      className="h-[50px] w-[50px] shrink-0 rounded-full bg-gradient-to-r from-blue-600 to-purple-600"
+                      className="h-[50px] w-[50px] shrink-0 rounded-full bg-primary text-primary-foreground"
                     >
                       {isLoading ? <Loader2 className="h-4 w-4 animate-spin" /> : <Send className="h-4 w-4" />}
                     </Button>

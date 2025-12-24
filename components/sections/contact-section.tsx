@@ -22,17 +22,7 @@ export const ContactSection = () => {
             className="text-center"
           >
             <Card className="p-12 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm border-0 shadow-xl rounded-2xl relative overflow-hidden">
-              <motion.div
-                className="absolute inset-0 bg-gradient-to-br from-green-500/5 to-blue-500/5"
-                animate={{
-                  background: [
-                    "linear-gradient(45deg, rgba(34, 197, 94, 0.05), rgba(59, 130, 246, 0.05))",
-                    "linear-gradient(135deg, rgba(59, 130, 246, 0.05), rgba(34, 197, 94, 0.05))",
-                    "linear-gradient(45deg, rgba(34, 197, 94, 0.05), rgba(59, 130, 246, 0.05))",
-                  ],
-                }}
-                transition={{ duration: 4, repeat: Number.POSITIVE_INFINITY }}
-              />
+              <div className="absolute inset-0 bg-primary/5" />
 
               <div className="relative z-10 flex flex-col items-center gap-6">
                 <motion.div
@@ -49,7 +39,7 @@ export const ContactSection = () => {
                   transition={{ delay: 0.4 }}
                   className="text-center"
                 >
-                  <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-green-600 to-blue-600 bg-clip-text text-transparent">
+                  <h2 className="text-4xl md:text-5xl font-bold mb-4 text-foreground">
                     Thank You!
                   </h2>
                   <p className="text-lg text-gray-600 dark:text-gray-300 max-w-md">
@@ -60,7 +50,7 @@ export const ContactSection = () => {
                 <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.6 }}>
                   <Button
                     onClick={() => window.location.reload()}
-                    className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-8 py-3 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300"
+                    className="bg-primary hover:bg-primary/90 text-primary-foreground px-8 py-3 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300"
                   >
                     Send Another Message
                   </Button>
@@ -84,12 +74,12 @@ export const ContactSection = () => {
           className="text-center mb-16"
         >
           <h2
-            className="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent"
+            className="text-5xl md:text-6xl font-bold mb-6 text-primary"
             data-magnetic
           >
             Let's Create Together
           </h2>
-          <div className="w-32 h-1 bg-gradient-to-r from-blue-600 to-purple-600 mx-auto mb-8 rounded-full"></div>
+          <div className="w-32 h-1 bg-primary mx-auto mb-8 rounded-full"></div>
           <p className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
             Ready to bring your next big idea to life? Let's collaborate and create something extraordinary.
           </p>
@@ -103,17 +93,7 @@ export const ContactSection = () => {
           data-magnetic
         >
           <Card className="p-8 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm border-0 shadow-xl rounded-2xl relative overflow-hidden">
-            <motion.div
-              className="absolute inset-0 bg-gradient-to-br from-blue-500/5 to-purple-500/5"
-              animate={{
-                background: [
-                  "linear-gradient(45deg, rgba(59, 130, 246, 0.05), rgba(147, 51, 234, 0.05))",
-                  "linear-gradient(135deg, rgba(147, 51, 234, 0.05), rgba(59, 130, 246, 0.05))",
-                  "linear-gradient(45deg, rgba(59, 130, 246, 0.05), rgba(147, 51, 234, 0.05))",
-                ],
-              }}
-              transition={{ duration: 4, repeat: Number.POSITIVE_INFINITY }}
-            />
+            <div className="absolute inset-0 bg-primary/5" />
 
             <form onSubmit={handleSubmit} className="space-y-6 relative z-10">
               <div className="grid md:grid-cols-2 gap-6">
@@ -207,7 +187,7 @@ export const ContactSection = () => {
                 <Button
                   type="submit"
                   disabled={state.submitting}
-                  className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white py-4 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 disabled:opacity-50"
+                  className="w-full bg-primary hover:bg-primary/90 text-primary-foreground py-4 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 disabled:opacity-50"
                 >
                   {state.submitting ? (
                     <>

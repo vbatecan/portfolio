@@ -14,20 +14,20 @@ export const StatsSection = () => {
 
   const statsConfig = {
     github: {
-      light: "https://github-readme-stats.vercel.app/api?username=vbatecan&show_icons=true&theme=default&hide_border=true&bg_color=FFFFFF&title_color=0366d6&icon_color=0366d6&text_color=24292e",
-      dark: "https://github-readme-stats.vercel.app/api?username=vbatecan&show_icons=true&theme=radical&hide_border=true&bg_color=0D1117&title_color=F85D7F&icon_color=F85D7F&text_color=FFFFFF"
+      light: "https://github-readme-stats.vercel.app/api?username=vbatecan&show_icons=true&hide_border=true&bg_color=FFFFFF&title_color=2563eb&icon_color=2563eb&text_color=1e293b",
+      dark: "https://github-readme-stats.vercel.app/api?username=vbatecan&show_icons=true&hide_border=true&bg_color=0f172a&title_color=3b82f6&icon_color=3b82f6&text_color=f8fafc"
     },
     streak: {
-      light: "https://github-readme-streak-stats.herokuapp.com/?user=vbatecan&theme=default&hide_border=true&background=FFFFFF&stroke=0366d6&ring=0366d6&fire=0366d6&currStreakLabel=0366d6",
-      dark: "https://github-readme-streak-stats.herokuapp.com/?user=vbatecan&theme=radical&hide_border=true&background=0D1117&stroke=F85D7F&ring=F85D7F&fire=F85D7F&currStreakLabel=F85D7F"
+      light: "https://github-readme-streak-stats.herokuapp.com/?user=vbatecan&hide_border=true&background=FFFFFF&stroke=2563eb&ring=2563eb&fire=2563eb&currStreakLabel=2563eb&sideNums=1e293b&sideLabels=1e293b&dates=1e293b",
+      dark: "https://github-readme-streak-stats.herokuapp.com/?user=vbatecan&hide_border=true&background=0f172a&stroke=3b82f6&ring=3b82f6&fire=3b82f6&currStreakLabel=3b82f6&sideNums=f8fafc&sideLabels=f8fafc&dates=f8fafc"
     },
     languages: {
-      light: "https://github-readme-stats.vercel.app/api/top-langs/?username=vbatecan&layout=compact&theme=default&hide_border=true&bg_color=FFFFFF&title_color=0366d6&text_color=24292e",
-      dark: "https://github-readme-stats.vercel.app/api/top-langs/?username=vbatecan&layout=compact&theme=radical&hide_border=true&bg_color=0D1117&title_color=F85D7F&text_color=FFFFFF"
+      light: "https://github-readme-stats.vercel.app/api/top-langs/?username=vbatecan&layout=compact&hide_border=true&bg_color=FFFFFF&title_color=2563eb&text_color=1e293b",
+      dark: "https://github-readme-stats.vercel.app/api/top-langs/?username=vbatecan&layout=compact&hide_border=true&bg_color=0f172a&title_color=3b82f6&text_color=f8fafc"
     },
     wakatime: {
-      light: "https://github-readme-stats.vercel.app/api/wakatime?username=vbatecan&theme=default&hide_border=true&bg_color=FFFFFF&title_color=0366d6&text_color=24292e",
-      dark: "https://github-readme-stats.vercel.app/api/wakatime?username=vbatecan&theme=radical&hide_border=true&bg_color=0D1117&title_color=F85D7F&text_color=FFFFFF"
+      light: "https://github-readme-stats.vercel.app/api/wakatime?username=vbatecan&hide_border=true&bg_color=FFFFFF&title_color=2563eb&text_color=1e293b",
+      dark: "https://github-readme-stats.vercel.app/api/wakatime?username=vbatecan&hide_border=true&bg_color=0f172a&title_color=3b82f6&text_color=f8fafc"
     }
   }
 
@@ -42,12 +42,12 @@ export const StatsSection = () => {
           className="text-center mb-16"
         >
           <h2
-            className="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent"
+            className="text-5xl md:text-6xl font-bold mb-6 text-primary"
             data-magnetic
           >
             GitHub Stats
           </h2>
-          <div className="w-32 h-1 bg-gradient-to-r from-blue-600 to-purple-600 mx-auto mb-8 rounded-full"></div>
+          <div className="w-32 h-1 bg-primary mx-auto mb-8 rounded-full"></div>
           <p className="text-lg text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
             My coding activity and contributions across various projects
           </p>

@@ -14,7 +14,7 @@ export const SectionLoader = () => {
         {[0, 1, 2].map((index) => (
           <motion.div
             key={index}
-            className="w-3 h-3 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full"
+            className="w-3 h-3 bg-primary rounded-full"
             animate={{
               scale: [1, 1.2, 1],
               opacity: [0.7, 1, 0.7],

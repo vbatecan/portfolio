@@ -31,21 +31,13 @@ export const HeroSection = ({ scrollToSection }: HeroSectionProps) => {
 
           <h1 className="text-6xl md:text-8xl font-black mb-6 relative z-10">
             <motion.span
-              className="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent"
-              animate={{
-                backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
-              }}
-              transition={{ duration: 3, repeat: Number.POSITIVE_INFINITY }}
+              className="text-primary"
             >
               Vince Angelo
             </motion.span>
             <br />
             <motion.span
-              className="bg-gradient-to-r from-pink-600 via-purple-600 to-blue-600 bg-clip-text text-transparent"
-              animate={{
-                backgroundPosition: ["100% 50%", "0% 50%", "100% 50%"],
-              }}
-              transition={{ duration: 3, repeat: Number.POSITIVE_INFINITY }}
+              className="text-primary"
             >
               Batecan
             </motion.span>
@@ -58,29 +50,17 @@ export const HeroSection = ({ scrollToSection }: HeroSectionProps) => {
             transition={{ delay: 0.5, duration: 0.8 }}
           >
             Crafting the future with{" "}
-            <motion.span
-              className="text-blue-600 dark:text-blue-400 font-semibold"
-              animate={{ color: ["#2563eb", "#7c3aed", "#db2777", "#2563eb"] }}
-              transition={{ duration: 2, repeat: Number.POSITIVE_INFINITY }}
-            >
+            <span className="text-primary font-semibold">
               code
-            </motion.span>
+            </span>
             ,{" "}
-            <motion.span
-              className="text-purple-600 dark:text-purple-400 font-semibold"
-              animate={{ color: ["#7c3aed", "#db2777", "#2563eb", "#7c3aed"] }}
-              transition={{ duration: 2, repeat: Number.POSITIVE_INFINITY, delay: 0.5 }}
-            >
+            <span className="text-secondary font-semibold">
               creativity
-            </motion.span>
+            </span>
             , and{" "}
-            <motion.span
-              className="text-pink-600 dark:text-pink-400 font-semibold"
-              animate={{ color: ["#db2777", "#2563eb", "#7c3aed", "#db2777"] }}
-              transition={{ duration: 2, repeat: Number.POSITIVE_INFINITY, delay: 1 }}
-            >
+            <span className="text-primary font-semibold">
               innovation
-            </motion.span>
+            </span>
           </motion.p>
 
           <motion.div
@@ -92,7 +72,7 @@ export const HeroSection = ({ scrollToSection }: HeroSectionProps) => {
             <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
               <Button
                 onClick={() => scrollToSection("projects")}
-                className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-8 py-4 text-lg rounded-full shadow-lg hover:shadow-xl transition-all duration-300"
+                className="bg-primary hover:bg-primary/90 text-primary-foreground px-8 py-4 text-lg rounded-full shadow-lg hover:shadow-xl transition-all duration-300"
               >
                 <Zap className="mr-2 h-5 w-5" />
                 Explore Work
@@ -102,7 +82,7 @@ export const HeroSection = ({ scrollToSection }: HeroSectionProps) => {
               <Button
                 variant="outline"
                 onClick={() => scrollToSection("contact")}
-                className="px-8 py-4 text-lg border-2 rounded-full hover:bg-gradient-to-r hover:from-blue-50 hover:to-purple-50 dark:hover:from-gray-800 dark:hover:to-gray-700 transition-all duration-300"
+                className="px-8 py-4 text-lg border-2 rounded-full hover:bg-muted transition-all duration-300"
               >
                 Let's Connect
               </Button>

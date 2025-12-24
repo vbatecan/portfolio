@@ -7,16 +7,16 @@ import { ThemeProvider } from "@/components/theme-provider"
 const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  title: "Vince Angelo Batecan - Portfolio",
+  title: "Vince Angelo Batecan",
   description: "Full-Stack Developer & AI Enthusiast crafting digital experiences that matter",
   keywords: "developer, portfolio, full-stack, react, node.js, web development, vince angelo batecan",
   authors: [{ name: "Vince Angelo Batecan" }],
   openGraph: {
-    title: "Vince Angelo Batecan - Portfolio",
+    title: "Vince Angelo Batecan",
     description: "Full-Stack Developer & AI Enthusiast crafting digital experiences that matter",
     type: "website",
   },
-  generator: "v0.dev",
+  generator: "Next.js",
 }
 
 export default function RootLayout({

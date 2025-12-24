@@ -21,7 +21,7 @@ export const Navbar = ({ darkMode, toggleDarkMode, scrollToSection }: NavbarProp
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
-            className="text-2xl font-bold bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent"
+            className="text-2xl font-bold text-foreground"
             data-magnetic
           >
             Vince Angelo O. Batecan | Portfolio
@@ -33,13 +33,13 @@ export const Navbar = ({ darkMode, toggleDarkMode, scrollToSection }: NavbarProp
               <motion.button
                 key={item}
                 onClick={() => scrollToSection(item)}
-                className="text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors capitalize relative group"
+                className="text-muted-foreground hover:text-primary transition-colors capitalize relative group"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 data-magnetic
               >
                 {item}
-                <motion.div className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-600 to-purple-600 group-hover:w-full transition-all duration-300" />
+                <motion.div className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary group-hover:w-full transition-all duration-300" />
               </motion.button>
             ))}
             <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }} data-magnetic>

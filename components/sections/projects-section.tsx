@@ -49,7 +49,7 @@ const getStatusInfo = (status: LiveStatus | RepoStatus) => {
     case "public":
       return { icon: LockOpen, color: "bg-blue-500", text: "Public Repository" }
     case "private":
-      return { icon: Lock, color: "bg-purple-500", text: "Private Repository" }
+      return { icon: Lock, color: "bg-secondary", text: "Private Repository" }
     case "none":
       return { icon: AlertCircle, color: "bg-gray-500", text: "No Repository" }
     default:
@@ -75,12 +75,12 @@ export const ProjectsSection = () => {
           className="text-center mb-16"
         >
           <h2
-            className="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent"
+            className="text-5xl md:text-6xl font-bold mb-6 text-primary"
             data-magnetic
           >
             Featured Projects
           </h2>
-          <div className="w-32 h-1 bg-gradient-to-r from-blue-600 to-purple-600 mx-auto mb-8 rounded-full"></div>
+          <div className="w-32 h-1 bg-primary mx-auto mb-8 rounded-full"></div>
           <p className="text-lg text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
             Real-world applications showcasing technical expertise across web development, hardware integration, AI/ML,
             system architecture, and client solutions
@@ -100,7 +100,7 @@ export const ProjectsSection = () => {
               <Button
                 variant={activeFilter === category.id ? "default" : "outline"}
                 onClick={() => setActiveFilter(category.id)}
-                className={`rounded-full px-4 py-2 text-sm ${activeFilter === category.id ? "bg-gradient-to-r from-blue-600 to-purple-600 text-white" : ""
+                className={`rounded-full px-4 py-2 text-sm ${activeFilter === category.id ? "bg-primary text-primary-foreground" : ""
                   }`}
               >
                 {category.name} ({category.count})
@@ -141,7 +141,7 @@ export const ProjectsSection = () => {
                         transition={{ duration: 0.5 }}
                       />
                       <motion.div
-                        className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500 flex items-center justify-center gap-4"
+                        className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-all duration-500 flex items-center justify-center gap-4"
                         initial={{ opacity: 0 }}
                         whileHover={{ opacity: 1 }}
                       >
@@ -198,7 +198,7 @@ export const ProjectsSection = () => {
                       </div>
                     </div>
                     <CardHeader className="pb-3">
-                      <CardTitle className="text-lg bg-gradient-to-r from-gray-900 to-gray-600 dark:from-white dark:to-gray-300 bg-clip-text text-transparent">
+                      <CardTitle className="text-lg text-foreground">
                         {project.title}
                       </CardTitle>
                       <CardDescription className="text-gray-600 dark:text-gray-400 text-sm">
@@ -211,7 +211,7 @@ export const ProjectsSection = () => {
                           <Badge
                             key={tech}
                             variant="secondary"
-                            className="bg-gradient-to-r from-blue-100 to-purple-100 dark:from-blue-900/30 dark:to-purple-900/30 text-blue-800 dark:text-blue-200 border-0 rounded-full text-xs"
+                            className="bg-secondary/10 text-secondary border-0 rounded-full text-xs"
                           >
                             {tech}
                           </Badge>
@@ -278,7 +278,7 @@ export const ProjectsSection = () => {
               >
                 <div className="p-8">
                   <div className="flex items-start gap-4 mb-6">
-                    <div className="p-3 bg-gradient-to-br from-blue-500 to-purple-500 rounded-2xl">
+                    <div className="p-3 bg-primary rounded-2xl">
                       <selectedProject.icon className="h-8 w-8 text-white" />
                     </div>
                     <div className="flex-1">
@@ -334,7 +334,7 @@ export const ProjectsSection = () => {
                             animate={{ opacity: 1, x: 0 }}
                             transition={{ delay: index * 0.1 }}
                           >
-                            <span className="w-2 h-2 bg-blue-500 rounded-full mt-2 flex-shrink-0"></span>
+                            <span className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></span>
                             <span className="text-gray-700 dark:text-gray-300">{feature}</span>
                           </motion.li>
                         ))}
@@ -347,7 +347,7 @@ export const ProjectsSection = () => {
                         {selectedProject.details.skills.map((skill) => (
                           <Badge
                             key={skill}
-                            className="bg-gradient-to-r from-blue-100 to-purple-100 dark:from-blue-900/30 dark:to-purple-900/30 text-blue-800 dark:text-blue-200 border-0 rounded-full"
+                            className="bg-secondary/10 text-secondary border-0 rounded-full"
                           >
                             {skill}
                           </Badge>
@@ -363,7 +363,7 @@ export const ProjectsSection = () => {
 
                   <div className="flex flex-wrap gap-4 mt-8 pt-6 border-t border-gray-200 dark:border-gray-700">
                     <Button
-                      className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700"
+                      className="bg-primary hover:bg-primary/90 text-primary-foreground"
                       disabled={selectedProject.repoStatus === "none"}
                       onClick={(e) => {
                         e.stopPropagation();

@@ -40,12 +40,12 @@ export const CertificatesSection = () => {
           className="text-center mb-16"
         >
           <h2
-            className="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent"
+            className="text-5xl md:text-6xl font-bold mb-6 text-primary"
             data-magnetic
           >
             Certifications
           </h2>
-          <div className="w-32 h-1 bg-gradient-to-r from-blue-600 to-purple-600 mx-auto mb-8 rounded-full"></div>
+          <div className="w-32 h-1 bg-primary mx-auto mb-8 rounded-full"></div>
           <p className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
             Professional certifications demonstrating expertise across hardware, operating systems, cloud platforms, and
             development frameworks
@@ -65,17 +65,7 @@ export const CertificatesSection = () => {
               data-magnetic
             >
               <Card className="text-center p-6 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm border-0 shadow-lg hover:shadow-2xl transition-all duration-500 rounded-2xl relative overflow-hidden h-full">
-                <motion.div
-                  className="absolute inset-0 bg-gradient-to-br from-blue-500/5 to-purple-500/5 group-hover:from-blue-500/10 group-hover:to-purple-500/10 transition-all duration-500"
-                  animate={{
-                    background: [
-                      "linear-gradient(45deg, rgba(59, 130, 246, 0.05), rgba(147, 51, 234, 0.05))",
-                      "linear-gradient(135deg, rgba(147, 51, 234, 0.05), rgba(59, 130, 246, 0.05))",
-                      "linear-gradient(45deg, rgba(59, 130, 246, 0.05), rgba(147, 51, 234, 0.05))",
-                    ],
-                  }}
-                  transition={{ duration: 4, repeat: Number.POSITIVE_INFINITY }}
-                />
+                <div className="absolute inset-0 bg-primary/5 group-hover:bg-primary/10 transition-colors duration-500" />
 
                 <div className="relative z-10 flex flex-col h-full">
                   <motion.img
@@ -86,7 +76,7 @@ export const CertificatesSection = () => {
                     transition={{ duration: 0.5 }}
                   />
 
-                  <h3 className="font-bold text-lg mb-2 bg-gradient-to-r from-gray-900 to-gray-600 dark:from-white dark:to-gray-300 bg-clip-text text-transparent">
+                  <h3 className="font-bold text-lg mb-2 text-foreground">
                     {cert.title}
                   </h3>
 
@@ -101,7 +91,7 @@ export const CertificatesSection = () => {
                       {cert.skills.slice(0, 3).map((skill) => (
                         <span
                           key={skill}
-                          className="text-xs px-2 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 rounded-full"
+                          className="text-xs px-2 py-1 bg-secondary/10 text-secondary rounded-full"
                         >
                           {skill}
                         </span>

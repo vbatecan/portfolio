@@ -57,7 +57,7 @@ export class ErrorBoundary extends Component<Props, State> {
             </p>
             <Button
               onClick={() => window.location.reload()}
-              className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700"
+              className="bg-primary hover:bg-primary/90 text-primary-foreground"
             >
               <RefreshCw className="h-4 w-4 mr-2" />
               Refresh Page

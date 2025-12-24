@@ -16,12 +16,12 @@ export const AboutSection = () => {
           className="text-center mb-16"
         >
           <h2
-            className="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent"
+            className="text-5xl md:text-6xl font-bold mb-6 text-primary"
             data-magnetic
           >
             About Me
           </h2>
-          <div className="w-32 h-1 bg-gradient-to-r from-blue-600 to-purple-600 mx-auto mb-8 rounded-full"></div>
+          <div className="w-32 h-1 bg-primary mx-auto mb-8 rounded-full"></div>
         </motion.div>
 
         <div className="grid md:grid-cols-2 gap-16 items-center">
@@ -33,14 +33,14 @@ export const AboutSection = () => {
             className="relative"
             data-magnetic
           >
-            <div className="relative bg-gradient-to-br from-blue-50 to-purple-50 dark:from-gray-800 dark:to-gray-700 rounded-3xl p-8 overflow-hidden">
+            <div className="relative bg-muted rounded-3xl p-8 overflow-hidden">
               <motion.div
-                className="absolute -top-10 -right-10 w-32 h-32 bg-gradient-to-br from-blue-400 to-purple-400 rounded-full opacity-20"
+                className="absolute -top-10 -right-10 w-32 h-32 bg-primary/20 rounded-full"
                 animate={{ rotate: 360 }}
                 transition={{ duration: 20, repeat: Number.POSITIVE_INFINITY, ease: "linear" }}
               />
               <motion.div
-                className="absolute -bottom-10 -left-10 w-24 h-24 bg-gradient-to-br from-pink-400 to-orange-400 rounded-full opacity-20"
+                className="absolute -bottom-10 -left-10 w-24 h-24 bg-secondary/20 rounded-full"
                 animate={{ rotate: -360 }}
                 transition={{ duration: 15, repeat: Number.POSITIVE_INFINITY, ease: "linear" }}
               />
@@ -92,22 +92,22 @@ export const AboutSection = () => {
             >
               <div className="space-y-4">
                 <div className="flex items-center gap-3 text-gray-600 dark:text-gray-300">
-                  <div className="p-2 bg-gradient-to-br from-blue-500 to-purple-500 rounded-lg">
-                    <MapPin className="h-4 w-4 text-white" />
+                  <div className="p-2 bg-primary rounded-lg">
+                    <MapPin className="h-4 w-4 text-primary-foreground" />
                   </div>
                   <span>Philippines</span>
                 </div>
                 <div className="flex items-center gap-3 text-gray-600 dark:text-gray-300">
-                  <div className="p-2 bg-gradient-to-br from-green-500 to-emerald-500 rounded-lg">
-                    <Mail className="h-4 w-4 text-white" />
+                  <div className="p-2 bg-secondary rounded-lg">
+                    <Mail className="h-4 w-4 text-secondary-foreground" />
                   </div>
                   <span>vbatecan@gmail.com</span>
                 </div>
               </div>
               <div className="space-y-4">
                 <div className="flex items-center gap-3 text-gray-600 dark:text-gray-300">
-                  <div className="p-2 bg-gradient-to-br from-purple-500 to-pink-500 rounded-lg">
-                    <Globe className="h-4 w-4 text-white" />
+                  <div className="p-2 bg-primary rounded-lg">
+                    <Globe className="h-4 w-4 text-primary-foreground" />
                   </div>
                   <div>
                     <div className="font-medium">Languages</div>
