@@ -16,10 +16,6 @@ import {
 import { useState } from "react"
 import { AllProjects, RepoStatus, LiveStatus } from "@/lib/data"
 
-// Define project status types
-type RepoStatus = "public" | "private" | "none"
-type LiveStatus = "live" | "offline" | "development" | "archived"
-
 const projects = AllProjects
 
 const categories = [

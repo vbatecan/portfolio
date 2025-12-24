@@ -21,7 +21,7 @@ import {
 } from "lucide-react"
 
 export type RepoStatus = "public" | "private" | "none"
-export type LiveStatus = "live" | "offline" | "development" | "archived"
+export type LiveStatus = "live" | "offline" | "development" | "archived" | "completed"
 
 export const AllProjects = [
   {
@@ -446,6 +446,124 @@ export const AllProjects = [
       skills: ["Python", "Image Processing", "Machine Learning", "Computer Vision", "Command Line Tools"],
     },
   },
+  {
+    id: 15,
+    title: "Virtuelink",
+    description:
+      "Virtuelink is a web application for managing meetings, reservations, and related workflows for organizations. It provides a calendar-first interface, user profiles, reservation handling, notifications, and server-side functions to automate common tasks.",
+    category: "web",
+    image: "/assets/virtuelink/image.png?height=200&width=300",
+    technologies: ["Angular", "TypeScript", "Tailwind", "PrimeNG", "Supabase", "PostgreSQL", "Playwright", "pnpm"],
+    github: "#",
+    live: "https://virtuelink.netlify.app",
+    icon: Server,
+    date: "2025",
+    repoStatus: "private" as RepoStatus,
+    liveStatus: "live" as LiveStatus,
+    details: {
+      overview:
+        "Virtuelink streamlines scheduling, reservations, and related workflows for organizations with a calendar-first UI and serverless automation.",
+      keyFeatures: [
+        "Calendar-first event and reservation management",
+        "Reservation requests, approvals, and conflict detection",
+        "Role-based profiles and access control",
+        "Email and in-app notifications with reminder scheduling",
+        "Supabase backend (Postgres, Auth, Storage, Edge Functions)",
+        "Serverless functions for automations and background jobs",
+        "Integrations for calendar sync and external services",
+      ],
+      impact:
+        "Speeds up scheduling and reduces administrative overhead while providing auditable history and reliable notifications.",
+      skills: ["Angular", "TypeScript", "Supabase", "Postgres", "Tailwind", "PrimeNG", "Serverless", "Testing", "Playwright"],
+    },
+  },
+  {
+    id: 16,
+    title: "Crumb Cabin Orders",
+    description:
+      "Crumb Cabin Orders is a full-stack web application for a cookie shop, providing an online ordering experience for customers and a comprehensive admin dashboard to manage operations.",
+    category: "web",
+    image: "/assets/crumb-cabin/image.png?height=200&width=300",
+    technologies: [
+      "React",
+      "Vite",
+      "TypeScript",
+      "Tailwind",
+      "shadcn/ui",
+      "React Router",
+      "TanStack Query",
+      "React Hook Form",
+      "Zod",
+      "Supabase",
+      "PostgreSQL",
+      "Playwright",
+      "pnpm",
+    ],
+    github: "#",
+    live: "https://crumb-cabin.netlify.app",
+    icon: ShoppingCart,
+    date: "2025",
+    repoStatus: "private" as RepoStatus,
+    liveStatus: "live" as LiveStatus,
+    details: {
+      overview:
+        "A modern, type-safe ordering system for a cookie shop with customer ordering, voucher support, order tracking, and an admin dashboard for managing menu, orders, bundles, and analytics.",
+      keyFeatures: [
+        "Customer portal with menu browsing and multi-step order form",
+        "Voucher/discount code support at checkout",
+        "Order tracking and status updates",
+        "Google reCAPTCHA spam protection on order forms",
+        "Admin dashboard with secure login and role-based access",
+        "Real-time order management and analytics",
+        "Menu, bundle, and voucher CRUD management",
+        "Supabase Edge Functions for transactional emails and background tasks",
+      ],
+      impact:
+        "Streamlines online ordering and store operations, reduces order handling time, and provides actionable analytics to improve business decisions.",
+      skills: [
+        "React",
+        "Vite",
+        "TypeScript",
+        "Tailwind",
+        "shadcn/ui",
+        "TanStack Query",
+        "React Hook Form",
+        "Zod",
+        "Supabase",
+        "PostgreSQL",
+        "Serverless",
+        "Playwright",
+      ],
+    },
+  },
+  {
+    "id": 17,
+    "title": "Kaong Detection Application - Optimized Version",
+    "description": "Flask application for detecting Kaong fruit ripeness using YOLO models, refactored into a service-oriented, production-ready architecture.",
+    "category": "ai",
+    "image": "/assets/kaong-detection/image.png?height=200&width=300",
+    "technologies": ["Python", "Flask", "PyTorch", "YOLO", "Ultralytics", "MySQL", "WebSocket"],
+    "github": "#",
+    "live": "#",
+    "icon": Search,
+    "date": "Nov 2025",
+    "repoStatus": "private" as RepoStatus,
+    "liveStatus": "completed" as LiveStatus,
+    "details": {
+      "overview": "An optimized, service-oriented Flask app for Kaong ripeness detection using YOLO models with separate DetectionService, DatabaseService, and ImageService for maintainability and performance.",
+      "keyFeatures": [
+        "Service-oriented architecture (DetectionService, DatabaseService, ImageService)",
+        "YOLO-based inference with support for custom and fallback models",
+        "Image validation, EXIF orientation handling and automatic resizing",
+        "Database connection pooling and configurable save thresholds",
+        "REST endpoints and WebSocket for real-time frame analysis",
+        "Centralized config with environment variable support",
+        "Comprehensive error handling and structured logging"
+      ],
+      "impact": "Provides accurate, scalable Kaong ripeness assessments with improved maintainability, efficient resource usage, and production-ready configuration.",
+      "skills": ["Python", "Flask", "Computer Vision", "PyTorch", "YOLO", "Database Design", "WebSocket", "Logging"]
+    }
+  },
 ]
 
 export const SkillsData = [
@@ -645,6 +763,7 @@ export const SkillsData = [
     ],
     relatedProjects: ["Gold Days Clothing", "Forumania", "PISO WiFi Management System"],
   },
+
 ]
 
 export const CoreSpecializations = ["Java", "Spring Boot", "Quarkus", "Angular", "PostgreSQL", "JWT", "OAuth2", "RESTful APIs"]
