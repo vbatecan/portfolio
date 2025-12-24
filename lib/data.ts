@@ -578,7 +578,7 @@ export const AllProjects = [
     icon: LayoutDashboard,
     date: "2025",
     repoStatus: "private" as RepoStatus,
-    liveStatus: "development" as LiveStatus,
+    liveStatus: "live" as LiveStatus,
     details: {
       overview:
         "A comprehensive project management solution designed for freelancers. This application helps you manage clients, projects, invoices, time tracking, and more in a unified dashboard. Built with modern web technologies for performance and user experience.",
