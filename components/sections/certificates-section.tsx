@@ -25,7 +25,34 @@ const certificates = [
     image: "/assets/others/cisco.jpg?height=100&width=100",
     description: "Core concepts of operating systems, including Windows, Linux, and system administration",
     skills: ["Operating Systems", "System Administration", "Linux", "Windows", "Command Line"],
-  }
+  },
+  {
+    title: "Ethical Hacking Fundamentals",
+    issuer: "EC-Council",
+    date: "2025",
+    image: "/certificates/fundamentals_of_ethical_hacking.jpg",
+    description: "Introduction to ethical hacking methodologies, tools, and security fundamentals",
+    skills: ["Ethical Hacking", "Cybersecurity", "Penetration Testing", "Security Fundamentals"],
+    clickable: true,
+  },
+  {
+    title: "ACSS Code Start: Bridging the Gap for Non-ICT Freshmen",
+    issuer: "University of the East - Caloocan",
+    date: "October 2025",
+    image: "/certificates/ecert_acss.jpg",
+    description: "Certificate of Participation for a three-session workshop covering Python programming, computational concepts, and Java with object-oriented programming",
+    skills: ["Python", "Java", "OOP", "Computational Concepts"],
+    clickable: true,
+  },
+  {
+    title: "Library Science Certification",
+    issuer: "University of the East - Caloocan",
+    date: "2025",
+    image: "/certificates/library.jpg",
+    description: "Participation Certification in library science and information management",
+    skills: ["Library Science", "Information Management", "Research Skills"],
+    clickable: true,
+  },
 ]
 
 export const CertificatesSection = () => {
@@ -68,13 +95,31 @@ export const CertificatesSection = () => {
                 <div className="absolute inset-0 bg-primary/5 group-hover:bg-primary/10 transition-colors duration-500" />
 
                 <div className="relative z-10 flex flex-col h-full">
-                  <motion.img
-                    src={cert.image || "/placeholder.svg"}
-                    alt={cert.title}
-                    className="w-20 h-20 mx-auto mb-4 rounded-2xl shadow-lg"
-                    whileHover={{ rotate: [0, -5, 5, 0], scale: 1.1 }}
-                    transition={{ duration: 0.5 }}
-                  />
+                  {cert.clickable ? (
+                    <motion.div
+                      whileHover={{ rotate: [0, -5, 5, 0], scale: 1.1 }}
+                      transition={{ duration: 0.5 }}
+                      className="cursor-pointer relative group/image"
+                      onClick={() => window.open(cert.image, "_blank")}
+                    >
+                      <motion.img
+                        src={cert.image || "/placeholder.svg"}
+                        alt={cert.title}
+                        className="w-40 h-auto mx-auto mb-4 rounded-xl shadow-lg"
+                      />
+                      <div className="absolute inset-0 flex items-center justify-center bg-black/40 rounded-2xl opacity-0 group-hover/image:opacity-100 transition-opacity">
+                        <span className="text-white text-xs font-medium">View Full</span>
+                      </div>
+                    </motion.div>
+                  ) : (
+                    <motion.img
+                      src={cert.image || "/placeholder.svg"}
+                      alt={cert.title}
+                      className="w-20 h-auto mx-auto mb-4 rounded-2xl shadow-lg"
+                      whileHover={{ rotate: [0, -5, 5, 0], scale: 1.1 }}
+                      transition={{ duration: 0.5 }}
+                    />
+                  )}
 
                   <h3 className="font-bold text-lg mb-2 text-foreground">
                     {cert.title}

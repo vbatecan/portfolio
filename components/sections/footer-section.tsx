@@ -22,7 +22,7 @@ export const FooterSection = ({ scrollToSection }: FooterSectionProps) => {
           >
             <div className="flex items-center gap-3">
               <div className="w-12 h-12 bg-primary rounded-xl flex items-center justify-center">
-                <span className="text-white font-bold text-xl">V</span>
+                <img src="/assets/2.jpg" alt="Profile" className="w-full h-full rounded-xl" />
               </div>
               <div>
                 <h3 className="text-xl font-bold">Vince Angelo Batecan</h3>
@@ -30,8 +30,7 @@ export const FooterSection = ({ scrollToSection }: FooterSectionProps) => {
               </div>
             </div>
             <p className="text-slate-300 leading-relaxed">
-              Empowering digital transformation through innovative technology and dedicated excellence. Building the
-              future, one project at a time.
+              1st year college student studying Bachelor of Science in Information Technology.
             </p>
             <p className="text-slate-500 text-sm">
               © {new Date().getFullYear()} Vince Angelo Batecan. All rights reserved.
@@ -92,7 +91,7 @@ export const FooterSection = ({ scrollToSection }: FooterSectionProps) => {
               <div className="flex items-center gap-3">
                 <Phone className="h-5 w-5 text-blue-400 flex-shrink-0" />
                 <a
-                  href="tel:+639123456789"
+                  href="tel:+639998216556"
                   className="text-slate-300 hover:text-blue-400 transition-colors"
                   data-magnetic
                 >
@@ -109,14 +108,12 @@ export const FooterSection = ({ scrollToSection }: FooterSectionProps) => {
             <motion.div className="mt-6" whileHover={{ scale: 1.02 }} data-magnetic>
               <div className="bg-slate-700 rounded-lg overflow-hidden">
                 <iframe
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3861.2!2d121.0!3d14.6!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTTCsDM2JzAwLjAiTiAxMjHCsDAwJzAwLjAiRQ!5e0!3m2!1sen!2sph!4v1234567890"
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15433.561591101725!2d120.98479536195548!3d14.747021923058652!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3397b18f6401438d%3A0x30e71aa2fddf0c66!2sBignay%2C%20Valenzuela%2C%20Metro%20Manila%2C%20Philippines!5e0!3m2!1sen!2sus!4v1774692607501!5m2!1sen!2sus"
                   width="100%"
                   height="150"
                   style={{ border: 0 }}
-                  allowFullScreen
                   loading="lazy"
-                  referrerPolicy="no-referrer-when-downgrade"
-                  className="grayscale hover:grayscale-0 transition-all duration-300"
+                  title="Location Map"
                 />
               </div>
             </motion.div>
