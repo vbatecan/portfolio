@@ -132,7 +132,6 @@ export const FooterSection = ({ scrollToSection }: FooterSectionProps) => {
             className="flex flex-col md:flex-row justify-between items-center gap-4"
           >
             <p className="text-slate-400 text-sm text-center md:text-left">
-              Designed with <span className="text-red-400">❤️</span> for modern web experiences
             </p>
             <div className="flex gap-4">
               <motion.a
