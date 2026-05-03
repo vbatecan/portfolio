@@ -29,7 +29,7 @@ export const Navbar = ({ darkMode, toggleDarkMode, scrollToSection }: NavbarProp
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
-            {["home", "about", "projects", "skills", "stats", "certificates", "contact"].map((item) => (
+            {["home", "about", "services", "projects", "skills", "stats", "certificates", "contact"].map((item) => (
               <motion.button
                 key={item}
                 onClick={() => scrollToSection(item)}
@@ -77,7 +77,7 @@ export const Navbar = ({ darkMode, toggleDarkMode, scrollToSection }: NavbarProp
             className="md:hidden bg-white/10 dark:bg-gray-900/10 backdrop-blur-xl border-t border-white/20 dark:border-gray-700/20"
           >
             <div className="px-4 py-2 space-y-2">
-              {["home", "about", "projects", "skills", "stats", "certificates", "contact"].map((item) => (
+              {["home", "about", "services", "projects", "skills", "stats", "certificates", "contact"].map((item) => (
                 <button
                   key={item}
                   onClick={() => {

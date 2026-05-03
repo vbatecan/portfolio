@@ -17,6 +17,9 @@ import { ChatInterface } from "@/components/chat/chat-interface"
 const AboutSection = lazy(() =>
   import("@/components/sections/about-section").then((mod) => ({ default: mod.AboutSection })),
 )
+const ServicesSection = lazy(() =>
+  import("@/components/sections/services-section").then((mod) => ({ default: mod.ServicesSection })),
+)
 const ProjectsSection = lazy(() =>
   import("@/components/sections/projects-section").then((mod) => ({ default: mod.ProjectsSection })),
 )
@@ -87,6 +90,9 @@ export default function Portfolio() {
 
           {/* About Section - High priority */}
           <LazySection sectionName="about" component={AboutSection} priority="high" preloadOffset="400px" />
+
+          {/* Services Section - High priority */}
+          <LazySection sectionName="services" component={ServicesSection} priority="high" preloadOffset="400px" />
 
           {/* Projects Section - High priority */}
           <LazySection sectionName="projects" component={ProjectsSection} priority="high" preloadOffset="400px" />
