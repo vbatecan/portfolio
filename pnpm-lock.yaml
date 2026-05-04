@@ -180,9 +180,6 @@ importers:
       '@types/react-dom':
         specifier: ^19
         version: 19.0.0
-      opennextjs-cloudflare:
-        specifier: ^1.0.0
-        version: 1.0.0
       postcss:
         specifier: ^8
         version: 8.0.0
@@ -1673,9 +1670,6 @@ packages:
   object-hash@3.0.0:
     resolution: {integrity: sha512-RSn9F68PjH9HqtltsSnqYC1XXoWe9Bju5+213R98cNGttag9q9yAOTzdbsqvIa7aNm5WffBZFpWYr2aWrklWAw==}
     engines: {node: '>= 6'}
-
-  opennextjs-cloudflare@1.0.0:
-    resolution: {integrity: sha512-udcoJaxZyMUp+uYt5Lumz0b+uuCsbnQP8jG7kexZltHaO9ANxfPBhrju4MzkrUPUb3ePox9nQ7Bo2e9Wbeux9g==}
 
   package-json-from-dist@1.0.1:
     resolution: {integrity: sha512-UEZIS3/by4OC8vL3P2dTXRETpebLI2NiI5vIrjaD/5UtrkFX/tNbwjTSRAGC/+7CAo2pIcBaRgWmcBBHcsaCIw==}
@@ -3477,8 +3471,6 @@ snapshots:
   object-assign@4.1.1: {}
 
   object-hash@3.0.0: {}
-
-  opennextjs-cloudflare@1.0.0: {}
 
   package-json-from-dist@1.0.1: {}
 
