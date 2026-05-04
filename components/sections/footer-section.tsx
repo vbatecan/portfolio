@@ -1,6 +1,7 @@
 "use client"
 
 import { motion } from "framer-motion"
+import { useState, useEffect } from "react"
 import { Github, Linkedin, Mail, Heart, Terminal } from "lucide-react"
 
 interface FooterSectionProps {
@@ -8,7 +9,11 @@ interface FooterSectionProps {
 }
 
 export const FooterSection = ({ scrollToSection }: FooterSectionProps) => {
-  const currentYear = new Date().getFullYear()
+  const [currentYear, setCurrentYear] = useState(new Date().getFullYear())
+
+  useEffect(() => {
+    setCurrentYear(new Date().getFullYear())
+  }, [])
 
   return (
     <footer className="py-12 px-4 bg-gray-900 text-white relative z-10">

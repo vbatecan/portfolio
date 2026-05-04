@@ -14,7 +14,7 @@ const navItems = [
   { id: "home", label: "Home", icon: Home },
   { id: "about", label: "About", icon: User },
   { id: "projects", label: "Projects", icon: FolderGit2 },
-  { id: "code", label: "Code", icon: Code2 },
+  { id: "skills", label: "Skills", icon: Code2 },
   { id: "contact", label: "Contact", icon: MessageSquare },
 ]
 

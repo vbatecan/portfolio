@@ -16,7 +16,6 @@ import { StatsSection } from "@/components/sections/stats-section"
 import { CertificatesSection } from "@/components/sections/certificates-section"
 import { ContactSection } from "@/components/sections/contact-section"
 import { FooterSection } from "@/components/sections/footer-section"
-import { CodeSnippetsSection } from "@/components/sections/code-snippets-section"
 import { ChatInterface } from "@/components/chat/chat-interface"
 
 export default function Portfolio() {
@@ -58,7 +57,6 @@ export default function Portfolio() {
         <HeroSection scrollToSection={scrollToSection} />
         <AboutSection />
         <ProjectsSection />
-        <CodeSnippetsSection />
         <SkillsSection />
         <StatsSection />
         <CertificatesSection />

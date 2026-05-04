@@ -1,16 +1,25 @@
 "use client"
 
 import { useTheme } from "next-themes"
+import { useState, useEffect } from "react"
 import { motion } from "framer-motion"
 import { Card, CardContent } from "@/components/ui/card"
 import { BarChart3 } from "lucide-react"
 
 export const StatsSection = () => {
   const { theme } = useTheme()
-  const isDark = theme === "dark"
+  const [mounted, setMounted] = useState(false)
+  const [cacheBust, setCacheBust] = useState('')
+
+  useEffect(() => {
+    setMounted(true)
+    setCacheBust(Date.now().toString())
+  }, [])
+
+  const isDark = mounted ? theme === "dark" : false
 
   const getImageUrl = (baseUrl: string) => {
-    return `${baseUrl}&cache=${Date.now()}`
+    return `${baseUrl}&cache=${cacheBust}`
   }
 
   const statsConfig = {
