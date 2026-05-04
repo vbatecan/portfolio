@@ -1,40 +1,23 @@
 "use client"
 
-import { useState, useEffect, lazy } from "react"
+import { useState, useEffect } from "react"
 
 import { FloatingShapes } from "@/components/background/floating-shapes"
 import { ParticleSystem } from "@/components/background/particle-system"
 
 import { Navbar } from "@/components/navigation/navbar"
-
-import { PreloadManager } from "@/components/preloading/preload-manager"
-import { LazySection } from "@/components/preloading/lazy-section"
-import { ResourcePreloader } from "@/components/preloading/resource-preloader"
+import { MobileNav } from "@/components/navigation/mobile-nav"
 
 import { HeroSection } from "@/components/sections/hero-section"
+import { AboutSection } from "@/components/sections/about-section"
+import { ProjectsSection } from "@/components/sections/projects-section"
+import { SkillsSection } from "@/components/sections/skills-section"
+import { StatsSection } from "@/components/sections/stats-section"
+import { CertificatesSection } from "@/components/sections/certificates-section"
+import { ContactSection } from "@/components/sections/contact-section"
+import { FooterSection } from "@/components/sections/footer-section"
+import { CodeSnippetsSection } from "@/components/sections/code-snippets-section"
 import { ChatInterface } from "@/components/chat/chat-interface"
-
-const AboutSection = lazy(() =>
-  import("@/components/sections/about-section").then((mod) => ({ default: mod.AboutSection })),
-)
-const ProjectsSection = lazy(() =>
-  import("@/components/sections/projects-section").then((mod) => ({ default: mod.ProjectsSection })),
-)
-const SkillsSection = lazy(() =>
-  import("@/components/sections/skills-section").then((mod) => ({ default: mod.SkillsSection })),
-)
-const StatsSection = lazy(() =>
-  import("@/components/sections/stats-section").then((mod) => ({ default: mod.StatsSection })),
-)
-const CertificatesSection = lazy(() =>
-  import("@/components/sections/certificates-section").then((mod) => ({ default: mod.CertificatesSection })),
-)
-const ContactSection = lazy(() =>
-  import("@/components/sections/contact-section").then((mod) => ({ default: mod.ContactSection })),
-)
-const FooterSection = lazy(() =>
-  import("@/components/sections/footer-section").then((mod) => ({ default: mod.FooterSection })),
-)
 
 export default function Portfolio() {
   const [darkMode, setDarkMode] = useState(false)
@@ -59,65 +42,32 @@ export default function Portfolio() {
   }
 
   return (
-    <PreloadManager>
-      <div className={`min-h-screen transition-colors duration-300 ${darkMode ? "dark" : ""}`}>
-        <div className="bg-white dark:bg-gray-900 text-gray-900 dark:text-white relative overflow-hidden">
-          {/* Resource Preloader */}
-          <ResourcePreloader
-            images={[
-              "/placeholder.svg?height=400&width=400",
-              "/placeholder.svg?height=200&width=300",
-              "/placeholder.svg?height=100&width=100",
-            ]}
-            priority="high"
-          />
+    <div className={`min-h-screen transition-colors duration-300 ${darkMode ? "dark" : ""}`}>
+      <div className="bg-white dark:bg-gray-900 text-gray-900 dark:text-white relative overflow-hidden">
+        {/* Background Effects */}
+        <FloatingShapes />
+        <ParticleSystem />
 
-          {/* Background Effects (lightweight) */}
-          <FloatingShapes />
-          <ParticleSystem />
+        {/* Navigation */}
+        <Navbar darkMode={darkMode} toggleDarkMode={toggleDarkMode} scrollToSection={scrollToSection} />
 
-          {/* Navigation - Critical, always loaded */}
-          <Navbar darkMode={darkMode} toggleDarkMode={toggleDarkMode} scrollToSection={scrollToSection} />
+        {/* Chat Interface */}
+        <ChatInterface />
 
-          {/* Chat Interface */}
-          <ChatInterface />
+        {/* All Sections */}
+        <HeroSection scrollToSection={scrollToSection} />
+        <AboutSection />
+        <ProjectsSection />
+        <CodeSnippetsSection />
+        <SkillsSection />
+        <StatsSection />
+        <CertificatesSection />
+        <ContactSection />
+        <FooterSection scrollToSection={scrollToSection} />
 
-          {/* Hero Section - Critical, loaded immediately */}
-          <HeroSection scrollToSection={scrollToSection} />
-
-          {/* About Section - High priority */}
-          <LazySection sectionName="about" component={AboutSection} priority="high" preloadOffset="400px" />
-
-          {/* Projects Section - High priority */}
-          <LazySection sectionName="projects" component={ProjectsSection} priority="high" preloadOffset="400px" />
-
-          {/* Skills Section - Medium priority */}
-          <LazySection sectionName="skills" component={SkillsSection} priority="medium" preloadOffset="300px" />
-
-          {/* Stats Section - Medium priority */}
-          <LazySection sectionName="stats" component={StatsSection} priority="medium" preloadOffset="300px" />
-
-          {/* Certificates Section - Low priority */}
-          <LazySection
-            sectionName="certificates"
-            component={CertificatesSection}
-            priority="low"
-            preloadOffset="200px"
-          />
-
-          {/* Contact Section - Low priority */}
-          <LazySection sectionName="contact" component={ContactSection} priority="low" preloadOffset="200px" />
-
-          {/* Footer Section - Low priority */}
-          <LazySection
-            sectionName="footer"
-            component={FooterSection}
-            priority="low"
-            preloadOffset="100px"
-            scrollToSection={scrollToSection}
-          />
-        </div>
+        {/* Mobile Bottom Navigation */}
+        <MobileNav darkMode={darkMode} toggleDarkMode={toggleDarkMode} scrollToSection={scrollToSection} />
       </div>
-    </PreloadManager>
+    </div>
   )
 }

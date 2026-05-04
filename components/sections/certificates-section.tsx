@@ -1,7 +1,7 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { Calendar, Award } from "lucide-react"
+import { Calendar, Award, ScrollText } from "lucide-react"
 import { Card } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 
@@ -13,8 +13,8 @@ const certificates = [
     credentialId: "58a30888-d92d-4cc3-87b3-4daa1f550789",
     credentialUrl: "https://www.credly.com/badges/58a30888-d92d-4cc3-87b3-4daa1f550789/linked_in_profile",
     image: "/assets/others/cisco.jpg?height=100&width=100",
-    description: "Fundamental knowledge of computer hardware components, assembly, and troubleshooting",
-    skills: ["Hardware Components", "Computer Assembly", "Troubleshooting", "System Architecture"],
+    description: "Hardware components, assembly, and troubleshooting fundamentals",
+    skills: ["Hardware", "Assembly", "Troubleshooting"],
   },
   {
     title: "Operating Systems Basics",
@@ -23,154 +23,133 @@ const certificates = [
     credentialId: "32f6a9c2-a38f-4973-9567-ace1ccb8f1b1",
     credentialUrl: "https://www.credly.com/badges/32f6a9c2-a38f-4973-9567-ace1ccb8f1b1/linked_in_profile",
     image: "/assets/others/cisco.jpg?height=100&width=100",
-    description: "Core concepts of operating systems, including Windows, Linux, and system administration",
-    skills: ["Operating Systems", "System Administration", "Linux", "Windows", "Command Line"],
+    description: "OS concepts: Windows, Linux, system administration, and command line",
+    skills: ["Linux", "Windows", "SysAdmin", "CLI"],
   },
   {
     title: "Ethical Hacking Fundamentals",
     issuer: "EC-Council",
     date: "2025",
     image: "/certificates/fundamentals_of_ethical_hacking.jpg",
-    description: "Introduction to ethical hacking methodologies, tools, and security fundamentals",
-    skills: ["Ethical Hacking", "Cybersecurity", "Penetration Testing", "Security Fundamentals"],
+    description: "Ethical hacking methodologies, tools, and security fundamentals",
+    skills: ["PenTesting", "Cybersecurity", "Security"],
     clickable: true,
   },
   {
-    title: "ACSS Code Start: Bridging the Gap for Non-ICT Freshmen",
-    issuer: "University of the East - Caloocan",
+    title: "ACSS Code Start",
+    issuer: "UE Caloocan",
     date: "October 2025",
     image: "/certificates/ecert_acss.jpg",
-    description: "Certificate of Participation for a three-session workshop covering Python programming, computational concepts, and Java with object-oriented programming",
-    skills: ["Python", "Java", "OOP", "Computational Concepts"],
+    description: "Python, Java OOP, and computational concepts workshop",
+    skills: ["Python", "Java", "OOP"],
     clickable: true,
   },
   {
-    title: "Library Science Certification",
-    issuer: "University of the East - Caloocan",
+    title: "Library Science",
+    issuer: "UE Caloocan",
     date: "2025",
     image: "/certificates/library.jpg",
-    description: "Participation Certification in library science and information management",
-    skills: ["Library Science", "Information Management", "Research Skills"],
+    description: "Library science and information management",
+    skills: ["Research", "Info Management"],
     clickable: true,
   },
 ]
 
 export const CertificatesSection = () => {
   return (
-    <section id="certificates" className="py-20 px-4 relative z-10">
+    <section id="certificates" className="py-20 px-4 relative z-10 bg-gray-50/50 dark:bg-gray-800/50">
       <div className="max-w-6xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
-          className="text-center mb-16"
+          className="mb-16"
         >
-          <h2
-            className="text-5xl md:text-6xl font-bold mb-6 text-primary"
-            data-magnetic
-          >
-            Certifications
-          </h2>
-          <div className="w-32 h-1 bg-primary mx-auto mb-8 rounded-full"></div>
-          <p className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
-            Professional certifications demonstrating expertise across hardware, operating systems, cloud platforms, and
-            development frameworks
+          <p className="font-mono text-sm text-secondary mb-2 tracking-widest uppercase">
+            <ScrollText className="inline h-4 w-4 mr-2" />
+            ls -la ./certificates/
+          </p>
+          <h2 className="section-title mb-4">Certifications</h2>
+          <div className="accent-line mb-6"></div>
+          <p className="section-subtitle">
+            Continuing education and skill verification.
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {certificates.map((cert, index) => (
             <motion.div
               key={cert.title}
-              initial={{ opacity: 0, y: 50, rotateX: -30 }}
-              whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
-              transition={{ duration: 0.8, delay: index * 0.2 }}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: index * 0.1 }}
               viewport={{ once: true }}
-              whileHover={{ y: -10, rotateX: 5, scale: 1.02 }}
+              whileHover={{ y: -5 }}
               className="group"
-              data-magnetic
             >
-              <Card className="text-center p-6 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm border-0 shadow-lg hover:shadow-2xl transition-all duration-500 rounded-2xl relative overflow-hidden h-full">
-                <div className="absolute inset-0 bg-primary/5 group-hover:bg-primary/10 transition-colors duration-500" />
-
-                <div className="relative z-10 flex flex-col h-full">
+              <Card className="p-6 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm border-0 shadow-lg hover:shadow-xl transition-all duration-300 rounded-2xl h-full flex flex-col">
+                <div className="flex items-start gap-4 mb-4">
                   {cert.clickable ? (
                     <motion.div
-                      whileHover={{ rotate: [0, -5, 5, 0], scale: 1.1 }}
-                      transition={{ duration: 0.5 }}
-                      className="cursor-pointer relative group/image"
+                      whileHover={{ scale: 1.05 }}
+                      className="cursor-pointer relative shrink-0"
                       onClick={() => window.open(cert.image, "_blank")}
                     >
-                      <motion.img
+                      <img
                         src={cert.image || "/placeholder.svg"}
                         alt={cert.title}
-                        className="w-40 h-auto mx-auto mb-4 rounded-xl shadow-lg"
+                        className="w-24 h-auto rounded-xl shadow-md"
                       />
-                      <div className="absolute inset-0 flex items-center justify-center bg-black/40 rounded-2xl opacity-0 group-hover/image:opacity-100 transition-opacity">
-                        <span className="text-white text-xs font-medium">View Full</span>
+                      <div className="absolute inset-0 flex items-center justify-center bg-black/40 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity">
+                        <span className="text-white text-xs font-mono">View</span>
                       </div>
                     </motion.div>
                   ) : (
-                    <motion.img
+                    <img
                       src={cert.image || "/placeholder.svg"}
                       alt={cert.title}
-                      className="w-20 h-auto mx-auto mb-4 rounded-2xl shadow-lg"
-                      whileHover={{ rotate: [0, -5, 5, 0], scale: 1.1 }}
-                      transition={{ duration: 0.5 }}
+                      className="w-16 h-auto rounded-lg shadow-md shrink-0"
                     />
                   )}
+                  
+                  <div className="flex-1 min-w-0">
+                    <h3 className="font-bold text-sm mb-1 text-foreground line-clamp-2">
+                      {cert.title}
+                    </h3>
+                    <p className="text-xs text-secondary font-mono">{cert.issuer}</p>
+                  </div>
+                </div>
 
-                  <h3 className="font-bold text-lg mb-2 text-foreground">
-                    {cert.title}
-                  </h3>
+                <p className="text-sm text-gray-600 dark:text-gray-400 mb-4 flex-1">
+                  {cert.description}
+                </p>
 
-                  <p className="text-gray-600 dark:text-gray-300 mb-3 font-medium">{cert.issuer}</p>
+                <div className="flex flex-wrap gap-1.5 mb-4">
+                  {cert.skills.map((skill) => (
+                    <span key={skill} className="tech-tag text-xs">
+                      {skill}
+                    </span>
+                  ))}
+                </div>
 
-                  {cert.description && (
-                    <p className="text-sm text-gray-500 dark:text-gray-400 mb-4 flex-grow">{cert.description}</p>
-                  )}
-
-                  {cert.skills && (
-                    <div className="flex flex-wrap gap-1 mb-4 justify-center">
-                      {cert.skills.slice(0, 3).map((skill) => (
-                        <span
-                          key={skill}
-                          className="text-xs px-2 py-1 bg-secondary/10 text-secondary rounded-full"
-                        >
-                          {skill}
-                        </span>
-                      ))}
-                      {cert.skills.length > 3 && (
-                        <span className="text-xs px-2 py-1 bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 rounded-full">
-                          +{cert.skills.length - 3}
-                        </span>
-                      )}
-                    </div>
-                  )}
-
-                  <div className="mt-auto space-y-3">
-                    <div className="flex items-center justify-center gap-2 text-sm text-gray-500">
-                      <Calendar className="h-4 w-4" />
-                      <span>{cert.date}</span>
+                <div className="mt-auto pt-4 border-t border-gray-200 dark:border-gray-700">
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-1.5 text-xs text-gray-500 font-mono">
+                      <Calendar className="h-3 w-3" />
+                      {cert.date}
                     </div>
 
                     {cert.credentialUrl && (
-                      <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                        <Button
-                          variant="outline"
-                          size="sm"
-                          className="w-full rounded-full"
-                          onClick={() => window.open(cert.credentialUrl, "_blank")}
-                        >
-                          <Award className="h-4 w-4 mr-2" />
-                          View Credential
-                        </Button>
-                      </motion.div>
-                    )}
-
-                    {cert.credentialId && (
-                      <p className="text-xs text-gray-400 dark:text-gray-500 break-all">ID: {cert.credentialId}</p>
+                      <a
+                        href={cert.credentialUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center gap-1 text-xs text-primary hover:underline font-mono"
+                      >
+                        <Award className="h-3 w-3" />
+                        Verify
+                      </a>
                     )}
                   </div>
                 </div>

@@ -1,149 +1,132 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { MapPin, Mail, Github, Linkedin, Facebook, Globe } from "lucide-react"
+import { MapPin, Mail, Github, Linkedin, Terminal } from "lucide-react"
 import { Button } from "@/components/ui/button"
 
 export const AboutSection = () => {
   return (
-    <section id="about" className="py-20 px-4 relative z-10">
+    <section id="about" className="py-20 px-4 relative z-10 bg-white dark:bg-gray-900">
       <div className="max-w-6xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
-          className="text-center mb-16"
+          className="mb-16"
         >
-          <h2
-            className="text-5xl md:text-6xl font-bold mb-6 text-primary"
-            data-magnetic
-          >
-            About Me
-          </h2>
-          <div className="w-32 h-1 bg-primary mx-auto mb-8 rounded-full"></div>
+          <p className="font-mono text-sm text-secondary mb-2 tracking-widest uppercase">
+            <Terminal className="inline h-4 w-4 mr-2" />
+            cat about.md
+          </p>
+          <h2 className="section-title mb-4">The Short Version</h2>
+          <div className="accent-line"></div>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 gap-16 items-center">
+        <div className="grid lg:grid-cols-5 gap-12 items-start">
+          {/* Image - takes 2 cols */}
           <motion.div
-            initial={{ opacity: 0, x: -50 }}
+            initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
-            className="relative"
-            data-magnetic
+            className="lg:col-span-2"
           >
-            <div className="relative bg-muted rounded-3xl p-8 overflow-hidden">
+            <div className="relative">
+              <div className="aspect-square bg-gradient-to-br from-primary/20 to-secondary/20 rounded-3xl overflow-hidden">
+                <img
+                  src="/assets/2.jpg?height=500&width=500"
+                  alt="Vince Angelo Batecan"
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              
+              {/* Floating terminal decoration */}
               <motion.div
-                className="absolute -top-10 -right-10 w-32 h-32 bg-primary/20 rounded-full"
-                animate={{ rotate: 360 }}
-                transition={{ duration: 20, repeat: Number.POSITIVE_INFINITY, ease: "linear" }}
-              />
-              <motion.div
-                className="absolute -bottom-10 -left-10 w-24 h-24 bg-secondary/20 rounded-full"
-                animate={{ rotate: -360 }}
-                transition={{ duration: 15, repeat: Number.POSITIVE_INFINITY, ease: "linear" }}
-              />
-              <img
-                src="/assets/2.jpg?height=400&width=400"
-                alt="Profile"
-                className="w-full max-w-sm mx-auto rounded-2xl shadow-2xl relative z-10"
-              />
+                className="absolute -bottom-4 -right-4 bg-gray-900 text-gray-300 rounded-xl p-4 font-mono text-xs shadow-xl"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.5 }}
+                viewport={{ once: true }}
+              >
+                <div className="text-green-400">$ whoami</div>
+                <div>vince-batecan</div>
+                <div className="text-gray-500 mt-1">// UE IT Student</div>
+                <div className="text-gray-500">// Full-Stack Dev</div>
+              </motion.div>
             </div>
           </motion.div>
 
+          {/* Content - takes 3 cols */}
           <motion.div
-            initial={{ opacity: 0, x: 50 }}
+            initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
             viewport={{ once: true }}
-            className="space-y-6"
+            className="lg:col-span-3 space-y-6"
           >
-            <motion.p
-              className="text-lg text-gray-600 dark:text-gray-300 leading-relaxed"
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              transition={{ delay: 0.2, duration: 0.8 }}
-              viewport={{ once: true }}
-            >
-              I'm a software developer specializing in <strong>Java and relational databases</strong>, with a focus on
-              building secure, scalable RESTful APIs using <strong>Spring Boot and Quarkus</strong>. I have experience
-              implementing authentication systems, including <strong>JWT-based security and OAuth2</strong>.
-            </motion.p>
+            <div className="prose prose-gray dark:prose-invert max-w-none">
+              <p className="text-lg text-gray-700 dark:text-gray-300 leading-relaxed">
+                <span className="text-primary font-semibold">Java backend developer</span> at heart. 
+                I build REST APIs with Spring Boot, integrate hardware with ESP32, and occasionally 
+                whip up an Angular frontend when needed.
+              </p>
 
-            <motion.p
-              className="text-lg text-gray-600 dark:text-gray-300 leading-relaxed"
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              transition={{ delay: 0.4, duration: 0.8 }}
-              viewport={{ once: true }}
-            >
-              Beyond backend development, I create dynamic, responsive user interfaces with <strong>Angular</strong>,
-              seamlessly integrating frontends with API backends for complete full-stack solutions. My work emphasizes{" "}
-              <strong>clean architecture, maintainable code, and security best practices</strong>.
-            </motion.p>
+              <p className="text-lg text-gray-700 dark:text-gray-300 leading-relaxed">
+                Currently studying IT at UE Caloocan while working on side projects. 
+                Started coding around 11, got serious about cybersecurity at 15 (TryHackMe top 2%), 
+                and shifted toward building products that actually ship.
+              </p>
 
-            <motion.div
-              className="grid grid-cols-2 gap-6 pt-4"
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              transition={{ delay: 0.6, duration: 0.8 }}
-              viewport={{ once: true }}
-            >
-              <div className="space-y-4">
-                <div className="flex items-center gap-3 text-gray-600 dark:text-gray-300">
-                  <div className="p-2 bg-primary rounded-lg">
-                    <MapPin className="h-4 w-4 text-primary-foreground" />
-                  </div>
-                  <span>Philippines</span>
+              <p className="text-lg text-gray-700 dark:text-gray-300 leading-relaxed">
+                I care about <span className="font-semibold">clean code, security-first design, 
+                and systems that work in the real world</span> — not just tutorials.
+              </p>
+            </div>
+
+            {/* Quick Info */}
+            <div className="grid grid-cols-2 gap-4 pt-4">
+              <div className="flex items-center gap-3 p-3 bg-gray-50 dark:bg-gray-800 rounded-xl">
+                <div className="p-2 bg-primary/10 rounded-lg">
+                  <MapPin className="h-4 w-4 text-primary icon-monochrome" />
                 </div>
-                <div className="flex items-center gap-3 text-gray-600 dark:text-gray-300">
-                  <div className="p-2 bg-secondary rounded-lg">
-                    <Mail className="h-4 w-4 text-secondary-foreground" />
-                  </div>
-                  <span>vbatecan@gmail.com</span>
+                <div>
+                  <div className="font-mono text-xs text-secondary">Location</div>
+                  <div className="text-sm font-medium">Valenzuela, PH</div>
                 </div>
               </div>
-              <div className="space-y-4">
-                <div className="flex items-center gap-3 text-gray-600 dark:text-gray-300">
-                  <div className="p-2 bg-primary rounded-lg">
-                    <Globe className="h-4 w-4 text-primary-foreground" />
-                  </div>
-                  <div>
-                    <div className="font-medium">Languages</div>
-                    <div className="text-sm">English (Professional)</div>
-                    <div className="text-sm">Filipino (Native)</div>
-                  </div>
+              <div className="flex items-center gap-3 p-3 bg-gray-50 dark:bg-gray-800 rounded-xl">
+                <div className="p-2 bg-primary/10 rounded-lg">
+                  <Mail className="h-4 w-4 text-primary icon-monochrome" />
+                </div>
+                <div>
+                  <div className="font-mono text-xs text-secondary">Email</div>
+                  <div className="text-sm font-medium">vbatecan@gmail.com</div>
                 </div>
               </div>
-            </motion.div>
+            </div>
 
-            <motion.div
-              className="flex gap-4 pt-4"
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              transition={{ delay: 0.8, duration: 0.8 }}
-              viewport={{ once: true }}
-            >
-              <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} data-magnetic>
-                <Button variant="outline" size="sm" className="rounded-full" onClick={() => window.open("https://github.com/vbatecan", "_blank")}>
-                  <Github className="h-4 w-4 mr-2" />
-                  GitHub
-                </Button>
-              </motion.div>
-              <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} data-magnetic>
-                <Button variant="outline" size="sm" className="rounded-full" onClick={() => window.open("https://www.linkedin.com/in/vince-batecan/", "_blank")}>
-                  <Linkedin className="h-4 w-4 mr-2" />
-                  LinkedIn
-                </Button>
-              </motion.div>
-              <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} data-magnetic>
-                <Button variant="outline" size="sm" className="rounded-full" onClick={() => window.open("https://www.facebook.com/Nytriii", "_blank")}>
-                  <Facebook className="h-4 w-4 mr-2" />
-                  Facebook
-                </Button>
-              </motion.div>
-            </motion.div>
+            {/* Social Links */}
+            <div className="flex flex-wrap gap-3 pt-4">
+              <Button
+                variant="outline"
+                size="sm"
+                className="font-mono rounded-lg"
+                onClick={() => window.open("https://github.com/vbatecan", "_blank")}
+              >
+                <Github className="h-4 w-4 mr-2" />
+                GitHub
+              </Button>
+              <Button
+                variant="outline"
+                size="sm"
+                className="font-mono rounded-lg"
+                onClick={() => window.open("https://www.linkedin.com/in/vince-batecan/", "_blank")}
+              >
+                <Linkedin className="h-4 w-4 mr-2" />
+                LinkedIn
+              </Button>
+            </div>
           </motion.div>
         </div>
       </div>
