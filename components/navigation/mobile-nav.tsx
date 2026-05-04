@@ -13,6 +13,7 @@ interface MobileNavProps {
 const navItems = [
   { id: "home", label: "Home", icon: Home },
   { id: "about", label: "About", icon: User },
+  { id: "services", label: "Services", icon: FolderGit2 },
   { id: "projects", label: "Projects", icon: FolderGit2 },
   { id: "skills", label: "Skills", icon: Code2 },
   { id: "contact", label: "Contact", icon: MessageSquare },

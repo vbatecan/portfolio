@@ -10,6 +10,7 @@ import { MobileNav } from "@/components/navigation/mobile-nav"
 
 import { HeroSection } from "@/components/sections/hero-section"
 import { AboutSection } from "@/components/sections/about-section"
+import { ServicesSection } from "@/components/sections/services-section"
 import { ProjectsSection } from "@/components/sections/projects-section"
 import { SkillsSection } from "@/components/sections/skills-section"
 import { StatsSection } from "@/components/sections/stats-section"
@@ -56,6 +57,7 @@ export default function Portfolio() {
         {/* All Sections */}
         <HeroSection scrollToSection={scrollToSection} />
         <AboutSection />
+        <ServicesSection />
         <ProjectsSection />
         <SkillsSection />
         <StatsSection />
