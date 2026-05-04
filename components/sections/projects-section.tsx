@@ -29,15 +29,6 @@ const categories = [
   { id: "security", name: "Security", count: projects.filter((p) => p.category === "security").length },
 ]
 
-// Bento size based on project importance/complexity
-const getBentoSize = (project: typeof projects[0]) => {
-  // Tall cards for hardware/IoT projects
-  if (project.title.includes("ESP32") || project.title.includes("Kaong") || project.title.includes("Fingerprint")) return "tall"
-  // Wide cards for APIs and system projects
-  if (project.title.includes("Shoes API") || project.title.includes("PISO") || project.title.includes("Enrollment")) return "wide"
-  return "normal"
-}
-
 // Helper function to get status information
 const getStatusInfo = (status: LiveStatus | RepoStatus) => {
   switch (status) {
@@ -121,15 +112,14 @@ export const ProjectsSection = () => {
           ))}
         </motion.div>
 
-        {/* Bento Grid */}
-        <motion.div layout className="bento-grid mb-12">
+        {/* Uniform Grid */}
+        <motion.div layout className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
           <AnimatePresence>
             {filteredProjects.map((project, index) => {
               const liveStatusInfo = getStatusInfo(project.liveStatus)
               const repoStatusInfo = getStatusInfo(project.repoStatus)
               const LiveIcon = liveStatusInfo.icon
               const RepoIcon = repoStatusInfo.icon
-              const bentoSize = getBentoSize(project)
 
               return (
                 <motion.div
@@ -140,18 +130,15 @@ export const ProjectsSection = () => {
                   exit={{ opacity: 0, scale: 0.9, y: -50 }}
                   transition={{ duration: 0.5, delay: index * 0.03 }}
                   whileHover={{ y: -5, scale: 1.01 }}
-                  className={`group cursor-pointer ${
-                    bentoSize === "tall" ? "bento-tall" :
-                    bentoSize === "wide" ? "bento-wide" : "bento-normal"
-                  }`}
+                  className="group cursor-pointer"
                   onClick={() => setSelectedProject(project)}
                 >
-                  <Card className={`h-full overflow-hidden bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm border-0 shadow-lg hover:shadow-2xl transition-all duration-500 rounded-2xl ${bentoSize === "tall" ? "h-full" : ""}`}>
+                  <Card className="h-full overflow-hidden bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm border-0 shadow-lg hover:shadow-2xl transition-all duration-500 rounded-2xl">
                     <div className="relative overflow-hidden">
                       <motion.img
                         src={project.image || "/placeholder.svg"}
                         alt={project.title}
-                        className={`w-full object-cover ${bentoSize === "tall" ? "h-56" : "h-40"}`}
+                        className="w-full object-cover h-40"
                         whileHover={{ scale: 1.05 }}
                         transition={{ duration: 0.5 }}
                       />
