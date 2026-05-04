@@ -31,10 +31,10 @@ const categories = [
 
 // Bento size based on project importance/complexity
 const getBentoSize = (project: typeof projects[0]) => {
-  // Featured projects get more space
-  if (project.title.includes("Trackattend") || project.title.includes("VirtueLink")) return "featured"
-  if (project.title.includes("ESP32") || project.title.includes("Kaong")) return "tall"
-  if (project.title.includes("Shoes API") || project.title.includes("PISO")) return "wide"
+  // Tall cards for hardware/IoT projects
+  if (project.title.includes("ESP32") || project.title.includes("Kaong") || project.title.includes("Fingerprint")) return "tall"
+  // Wide cards for APIs and system projects
+  if (project.title.includes("Shoes API") || project.title.includes("PISO") || project.title.includes("Enrollment")) return "wide"
   return "normal"
 }
 
@@ -141,23 +141,17 @@ export const ProjectsSection = () => {
                   transition={{ duration: 0.5, delay: index * 0.03 }}
                   whileHover={{ y: -5, scale: 1.01 }}
                   className={`group cursor-pointer ${
-                    bentoSize === "featured" ? "bento-featured" :
                     bentoSize === "tall" ? "bento-tall" :
                     bentoSize === "wide" ? "bento-wide" : "bento-normal"
                   }`}
                   onClick={() => setSelectedProject(project)}
                 >
-                  <Card className={`h-full overflow-hidden bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm border-0 shadow-lg hover:shadow-2xl transition-all duration-500 rounded-2xl ${
-                    bentoSize === "featured" ? "ring-2 ring-primary/20" : ""
-                  }`}>
+                  <Card className={`h-full overflow-hidden bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm border-0 shadow-lg hover:shadow-2xl transition-all duration-500 rounded-2xl ${bentoSize === "tall" ? "h-full" : ""}`}>
                     <div className="relative overflow-hidden">
                       <motion.img
                         src={project.image || "/placeholder.svg"}
                         alt={project.title}
-                        className={`w-full object-cover ${
-                          bentoSize === "featured" ? "h-64" :
-                          bentoSize === "tall" ? "h-80" : "h-40"
-                        }`}
+                        className={`w-full object-cover ${bentoSize === "tall" ? "h-56" : "h-40"}`}
                         whileHover={{ scale: 1.05 }}
                         transition={{ duration: 0.5 }}
                       />
