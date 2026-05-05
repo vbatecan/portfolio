@@ -24,7 +24,29 @@ import {
 export type RepoStatus = "public" | "private" | "none"
 export type LiveStatus = "live" | "offline" | "development" | "archived" | "completed"
 
-export const AllProjects = [
+export interface Project {
+  id: number;
+  title: string;
+  description: string;
+  category: string;
+  image: string;
+  technologies: string[];
+  github: string;
+  live: string;
+  icon: any;
+  date: string;
+  repoStatus: RepoStatus;
+  liveStatus: LiveStatus;
+  featured?: boolean;
+  details: {
+    overview: string;
+    keyFeatures: string[];
+    impact: string;
+    skills: string[];
+  };
+}
+
+export const AllProjects: Project[] = [
   {
     id: 1,
     title: "Student Attendance Management System",
@@ -37,8 +59,9 @@ export const AllProjects = [
     live: "#",
     icon: GraduationCap,
     date: "2024",
-    repoStatus: "private" as RepoStatus,
-    liveStatus: "offline" as LiveStatus,
+    repoStatus: "private",
+    liveStatus: "offline",
+    featured: true,
     details: {
       overview:
         "The web interface of the Trackattend project, integrating fingerprint biometric authentication for real-time student attendance registration.",
@@ -67,8 +90,8 @@ export const AllProjects = [
     live: "#",
     icon: Fingerprint,
     date: "2024",
-    repoStatus: "private" as RepoStatus,
-    liveStatus: "offline" as LiveStatus,
+    repoStatus: "private",
+    liveStatus: "offline",
     details: {
       overview:
         "A comprehensive Grade 12 research project combining hardware and software to automate student attendance using fingerprint biometric technology.",
@@ -97,8 +120,9 @@ export const AllProjects = [
     live: "#",
     icon: Search,
     date: "2024",
-    repoStatus: "private" as RepoStatus,
-    liveStatus: "offline" as LiveStatus,
+    repoStatus: "private",
+    liveStatus: "offline",
+    featured: true,
     details: {
       overview:
         "Machine learning solution designed to help editors quickly locate specific stickers within Silhouette Studio software for Shopee product orders.",
@@ -127,8 +151,8 @@ export const AllProjects = [
     live: "#",
     icon: Wifi,
     date: "2024",
-    repoStatus: "development" as RepoStatus,
-    liveStatus: "offline" as LiveStatus,
+    repoStatus: "development",
+    liveStatus: "offline",
     details: {
       overview:
         "A comprehensive WiFi management system enabling pay-per-use internet access with automated control and monitoring capabilities.",
@@ -157,8 +181,8 @@ export const AllProjects = [
     live: "#",
     icon: Server,
     date: "Oct 2024 - Nov 2024",
-    repoStatus: "public" as RepoStatus,
-    liveStatus: "offline" as LiveStatus,
+    repoStatus: "public",
+    liveStatus: "offline",
     details: {
       overview:
         "A robust backend solution crafted to offer manipulable and dynamic searching capabilities for shoe-related data with comprehensive filtering operations.",
@@ -187,8 +211,9 @@ export const AllProjects = [
     live: "#",
     icon: Shield,
     date: "Oct 2024",
-    repoStatus: "public" as RepoStatus,
-    liveStatus: "development" as LiveStatus,
+    repoStatus: "public",
+    liveStatus: "development",
+    featured: true,
     details: {
       overview:
         "Contributed to the development of the user interface for the ESP32 Deauther project—a tool designed for WiFi network security testing and educational purposes.",
@@ -217,8 +242,8 @@ export const AllProjects = [
     live: "#",
     icon: ShoppingCart,
     date: "Aug 2024 - Sep 2024",
-    repoStatus: "none" as RepoStatus,
-    liveStatus: "offline" as LiveStatus,
+    repoStatus: "none",
+    liveStatus: "offline",
     details: {
       overview:
         "A refined e-commerce platform dedicated to the sale of high-quality apparel, leveraging cutting-edge technology for seamless shopping experiences.",
@@ -247,8 +272,8 @@ export const AllProjects = [
     live: "#",
     icon: MessageSquare,
     date: "Jul 2024 - Aug 2024",
-    repoStatus: "private" as RepoStatus,
-    liveStatus: "offline" as LiveStatus,
+    repoStatus: "private",
+    liveStatus: "offline",
     details: {
       overview:
         "A forum platform designed to facilitate engaging discussions and foster dynamic online communities with advanced technology and user-centric approach.",
@@ -277,8 +302,8 @@ export const AllProjects = [
     live: "https://vbatecan.github.io/soapify/",
     icon: Sparkles,
     date: "Mar 2024",
-    repoStatus: "public" as RepoStatus,
-    liveStatus: "live" as LiveStatus,
+    repoStatus: "public",
+    liveStatus: "live",
     details: {
       overview:
         "A static website developed as a commission for a client to present and promote soap and disinfectant products, serving as a digital brand introduction.",
@@ -307,8 +332,8 @@ export const AllProjects = [
     live: "#",
     icon: GraduationCap,
     date: "Sep 2023 - Oct 2023",
-    repoStatus: "none" as RepoStatus,
-    liveStatus: "archived" as LiveStatus,
+    repoStatus: "none",
+    liveStatus: "archived",
     details: {
       overview:
         "A comprehensive desktop application designed to streamline student enrollment processes and enhance record-keeping in educational institutions, built with C# and equipped with LocalDB.",
@@ -337,8 +362,8 @@ export const AllProjects = [
     live: "#",
     icon: ShoppingCart,
     date: "Apr 2022 - Jun 2022",
-    repoStatus: "public" as RepoStatus,
-    liveStatus: "archived" as LiveStatus,
+    repoStatus: "public",
+    liveStatus: "archived",
     details: {
       overview:
         "A comprehensive solution designed to streamline operations and enhance efficiency in the fast food industry, managing inventory, sales, staffing, and customer service.",
@@ -367,8 +392,8 @@ export const AllProjects = [
     live: "#",
     icon: Server,
     date: "Jan 2022",
-    repoStatus: "public" as RepoStatus,
-    liveStatus: "offline" as LiveStatus,
+    repoStatus: "public",
+    liveStatus: "offline",
     details: {
       overview:
         "A RESTful API designed to assist Todo list applications in managing task information, providing comprehensive CRUD operations for task management.",
@@ -397,8 +422,9 @@ export const AllProjects = [
     live: "#",
     icon: Server,
     date: "June 2025",
-    repoStatus: "public" as RepoStatus,
-    liveStatus: "offline" as LiveStatus,
+    repoStatus: "public",
+    liveStatus: "offline",
+    featured: true,
     details: {
       overview:
         "A RESTful API designed to assist Patient Management System applications in managing patient information, providing comprehensive CRUD operations for patient management. Additionally, it includes authentication and authorization using JWT tokens. Implemented RBAC for role-based access control.",
@@ -428,8 +454,8 @@ export const AllProjects = [
     live: "#",
     icon: Terminal,
     date: "June 2025",
-    repoStatus: "public" as RepoStatus,
-    liveStatus: "archived" as LiveStatus,
+    repoStatus: "public",
+    liveStatus: "archived",
     details: {
       overview:
         "A Python script that tiles images into smaller pieces, making it easier to process large datasets for machine learning tasks. By splitting images into grids, the tool enables models to focus on finer details and improves detection of small objects. Supports batch processing of images in various formats, providing a free and customizable alternative to commercial solutions like Roboflow.",
@@ -459,8 +485,9 @@ export const AllProjects = [
     live: "https://virtuelink.netlify.app",
     icon: Server,
     date: "2025",
-    repoStatus: "private" as RepoStatus,
-    liveStatus: "live" as LiveStatus,
+    repoStatus: "private",
+    liveStatus: "live",
+    featured: true,
     details: {
       overview:
         "Virtuelink streamlines scheduling, reservations, and related workflows for organizations with a calendar-first UI and serverless automation.",
@@ -504,8 +531,8 @@ export const AllProjects = [
     live: "https://crumb-cabin.netlify.app",
     icon: ShoppingCart,
     date: "2025",
-    repoStatus: "private" as RepoStatus,
-    liveStatus: "live" as LiveStatus,
+    repoStatus: "private",
+    liveStatus: "live",
     details: {
       overview:
         "A modern, type-safe ordering system for a cookie shop with customer ordering, voucher support, order tracking, and an admin dashboard for managing menu, orders, bundles, and analytics.",
@@ -548,8 +575,9 @@ export const AllProjects = [
     "live": "#",
     "icon": Search,
     "date": "Nov 2025",
-    "repoStatus": "private" as RepoStatus,
-    "liveStatus": "completed" as LiveStatus,
+    "repoStatus": "private",
+    "liveStatus": "completed",
+    "featured": true,
     "details": {
       "overview": "An optimized, service-oriented Flask app for Kaong ripeness detection using YOLO models with separate DetectionService, DatabaseService, and ImageService for maintainability and performance.",
       "keyFeatures": [
@@ -577,8 +605,9 @@ export const AllProjects = [
     live: "https://freelance-central.netlify.app",
     icon: LayoutDashboard,
     date: "2025",
-    repoStatus: "private" as RepoStatus,
-    liveStatus: "live" as LiveStatus,
+    repoStatus: "private",
+    liveStatus: "live",
+    featured: true,
     details: {
       overview:
         "A comprehensive project management solution designed for freelancers. This application helps you manage clients, projects, invoices, time tracking, and more in a unified dashboard. Built with modern web technologies for performance and user experience.",
@@ -603,6 +632,50 @@ export const AllProjects = [
         "FullCalendar",
         "Gemini AI",
         "PDF Generation",
+      ],
+    },
+  },
+  {
+    id: 19,
+    title: "Pikash",
+    description:
+      "Personal finance tracker for Filipinos — offline-first with Supabase sync, AI assistant (Tarsi), wallets, budgets, and built-in calculator for expense/income forms",
+    category: "web",
+    image: "/assets/pikash/image.png?height=200&width=300",
+    technologies: ["React 19", "Vite", "TypeScript", "Tailwind CSS 4", "shadcn/ui", "React Router v7", "Recharts", "Dexie.js", "Supabase", "Cloudflare Pages"],
+    github: "https://github.com/vbatecan/pikash",
+    live: "https://0d88f217.pikash.pages.dev",
+    icon: LayoutDashboard,
+    date: "2025",
+    repoStatus: "public",
+    liveStatus: "live",
+    featured: true,
+    details: {
+      overview:
+        "Pikash is a personal finance tracker designed for Filipinos. It tracks income, expenses, and budgets across multiple wallets with offline-first storage via Dexie.js (IndexedDB) and cloud sync via Supabase. Features an AI assistant named Tarsi for natural language finance queries and a built-in calculator in entry forms.",
+      keyFeatures: [
+        "Multi-wallet support (Cash, Debit, Bank, Credit, Savings, Investment)",
+        "Expense, income, and transfer tracking with category hierarchy",
+        "Offline-first architecture with Dexie.js and Supabase cloud sync",
+        "Budget management with periodic limits per category",
+        "AI assistant (Tarsi) for conversational finance insights",
+        "Built-in calculator keypad with chained arithmetic operations",
+        "Cloudflare Pages deployment for global availability",
+      ],
+      impact:
+        "Gives Filipinos a powerful, privacy-focused tool to manage personal finances — works offline and syncs when connected, making it reliable even on spotty internet.",
+      skills: [
+        "React 19",
+        "Vite",
+        "TypeScript",
+        "Tailwind CSS 4",
+        "shadcn/ui",
+        "React Router v7",
+        "Recharts",
+        "Dexie.js",
+        "Supabase",
+        "Cloudflare Pages",
+        "Offline-First Architecture",
       ],
     },
   },
