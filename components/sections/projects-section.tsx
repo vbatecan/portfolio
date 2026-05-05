@@ -13,6 +13,8 @@ import {
   Lock,
   LockOpen,
   Code2,
+  ChevronLeft,
+  ChevronRight,
 } from "lucide-react"
 import { useState } from "react"
 import { AllProjects, RepoStatus, LiveStatus } from "@/lib/data"
@@ -51,6 +53,189 @@ const getStatusInfo = (status: LiveStatus | RepoStatus) => {
     default:
       return { icon: AlertCircle, color: "bg-gray-500", text: "?" }
   }
+}
+
+// ─── Modal Carousel ────────────────────────────────────────────────────────────
+
+function ModalCarousel({
+  project,
+  onClose,
+}: {
+  project: (typeof projects)[0]
+  onClose: () => void
+}) {
+  const [activeIdx, setActiveIdx] = useState(0)
+
+  const allImages = project.images && project.images.length > 0
+    ? project.images
+    : [project.image]
+
+  const prev = (e: React.MouseEvent) => {
+    e.stopPropagation()
+    setActiveIdx((i) => (i - 1 + allImages.length) % allImages.length)
+  }
+
+  const next = (e: React.MouseEvent) => {
+    e.stopPropagation()
+    setActiveIdx((i) => (i + 1) % allImages.length)
+  }
+
+  const isMulti = allImages.length > 1
+
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      className="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4"
+      onClick={onClose}
+    >
+      <motion.div
+        initial={{ scale: 0.9, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
+        exit={{ scale: 0.9, opacity: 0 }}
+        className="bg-white dark:bg-gray-900 rounded-3xl max-w-4xl w-full max-h-[90vh] flex flex-col overflow-hidden"
+        onClick={(e) => e.stopPropagation()}
+      >
+        {/* ── Image Carousel ── */}
+        <div className="relative flex-shrink-0 overflow-hidden" style={{ height: "220px" }}>
+          <AnimatePresence mode="wait">
+            <motion.img
+              key={activeIdx}
+              src={allImages[activeIdx] || "/placeholder.svg"}
+              alt={`${project.title} screenshot ${activeIdx + 1}`}
+              className="w-full h-full object-cover"
+              initial={{ opacity: 0, x: 30 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -30 }}
+              transition={{ duration: 0.25 }}
+            />
+          </AnimatePresence>
+
+          {/* Close button */}
+          <Button
+            variant="ghost"
+            size="icon"
+            className="absolute top-3 right-3 bg-black/50 hover:bg-black/70 rounded-full z-10"
+            onClick={onClose}
+          >
+            ×
+          </Button>
+
+          {/* Prev / Next arrows */}
+          {isMulti && (
+            <>
+              <button
+                onClick={prev}
+                className="absolute left-3 top-1/2 -translate-y-1/2 w-8 h-8 bg-black/50 hover:bg-black/70 rounded-full flex items-center justify-center text-white transition-colors z-10"
+              >
+                <ChevronLeft className="h-4 w-4" />
+              </button>
+              <button
+                onClick={next}
+                className="absolute right-3 top-1/2 -translate-y-1/2 w-8 h-8 bg-black/50 hover:bg-black/70 rounded-full flex items-center justify-center text-white transition-colors z-10"
+              >
+                <ChevronRight className="h-4 w-4" />
+              </button>
+
+              {/* Dot indicators */}
+              <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-1.5 z-10">
+                {allImages.map((_, i) => (
+                  <button
+                    key={i}
+                    onClick={(e) => { e.stopPropagation(); setActiveIdx(i) }}
+                    className={`rounded-full transition-all ${i === activeIdx ? "w-4 h-2 bg-white" : "w-2 h-2 bg-white/50 hover:bg-white/80"}`}
+                  />
+                ))}
+              </div>
+
+              {/* Image counter */}
+              <div className="absolute top-3 left-3 bg-black/50 text-white text-xs font-mono px-2 py-1 rounded z-10">
+                {activeIdx + 1} / {allImages.length}
+              </div>
+            </>
+          )}
+        </div>
+
+        {/* ── Content ── */}
+        <div className="p-6 overflow-y-auto flex-1">
+          <div className="flex items-start justify-between mb-6">
+            <div>
+              <p className="font-mono text-sm text-secondary mb-1">
+                #{project.id.toString().padStart(2, '0')} · {project.date}
+              </p>
+              <h3 className="text-2xl font-bold text-foreground">{project.title}</h3>
+              <p className="text-gray-600 dark:text-gray-300 mt-2">{project.details.overview}</p>
+            </div>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-8">
+            <div>
+              <h4 className="font-mono text-sm text-secondary mb-4 uppercase tracking-wide">Key Features</h4>
+              <ul className="space-y-2">
+                {project.details.keyFeatures.map((feature, idx) => (
+                  <motion.li
+                    key={idx}
+                    className="flex items-start gap-3 text-sm"
+                    initial={{ opacity: 0, x: -10 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: idx * 0.05 }}
+                  >
+                    <span className="w-1.5 h-1.5 bg-primary rounded-full mt-2 flex-shrink-0"></span>
+                    <span className="text-gray-700 dark:text-gray-300">{feature}</span>
+                  </motion.li>
+                ))}
+              </ul>
+            </div>
+
+            <div>
+              <h4 className="font-mono text-sm text-secondary mb-4 uppercase tracking-wide">Tech Stack</h4>
+              <div className="flex flex-wrap gap-2 mb-6">
+                {project.details.skills.map((skill) => (
+                  <span key={skill} className="tech-tag">{skill}</span>
+                ))}
+              </div>
+
+              <h4 className="font-mono text-sm text-secondary mb-3 uppercase tracking-wide">Impact</h4>
+              <p className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed">
+                {project.details.impact}
+              </p>
+            </div>
+          </div>
+
+          <div className="flex gap-4 mt-8 pt-6 border-t border-gray-200 dark:border-gray-700">
+            <Button
+              className="bg-primary hover:bg-primary/90 text-primary-foreground font-mono"
+              disabled={project.repoStatus === "none"}
+              onClick={(e) => {
+                e.stopPropagation()
+                if (project.github !== "#") {
+                  window.open(project.github, '_blank')
+                }
+              }}
+            >
+              <Github className="h-4 w-4 mr-2" />
+              {project.repoStatus === "private" ? "Request Access" : "View Code"}
+            </Button>
+            <Button
+              variant="outline"
+              className="font-mono"
+              disabled={project.liveStatus !== "live"}
+              onClick={(e) => {
+                e.stopPropagation()
+                if (project.live !== "#") {
+                  window.open(project.live, "_blank", "noreferrer")
+                }
+              }}
+            >
+              <ExternalLink className="h-4 w-4 mr-2" />
+              {project.liveStatus === "live" ? "Live Demo" : "—"}
+            </Button>
+          </div>
+        </div>
+      </motion.div>
+    </motion.div>
+  )
 }
 
 export const ProjectsSection = () => {
@@ -200,113 +385,10 @@ export const ProjectsSection = () => {
         {/* Project Modal */}
         <AnimatePresence>
           {selectedProject && (
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              className="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4"
-              onClick={() => setSelectedProject(null)}
-            >
-              <motion.div
-                initial={{ scale: 0.9, opacity: 0 }}
-                animate={{ scale: 1, opacity: 1 }}
-                exit={{ scale: 0.9, opacity: 0 }}
-                className="bg-white dark:bg-gray-900 rounded-3xl max-w-4xl w-full max-h-[90vh] overflow-y-auto"
-                onClick={(e) => e.stopPropagation()}
-              >
-                <div className="relative overflow-hidden">
-                  <motion.img
-                    src={selectedProject.image || "/placeholder.svg"}
-                    alt={selectedProject.title}
-                    className="w-full h-48 object-cover"
-                  />
-                  <Button
-                    variant="ghost"
-                    size="icon"
-                    className="absolute top-3 right-3 bg-black/50 hover:bg-black/70 rounded-full"
-                    onClick={() => setSelectedProject(null)}
-                  >
-                    ×
-                  </Button>
-                </div>
-
-                <div className="p-6 overflow-y-auto" style={{ maxHeight: "calc(90vh - 192px)" }}>
-                  <div className="flex items-start justify-between mb-6">
-                    <div>
-                      <p className="font-mono text-sm text-secondary mb-1">
-                        #{selectedProject.id.toString().padStart(2, '0')} · {selectedProject.date}
-                      </p>
-                      <h3 className="text-2xl font-bold text-foreground">{selectedProject.title}</h3>
-                      <p className="text-gray-600 dark:text-gray-300 mt-2">{selectedProject.details.overview}</p>
-                    </div>
-                  </div>
-
-                  <div className="grid md:grid-cols-2 gap-8">
-                    <div>
-                      <h4 className="font-mono text-sm text-secondary mb-4 uppercase tracking-wide">Key Features</h4>
-                      <ul className="space-y-2">
-                        {selectedProject.details.keyFeatures.map((feature, idx) => (
-                          <motion.li
-                            key={idx}
-                            className="flex items-start gap-3 text-sm"
-                            initial={{ opacity: 0, x: -10 }}
-                            animate={{ opacity: 1, x: 0 }}
-                            transition={{ delay: idx * 0.05 }}
-                          >
-                            <span className="w-1.5 h-1.5 bg-primary rounded-full mt-2 flex-shrink-0"></span>
-                            <span className="text-gray-700 dark:text-gray-300">{feature}</span>
-                          </motion.li>
-                        ))}
-                      </ul>
-                    </div>
-
-                    <div>
-                      <h4 className="font-mono text-sm text-secondary mb-4 uppercase tracking-wide">Tech Stack</h4>
-                      <div className="flex flex-wrap gap-2 mb-6">
-                        {selectedProject.details.skills.map((skill) => (
-                          <span key={skill} className="tech-tag">{skill}</span>
-                        ))}
-                      </div>
-
-                      <h4 className="font-mono text-sm text-secondary mb-3 uppercase tracking-wide">Impact</h4>
-                      <p className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed">
-                        {selectedProject.details.impact}
-                      </p>
-                    </div>
-                  </div>
-
-                  <div className="flex gap-4 mt-8 pt-6 border-t border-gray-200 dark:border-gray-700">
-                    <Button
-                      className="bg-primary hover:bg-primary/90 text-primary-foreground font-mono"
-                      disabled={selectedProject.repoStatus === "none"}
-                      onClick={(e) => {
-                        e.stopPropagation()
-                        if (selectedProject.github !== "#") {
-                          window.open(selectedProject.github, '_blank')
-                        }
-                      }}
-                    >
-                      <Github className="h-4 w-4 mr-2" />
-                      {selectedProject.repoStatus === "private" ? "Request Access" : "View Code"}
-                    </Button>
-                    <Button
-                      variant="outline"
-                      className="font-mono"
-                      disabled={selectedProject.liveStatus !== "live"}
-                      onClick={(e) => {
-                        e.stopPropagation()
-                        if (selectedProject.live !== "#") {
-                          window.open(selectedProject.live, "_blank", "noreferrer")
-                        }
-                      }}
-                    >
-                      <ExternalLink className="h-4 w-4 mr-2" />
-                      {selectedProject.liveStatus === "live" ? "Live Demo" : "—"}
-                    </Button>
-                  </div>
-                </div>
-              </motion.div>
-            </motion.div>
+            <ModalCarousel
+              project={selectedProject}
+              onClose={() => setSelectedProject(null)}
+            />
           )}
         </AnimatePresence>
       </div>

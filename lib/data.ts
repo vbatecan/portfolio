@@ -30,6 +30,7 @@ export interface Project {
   description: string;
   category: string;
   image: string;
+  images?: string[];
   technologies: string[];
   github: string;
   live: string;
@@ -54,6 +55,7 @@ export const AllProjects: Project[] = [
       "Web-based interface for biometric attendance tracking with real-time processing and automated reporting",
     category: "web",
     image: "/assets/sams/1.png?height=200&width=300",
+    images: ["/assets/sams/1.png", "/assets/sams/2.png"],
     technologies: ["Angular", "Quarkus", "PostgreSQL", "TypeScript", "PrimeNG", "JWT"],
     github: "#",
     live: "#",
@@ -85,6 +87,7 @@ export const AllProjects: Project[] = [
       "Fingerprint-based attendance system with ESP32 microcontroller and AS608 scanner for Punturin Senior High School",
     category: "hardware",
     image: "/assets/Trackattend/1.jpg?height=200&width=300",
+    images: ["/assets/Trackattend/1.jpg", "/assets/Trackattend/2.jpg"],
     technologies: ["C++", "Arduino", "ESP32", "JavaScript", "HTML", "CSS"],
     github: "#",
     live: "#",
@@ -297,6 +300,7 @@ export const AllProjects: Project[] = [
       "Professional static website for soap and disinfectant products with responsive design and brand presentation",
     category: "web",
     image: "/assets/Soapify/1.png?height=200&width=300",
+    images: ["/assets/Soapify/1.png", "/assets/Soapify/2.png", "/assets/Soapify/3.png", "/assets/Soapify/4.png"],
     technologies: ["JavaScript", "HTML", "CSS"],
     github: "https://github.com/vbatecan/soapify",
     live: "https://vbatecan.github.io/soapify/",
