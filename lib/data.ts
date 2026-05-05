@@ -644,12 +644,11 @@ export const AllProjects: Project[] = [
     image: "/assets/pikash/image.png?height=200&width=300",
     technologies: ["React 19", "Vite", "TypeScript", "Tailwind CSS 4", "shadcn/ui", "React Router v7", "Recharts", "Dexie.js", "Supabase", "Cloudflare Pages"],
     github: "https://github.com/vbatecan/pikash",
-    live: "https://0d88f217.pikash.pages.dev",
+    live: "#",
     icon: LayoutDashboard,
     date: "2025",
     repoStatus: "public",
-    liveStatus: "live",
-    featured: true,
+    liveStatus: "development",
     details: {
       overview:
         "Pikash is a personal finance tracker designed for Filipinos. It tracks income, expenses, and budgets across multiple wallets with offline-first storage via Dexie.js (IndexedDB) and cloud sync via Supabase. Features a built-in calculator in entry forms for quick amount entry.",
