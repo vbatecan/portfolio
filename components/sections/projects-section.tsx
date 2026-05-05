@@ -158,7 +158,7 @@ function ModalCarousel({
         </div>
 
         {/* ── Content ── */}
-        <div className="p-6 overflow-y-auto flex-1">
+        <div className="p-6 overflow-y-auto flex-1" style={{ maxHeight: "calc(90vh - 220px)" }}>
           <div className="flex items-start justify-between mb-6">
             <div>
               <p className="font-mono text-sm text-secondary mb-1">
