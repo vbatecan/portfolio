@@ -716,6 +716,46 @@ export const AllProjects: Project[] = [
       ],
     },
   },
+  {
+    id: 21,
+    title: "Scholar's Path",
+    description:
+      "Student productivity platform — career goal tracking, subject difficulty analytics, and AI-powered reviewer question generation for Filipino students",
+    category: "web",
+    image: "/assets/scholars-path/image.png",
+    technologies: ["Angular", "Python", "PostgreSQL", "pgvector", "JWT", "PDF Parsing", "JWT + Refresh Tokens", "AI Question Generation"],
+    github: "https://github.com/vbatecan/scholars-path",
+    live: "https://scholarspath.app",
+    icon: LayoutDashboard,
+    date: "2026",
+    repoStatus: "private",
+    liveStatus: "live",
+    details: {
+      overview:
+        "Scholar's Path is a student productivity system built for Filipino learners. It combines career goal tracking, subject difficulty analytics, and AI-powered reviewer generation — helping students make informed academic decisions and study smarter. The backend uses PostgreSQL with pgvector for embeddings, while the Angular frontend handles authentication, assessment workflows, and personalized recommendations.",
+      keyFeatures: [
+        "End-to-end auth: JWT access tokens + HTTP-only refresh tokens with IP/email rate limiting",
+        "Career Goal Module: curated career catalog with skill-area-to-subject mapping and career-aligned recommendation engine",
+        "Subject Difficulty Module: multi-component assessments (quiz, activity, exam), weak subject ranking with trend deltas, and career-readiness analysis",
+        "Reviewer Upload: PDF/PPT/DOCX/TXT upload with AI-generated questions tagged by difficulty (easy/medium/hard)",
+        "Dashboard with simulation sliders for real-time career alignment feedback",
+        "Topic-correlation impact cards with evidence thresholds for personalized study guidance",
+      ],
+      impact:
+        "Empowers Filipino students to make data-driven academic decisions — tracking their strengths and weaknesses while aligning every subject to their chosen career path.",
+      skills: [
+        "Angular",
+        "Python",
+        "PostgreSQL",
+        "pgvector",
+        "JWT",
+        "PDF Parsing",
+        "AI Question Generation",
+        "Career Guidance",
+        "Subject Analytics",
+      ],
+    },
+  },
 ]
 
 export const SkillsData = [
