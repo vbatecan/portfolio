@@ -677,6 +677,45 @@ export const AllProjects: Project[] = [
       ],
     },
   },
+  {
+    id: 20,
+    title: "LyriClear",
+    description:
+      "Karaoke lyrics processor — uploads audio, generates word-level timed lyrics using Demucs + Whisper, and displays them in a karaoke-style player",
+    category: "web",
+    image: "/assets/lyriclear/image.png",
+    technologies: ["Angular 20", "TypeScript", "Tailwind CSS", "RxJS", "Demucs", "Whisper"],
+    github: "https://github.com/vbatecan/lyriclear-frontend",
+    live: "#",
+    icon: LayoutDashboard,
+    date: "2025",
+    repoStatus: "public",
+    liveStatus: "development",
+    details: {
+      overview:
+        "LyriClear is a web app that turns any song into a karaoke experience. Upload an audio file, and it strips vocals with Demucs, transcribes with Whisper, and aligns every word to the timeline — producing a karaoke-style display with synchronized word highlighting.",
+      keyFeatures: [
+        "Audio upload supporting MP3, WAV, and OPUS up to 80MB",
+        "Vocal separation via Demucs for instrumental playback",
+        "Speech-to-text transcription with Whisper for accurate lyrics",
+        "Word-level timestamp alignment for karaoke-style highlighting",
+        "Karaoke player with fullscreen lyrics view and progress tracking",
+        "Real-time processing status and timeline visualization",
+      ],
+      impact:
+        "Makes karaoke lyrics creation accessible to anyone — no equipment needed, just upload a song and sing along with perfectly timed words.",
+      skills: [
+        "Angular 20",
+        "TypeScript",
+        "Tailwind CSS",
+        "RxJS",
+        "Demucs",
+        "Whisper",
+        "Audio Processing",
+        "Lyrics Synchronization",
+      ],
+    },
+  },
 ]
 
 export const SkillsData = [
