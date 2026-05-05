@@ -214,23 +214,23 @@ export const ProjectsSection = () => {
                 className="bg-white dark:bg-gray-900 rounded-3xl max-w-4xl w-full max-h-[90vh] overflow-y-auto"
                 onClick={(e) => e.stopPropagation()}
               >
-                <div className="relative">
+                <div className="relative overflow-hidden">
                   <motion.img
                     src={selectedProject.image || "/placeholder.svg"}
                     alt={selectedProject.title}
-                    className="w-full h-64 object-cover rounded-t-3xl"
+                    className="w-full h-48 object-cover"
                   />
                   <Button
                     variant="ghost"
                     size="icon"
-                    className="absolute top-4 right-4 bg-black/50 hover:bg-black/70 rounded-full"
+                    className="absolute top-3 right-3 bg-black/50 hover:bg-black/70 rounded-full"
                     onClick={() => setSelectedProject(null)}
                   >
                     ×
                   </Button>
                 </div>
 
-                <div className="p-8">
+                <div className="p-6 overflow-y-auto" style={{ maxHeight: "calc(90vh - 192px)" }}>
                   <div className="flex items-start justify-between mb-6">
                     <div>
                       <p className="font-mono text-sm text-secondary mb-1">
