@@ -17,6 +17,7 @@ import {
   ChevronRight,
 } from "lucide-react"
 import { useState } from "react"
+import { createPortal } from "react-dom"
 import { AllProjects, RepoStatus, LiveStatus } from "@/lib/data"
 
 const projects = AllProjects
@@ -82,7 +83,7 @@ function ModalCarousel({
 
   const isMulti = allImages.length > 1
 
-  return (
+  return createPortal(
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
@@ -232,7 +233,8 @@ function ModalCarousel({
           </Button>
         </div>
       </motion.div>
-    </motion.div>
+    </motion.div>,
+    document.body
   )
 }
 
