@@ -20,9 +20,6 @@ export const SkillsSection = () => {
           </p>
           <h2 className="section-title mb-4">What I Work With</h2>
           <div className="accent-line mb-6"></div>
-          <p className="section-subtitle">
-            Backend-focused. I live in Java Spring Boot, but I can ship full-stack when needed.
-          </p>
         </motion.div>
 
         {/* Core Specializations - horizontal scroll on mobile */}

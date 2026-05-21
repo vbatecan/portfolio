@@ -45,9 +45,11 @@ export const StatsSection = () => {
               <Card className="overflow-hidden border-0 shadow-lg rounded-2xl bg-gray-50 dark:bg-gray-800">
                 <CardContent className="p-4">
                   <figure className="m-0">
-                    <embed
+                    <img
                       src={src}
+                      alt="WakaTime stats"
                       className="w-full rounded-lg"
+                      loading="lazy"
                     />
                   </figure>
                 </CardContent>
