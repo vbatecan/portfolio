@@ -28,8 +28,8 @@ export const ContactSection = () => {
                 transition={{ delay: 0.2, type: "spring", stiffness: 200 }}
                 className="flex justify-center mb-6"
               >
-                <div className="p-4 bg-green-100 dark:bg-green-900/30 rounded-full">
-                  <CheckCircle className="h-12 w-12 text-green-600" />
+                <div className="p-4">
+                  <CheckCircle className="h-12 w-12 text-primary" />
                 </div>
               </motion.div>
 

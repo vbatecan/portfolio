@@ -53,7 +53,7 @@ export default function Portfolio() {
 
         {/* Chat Interface */}
         <ChatInterface />
-
+ore S
         {/* All Sections */}
         <HeroSection scrollToSection={scrollToSection} />
         <AboutSection />

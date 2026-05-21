@@ -97,15 +97,6 @@ const services = [
   },
 ]
 
-const colorMap: Record<string, { bg: string; icon: string; ring: string; dot: string; badge: string }> = {
-  blue: { bg: "from-blue-500/20 to-blue-600/10", icon: "bg-blue-600", ring: "hover:ring-blue-500/30", dot: "bg-blue-500", badge: "bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300" },
-  purple: { bg: "from-purple-500/20 to-purple-600/10", icon: "bg-purple-600", ring: "hover:ring-purple-500/30", dot: "bg-purple-500", badge: "bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300" },
-  amber: { bg: "from-amber-500/20 to-amber-600/10", icon: "bg-amber-600", ring: "hover:ring-amber-500/30", dot: "bg-amber-500", badge: "bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-300" },
-  yellow: { bg: "from-yellow-500/20 to-yellow-600/10", icon: "bg-yellow-600", ring: "hover:ring-yellow-500/30", dot: "bg-yellow-500", badge: "bg-yellow-100 dark:bg-yellow-900/30 text-yellow-700 dark:text-yellow-300" },
-  green: { bg: "from-green-500/20 to-green-600/10", icon: "bg-green-600", ring: "hover:ring-green-500/30", dot: "bg-green-500", badge: "bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300" },
-  red: { bg: "from-red-500/20 to-red-600/10", icon: "bg-red-600", ring: "hover:ring-red-500/30", dot: "bg-red-500", badge: "bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-300" },
-}
-
 export const ServicesSection = () => {
   return (
     <section id="services" className="py-20 px-4 relative z-10 bg-white dark:bg-gray-900">
@@ -129,7 +120,6 @@ export const ServicesSection = () => {
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {services.map((service, index) => {
-            const colors = colorMap[service.color]
             const Icon = service.icon
 
             return (
@@ -142,15 +132,15 @@ export const ServicesSection = () => {
                 whileHover={{ y: -5 }}
                 className="group"
               >
-                <Card className={`h-full bg-white/60 dark:bg-gray-800/60 backdrop-blur-sm border border-white/20 dark:border-gray-700/20 shadow-lg hover:shadow-2xl transition-all duration-500 rounded-2xl overflow-hidden hover:ring-2 ${colors.ring} relative`}>
-                  <div className={`absolute inset-0 bg-gradient-to-br ${colors.bg} to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none`} />
+                <Card className="h-full bg-white/60 dark:bg-gray-800/60 backdrop-blur-sm border border-white/20 dark:border-gray-700/20 shadow-lg hover:shadow-2xl transition-all duration-500 rounded-2xl overflow-hidden hover:ring-2 hover:ring-primary/20 relative">
+                  <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
 
                   <div className="relative z-10 p-6 flex flex-col h-full">
                     <div className="flex items-start justify-between mb-4">
-                      <div className={`p-3 rounded-xl ${colors.icon} shadow-lg group-hover:scale-110 group-hover:rotate-3 transition-all duration-300`}>
-                        <Icon className="h-6 w-6 text-white" />
+                      <div className="p-3 group-hover:scale-110 transition-all duration-300">
+                        <Icon className="h-6 w-6 text-primary" />
                       </div>
-                      <span className={`text-xs font-medium px-2 py-1 rounded-full ${colors.badge}`}>
+                      <span className="text-xs font-medium px-2 py-1 rounded-full bg-primary/10 dark:bg-primary/20 text-primary">
                         {service.subtitle}
                       </span>
                     </div>
@@ -168,7 +158,7 @@ export const ServicesSection = () => {
                     <ul className="space-y-2">
                       {service.features.map((feature) => (
                         <li key={feature} className="flex items-center gap-2 text-sm text-muted-foreground">
-                          <span className={`w-1.5 h-1.5 rounded-full ${colors.dot}`}></span>
+                          <span className="w-1.5 h-1.5 rounded-full bg-primary"></span>
                           {feature}
                         </li>
                       ))}

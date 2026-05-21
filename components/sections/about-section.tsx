@@ -87,7 +87,7 @@ export const AboutSection = () => {
             {/* Quick Info */}
             <div className="grid grid-cols-2 gap-4 pt-4">
               <div className="flex items-center gap-3 p-3 bg-gray-50 dark:bg-gray-800 rounded-xl">
-                <div className="p-2 bg-primary/10 rounded-lg">
+                <div className="p-2">
                   <MapPin className="h-4 w-4 text-primary icon-monochrome" />
                 </div>
                 <div>
@@ -96,7 +96,7 @@ export const AboutSection = () => {
                 </div>
               </div>
               <div className="flex items-center gap-3 p-3 bg-gray-50 dark:bg-gray-800 rounded-xl">
-                <div className="p-2 bg-primary/10 rounded-lg">
+                <div className="p-2">
                   <Mail className="h-4 w-4 text-primary icon-monochrome" />
                 </div>
                 <div>

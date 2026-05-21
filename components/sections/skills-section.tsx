@@ -7,7 +7,7 @@ import { SkillsData, CoreSpecializations, CurrentlyLearning } from "@/lib/data"
 export const SkillsSection = () => {
   return (
     <section id="skills" className="py-20 px-4 relative z-10 bg-gray-50/50 dark:bg-gray-800/50">
-      <div className="max-w-7xl mx-auto">
+      <div className="max-w-7xl h-full mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -68,7 +68,7 @@ export const SkillsSection = () => {
               }`}>
                 <CardContent className="p-4 h-full flex flex-col">
                   <div className="flex items-start justify-between mb-3">
-                    <div className="p-2 bg-primary/10 rounded-lg">
+                    <div className="p-2">
                       <skill.icon className="h-5 w-5 text-primary icon-monochrome" />
                     </div>
                     {skill.isSpecialty && (
@@ -92,7 +92,7 @@ export const SkillsSection = () => {
                   </div>
 
                   {/* Hover details */}
-                  <div className="absolute inset-0 bg-white/95 dark:bg-gray-800/95 backdrop-blur-sm rounded-xl p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10 flex flex-col">
+                  <div className="h-full absolute inset-0 bg-white/95 dark:bg-gray-800/95 backdrop-blur-sm rounded-xl p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10 flex flex-col">
                     <h4 className="font-bold text-sm mb-2">{skill.name}</h4>
                     <p className="text-xs text-gray-600 dark:text-gray-300 mb-3 flex-1">{skill.description}</p>
                     <div className="border-t border-gray-200 dark:border-gray-700 pt-2">
