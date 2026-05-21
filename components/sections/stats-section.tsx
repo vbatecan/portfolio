@@ -7,6 +7,8 @@ import { BarChart3 } from "lucide-react"
 const wakatimeEmbeds = [
   "https://wakatime.com/share/@vbatecan/1b322618-a234-4abf-a40f-3db31b9a14aa.svg",
   "https://wakatime.com/share/@vbatecan/b9e9abf5-62db-4354-b8ea-d91f087731ec.svg",
+  "https://wakatime.com/share/@vbatecan/131fd901-afbc-4ce4-b70f-2307ffcfaa5b.svg",
+  "https://wakatime.com/share/@vbatecan/e3035f8a-dc68-43af-bc30-b6e89337980c.svg",
 ]
 
 export const StatsSection = () => {

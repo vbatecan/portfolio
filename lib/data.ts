@@ -639,48 +639,7 @@ export const AllProjects: Project[] = [
       ],
     },
   },
-  {
-    id: 19,
-    title: "Pikash",
-    description:
-      "Personal finance tracker for Filipinos — offline-first with Supabase sync, wallets, budgets, and built-in calculator for expense/income forms",
-    category: "web",
-    image: "/assets/pikash/image.png?height=200&width=300",
-    technologies: ["React 19", "Vite", "TypeScript", "Tailwind CSS 4", "shadcn/ui", "React Router v7", "Recharts", "Dexie.js", "Supabase", "Cloudflare Pages"],
-    github: "https://github.com/vbatecan/pikash",
-    live: "#",
-    icon: LayoutDashboard,
-    date: "2025",
-    repoStatus: "public",
-    liveStatus: "development",
-    details: {
-      overview:
-        "Pikash is a personal finance tracker designed for Filipinos. It tracks income, expenses, and budgets across multiple wallets with offline-first storage via Dexie.js (IndexedDB) and cloud sync via Supabase. Features a built-in calculator in entry forms for quick amount entry.",
-      keyFeatures: [
-        "Multi-wallet support (Cash, Debit, Bank, Credit, Savings, Investment)",
-        "Expense, income, and transfer tracking with category hierarchy",
-        "Offline-first architecture with Dexie.js and Supabase cloud sync",
-        "Budget management with periodic limits per category",
-        "Built-in calculator keypad with chained arithmetic operations for quick amount entry",
-        "Cloudflare Pages deployment for global availability",
-      ],
-      impact:
-        "Gives Filipinos a powerful, privacy-focused tool to manage personal finances — works offline and syncs when connected, making it reliable even on spotty internet.",
-      skills: [
-        "React 19",
-        "Vite",
-        "TypeScript",
-        "Tailwind CSS 4",
-        "shadcn/ui",
-        "React Router v7",
-        "Recharts",
-        "Dexie.js",
-        "Supabase",
-        "Cloudflare Pages",
-        "Offline-First Architecture",
-      ],
-    },
-  },
+
   {
     id: 20,
     title: "LyriClear",

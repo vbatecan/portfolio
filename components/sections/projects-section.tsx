@@ -158,12 +158,9 @@ function ModalCarousel({
         </div>
 
         {/* ── Content ── */}
-        <div className="p-6 overflow-y-auto flex-1" style={{ maxHeight: "calc(90vh - 220px)" }}>
+        <div className="p-6 overflow-y-auto flex-1 min-h-0">
           <div className="flex items-start justify-between mb-6">
             <div>
-              <p className="font-mono text-sm text-secondary mb-1">
-                #{project.id.toString().padStart(2, '0')} · {project.date}
-              </p>
               <h3 className="text-2xl font-bold text-foreground">{project.title}</h3>
               <p className="text-gray-600 dark:text-gray-300 mt-2">{project.details.overview}</p>
             </div>
@@ -202,36 +199,37 @@ function ModalCarousel({
               </p>
             </div>
           </div>
+        </div>
 
-          <div className="flex gap-4 mt-8 pt-6 border-t border-gray-200 dark:border-gray-700">
-            <Button
-              className="bg-primary hover:bg-primary/90 text-primary-foreground font-mono"
-              disabled={project.repoStatus === "none"}
-              onClick={(e) => {
-                e.stopPropagation()
-                if (project.github !== "#") {
-                  window.open(project.github, '_blank')
-                }
-              }}
-            >
-              <Github className="h-4 w-4 mr-2" />
-              {project.repoStatus === "private" ? "Request Access" : "View Code"}
-            </Button>
-            <Button
-              variant="outline"
-              className="font-mono"
-              disabled={project.liveStatus !== "live"}
-              onClick={(e) => {
-                e.stopPropagation()
-                if (project.live !== "#") {
-                  window.open(project.live, "_blank", "noreferrer")
-                }
-              }}
-            >
-              <ExternalLink className="h-4 w-4 mr-2" />
-              {project.liveStatus === "live" ? "Live Demo" : "—"}
-            </Button>
-          </div>
+        {/* ── Footer ── */}
+        <div className="flex-shrink-0 flex gap-4 p-6 border-t border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900">
+          <Button
+            className="bg-primary hover:bg-primary/90 text-primary-foreground font-mono"
+            disabled={project.repoStatus === "none"}
+            onClick={(e) => {
+              e.stopPropagation()
+              if (project.github !== "#") {
+                window.open(project.github, '_blank')
+              }
+            }}
+          >
+            <Github className="h-4 w-4 mr-2" />
+            {project.repoStatus === "private" ? "Request Access" : "View Code"}
+          </Button>
+          <Button
+            variant="outline"
+            className="font-mono"
+            disabled={project.liveStatus !== "live"}
+            onClick={(e) => {
+              e.stopPropagation()
+              if (project.live !== "#") {
+                window.open(project.live, "_blank", "noreferrer")
+              }
+            }}
+          >
+            <ExternalLink className="h-4 w-4 mr-2" />
+            {project.liveStatus === "live" ? "Live Demo" : "—"}
+          </Button>
         </div>
       </motion.div>
     </motion.div>
@@ -352,7 +350,6 @@ export const ProjectsSection = () => {
 
                     <CardHeader className="pb-2">
                       <CardTitle className="text-base font-bold text-foreground flex items-center gap-2">
-                        <span className="text-secondary font-mono text-sm">#{project.id.toString().padStart(2, '0')}</span>
                         {project.title}
                       </CardTitle>
                       <CardDescription className="text-sm text-gray-500 dark:text-gray-400 line-clamp-2">
