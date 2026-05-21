@@ -1,0 +1,1 @@
+self.__RSC_SERVER_MANIFEST="{\"node\":{\"604bbb8a3b94d7ed0ae88e022e11e440d4be56c929\":{\"workers\":{\"app/page\":{\"moduleId\":\"778\",\"async\":false}},\"layer\":{\"app/page\":\"action-browser\"},\"filename\":\"app/actions/chat-actions.ts\",\"exportedName\":\"chatWithGrok\"}},\"edge\":{},\"encryptionKey\":\"process.env.NEXT_SERVER_ACTIONS_ENCRYPTION_KEY\"}"

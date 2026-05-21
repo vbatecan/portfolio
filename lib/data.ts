@@ -24,7 +24,30 @@ import {
 export type RepoStatus = "public" | "private" | "none"
 export type LiveStatus = "live" | "offline" | "development" | "archived" | "completed"
 
-export const AllProjects = [
+export interface Project {
+  id: number;
+  title: string;
+  description: string;
+  category: string;
+  image: string;
+  images?: string[];
+  technologies: string[];
+  github: string;
+  live: string;
+  icon: any;
+  date: string;
+  repoStatus: RepoStatus;
+  liveStatus: LiveStatus;
+  featured?: boolean;
+  details: {
+    overview: string;
+    keyFeatures: string[];
+    impact: string;
+    skills: string[];
+  };
+}
+
+export const AllProjects: Project[] = [
   {
     id: 1,
     title: "Student Attendance Management System",
@@ -32,13 +55,15 @@ export const AllProjects = [
       "Web-based interface for biometric attendance tracking with real-time processing and automated reporting",
     category: "web",
     image: "/assets/sams/1.png?height=200&width=300",
+    images: ["/assets/sams/1.png", "/assets/sams/2.png"],
     technologies: ["Angular", "Quarkus", "PostgreSQL", "TypeScript", "PrimeNG", "JWT"],
     github: "#",
     live: "#",
     icon: GraduationCap,
     date: "2024",
-    repoStatus: "private" as RepoStatus,
-    liveStatus: "offline" as LiveStatus,
+    repoStatus: "private",
+    liveStatus: "offline",
+    featured: true,
     details: {
       overview:
         "The web interface of the Trackattend project, integrating fingerprint biometric authentication for real-time student attendance registration.",
@@ -62,13 +87,14 @@ export const AllProjects = [
       "Fingerprint-based attendance system with ESP32 microcontroller and AS608 scanner for Punturin Senior High School",
     category: "hardware",
     image: "/assets/Trackattend/1.jpg?height=200&width=300",
+    images: ["/assets/Trackattend/1.jpg", "/assets/Trackattend/2.jpg"],
     technologies: ["C++", "Arduino", "ESP32", "JavaScript", "HTML", "CSS"],
     github: "#",
     live: "#",
     icon: Fingerprint,
     date: "2024",
-    repoStatus: "private" as RepoStatus,
-    liveStatus: "offline" as LiveStatus,
+    repoStatus: "private",
+    liveStatus: "offline",
     details: {
       overview:
         "A comprehensive Grade 12 research project combining hardware and software to automate student attendance using fingerprint biometric technology.",
@@ -97,8 +123,9 @@ export const AllProjects = [
     live: "#",
     icon: Search,
     date: "2024",
-    repoStatus: "private" as RepoStatus,
-    liveStatus: "offline" as LiveStatus,
+    repoStatus: "private",
+    liveStatus: "offline",
+    featured: true,
     details: {
       overview:
         "Machine learning solution designed to help editors quickly locate specific stickers within Silhouette Studio software for Shopee product orders.",
@@ -127,8 +154,8 @@ export const AllProjects = [
     live: "#",
     icon: Wifi,
     date: "2024",
-    repoStatus: "development" as RepoStatus,
-    liveStatus: "offline" as LiveStatus,
+    repoStatus: "development",
+    liveStatus: "offline",
     details: {
       overview:
         "A comprehensive WiFi management system enabling pay-per-use internet access with automated control and monitoring capabilities.",
@@ -157,8 +184,8 @@ export const AllProjects = [
     live: "#",
     icon: Server,
     date: "Oct 2024 - Nov 2024",
-    repoStatus: "public" as RepoStatus,
-    liveStatus: "offline" as LiveStatus,
+    repoStatus: "public",
+    liveStatus: "offline",
     details: {
       overview:
         "A robust backend solution crafted to offer manipulable and dynamic searching capabilities for shoe-related data with comprehensive filtering operations.",
@@ -187,8 +214,9 @@ export const AllProjects = [
     live: "#",
     icon: Shield,
     date: "Oct 2024",
-    repoStatus: "public" as RepoStatus,
-    liveStatus: "development" as LiveStatus,
+    repoStatus: "public",
+    liveStatus: "development",
+    featured: true,
     details: {
       overview:
         "Contributed to the development of the user interface for the ESP32 Deauther project—a tool designed for WiFi network security testing and educational purposes.",
@@ -217,8 +245,8 @@ export const AllProjects = [
     live: "#",
     icon: ShoppingCart,
     date: "Aug 2024 - Sep 2024",
-    repoStatus: "none" as RepoStatus,
-    liveStatus: "offline" as LiveStatus,
+    repoStatus: "none",
+    liveStatus: "offline",
     details: {
       overview:
         "A refined e-commerce platform dedicated to the sale of high-quality apparel, leveraging cutting-edge technology for seamless shopping experiences.",
@@ -247,8 +275,8 @@ export const AllProjects = [
     live: "#",
     icon: MessageSquare,
     date: "Jul 2024 - Aug 2024",
-    repoStatus: "private" as RepoStatus,
-    liveStatus: "offline" as LiveStatus,
+    repoStatus: "private",
+    liveStatus: "offline",
     details: {
       overview:
         "A forum platform designed to facilitate engaging discussions and foster dynamic online communities with advanced technology and user-centric approach.",
@@ -272,13 +300,14 @@ export const AllProjects = [
       "Professional static website for soap and disinfectant products with responsive design and brand presentation",
     category: "web",
     image: "/assets/Soapify/1.png?height=200&width=300",
+    images: ["/assets/Soapify/1.png", "/assets/Soapify/2.png", "/assets/Soapify/3.png", "/assets/Soapify/4.png"],
     technologies: ["JavaScript", "HTML", "CSS"],
     github: "https://github.com/vbatecan/soapify",
     live: "https://vbatecan.github.io/soapify/",
     icon: Sparkles,
     date: "Mar 2024",
-    repoStatus: "public" as RepoStatus,
-    liveStatus: "live" as LiveStatus,
+    repoStatus: "public",
+    liveStatus: "live",
     details: {
       overview:
         "A static website developed as a commission for a client to present and promote soap and disinfectant products, serving as a digital brand introduction.",
@@ -307,8 +336,8 @@ export const AllProjects = [
     live: "#",
     icon: GraduationCap,
     date: "Sep 2023 - Oct 2023",
-    repoStatus: "none" as RepoStatus,
-    liveStatus: "archived" as LiveStatus,
+    repoStatus: "none",
+    liveStatus: "archived",
     details: {
       overview:
         "A comprehensive desktop application designed to streamline student enrollment processes and enhance record-keeping in educational institutions, built with C# and equipped with LocalDB.",
@@ -337,8 +366,8 @@ export const AllProjects = [
     live: "#",
     icon: ShoppingCart,
     date: "Apr 2022 - Jun 2022",
-    repoStatus: "public" as RepoStatus,
-    liveStatus: "archived" as LiveStatus,
+    repoStatus: "public",
+    liveStatus: "archived",
     details: {
       overview:
         "A comprehensive solution designed to streamline operations and enhance efficiency in the fast food industry, managing inventory, sales, staffing, and customer service.",
@@ -367,8 +396,8 @@ export const AllProjects = [
     live: "#",
     icon: Server,
     date: "Jan 2022",
-    repoStatus: "public" as RepoStatus,
-    liveStatus: "offline" as LiveStatus,
+    repoStatus: "public",
+    liveStatus: "offline",
     details: {
       overview:
         "A RESTful API designed to assist Todo list applications in managing task information, providing comprehensive CRUD operations for task management.",
@@ -397,8 +426,9 @@ export const AllProjects = [
     live: "#",
     icon: Server,
     date: "June 2025",
-    repoStatus: "public" as RepoStatus,
-    liveStatus: "offline" as LiveStatus,
+    repoStatus: "public",
+    liveStatus: "offline",
+    featured: true,
     details: {
       overview:
         "A RESTful API designed to assist Patient Management System applications in managing patient information, providing comprehensive CRUD operations for patient management. Additionally, it includes authentication and authorization using JWT tokens. Implemented RBAC for role-based access control.",
@@ -428,8 +458,8 @@ export const AllProjects = [
     live: "#",
     icon: Terminal,
     date: "June 2025",
-    repoStatus: "public" as RepoStatus,
-    liveStatus: "archived" as LiveStatus,
+    repoStatus: "public",
+    liveStatus: "archived",
     details: {
       overview:
         "A Python script that tiles images into smaller pieces, making it easier to process large datasets for machine learning tasks. By splitting images into grids, the tool enables models to focus on finer details and improves detection of small objects. Supports batch processing of images in various formats, providing a free and customizable alternative to commercial solutions like Roboflow.",
@@ -459,8 +489,9 @@ export const AllProjects = [
     live: "https://virtuelink.netlify.app",
     icon: Server,
     date: "2025",
-    repoStatus: "private" as RepoStatus,
-    liveStatus: "live" as LiveStatus,
+    repoStatus: "private",
+    liveStatus: "live",
+    featured: true,
     details: {
       overview:
         "Virtuelink streamlines scheduling, reservations, and related workflows for organizations with a calendar-first UI and serverless automation.",
@@ -504,8 +535,8 @@ export const AllProjects = [
     live: "https://crumb-cabin.netlify.app",
     icon: ShoppingCart,
     date: "2025",
-    repoStatus: "private" as RepoStatus,
-    liveStatus: "live" as LiveStatus,
+    repoStatus: "private",
+    liveStatus: "live",
     details: {
       overview:
         "A modern, type-safe ordering system for a cookie shop with customer ordering, voucher support, order tracking, and an admin dashboard for managing menu, orders, bundles, and analytics.",
@@ -548,8 +579,9 @@ export const AllProjects = [
     "live": "#",
     "icon": Search,
     "date": "Nov 2025",
-    "repoStatus": "private" as RepoStatus,
-    "liveStatus": "completed" as LiveStatus,
+    "repoStatus": "private",
+    "liveStatus": "completed",
+    "featured": true,
     "details": {
       "overview": "An optimized, service-oriented Flask app for Kaong ripeness detection using YOLO models with separate DetectionService, DatabaseService, and ImageService for maintainability and performance.",
       "keyFeatures": [
@@ -577,8 +609,9 @@ export const AllProjects = [
     live: "https://freelance-central.netlify.app",
     icon: LayoutDashboard,
     date: "2025",
-    repoStatus: "private" as RepoStatus,
-    liveStatus: "live" as LiveStatus,
+    repoStatus: "private",
+    liveStatus: "live",
+    featured: true,
     details: {
       overview:
         "A comprehensive project management solution designed for freelancers. This application helps you manage clients, projects, invoices, time tracking, and more in a unified dashboard. Built with modern web technologies for performance and user experience.",
@@ -603,6 +636,127 @@ export const AllProjects = [
         "FullCalendar",
         "Gemini AI",
         "PDF Generation",
+      ],
+    },
+  },
+  {
+    id: 19,
+    title: "Pikash",
+    description:
+      "Personal finance tracker for Filipinos — offline-first with Supabase sync, wallets, budgets, and built-in calculator for expense/income forms",
+    category: "web",
+    image: "/assets/pikash/image.png?height=200&width=300",
+    technologies: ["React 19", "Vite", "TypeScript", "Tailwind CSS 4", "shadcn/ui", "React Router v7", "Recharts", "Dexie.js", "Supabase", "Cloudflare Pages"],
+    github: "https://github.com/vbatecan/pikash",
+    live: "#",
+    icon: LayoutDashboard,
+    date: "2025",
+    repoStatus: "public",
+    liveStatus: "development",
+    details: {
+      overview:
+        "Pikash is a personal finance tracker designed for Filipinos. It tracks income, expenses, and budgets across multiple wallets with offline-first storage via Dexie.js (IndexedDB) and cloud sync via Supabase. Features a built-in calculator in entry forms for quick amount entry.",
+      keyFeatures: [
+        "Multi-wallet support (Cash, Debit, Bank, Credit, Savings, Investment)",
+        "Expense, income, and transfer tracking with category hierarchy",
+        "Offline-first architecture with Dexie.js and Supabase cloud sync",
+        "Budget management with periodic limits per category",
+        "Built-in calculator keypad with chained arithmetic operations for quick amount entry",
+        "Cloudflare Pages deployment for global availability",
+      ],
+      impact:
+        "Gives Filipinos a powerful, privacy-focused tool to manage personal finances — works offline and syncs when connected, making it reliable even on spotty internet.",
+      skills: [
+        "React 19",
+        "Vite",
+        "TypeScript",
+        "Tailwind CSS 4",
+        "shadcn/ui",
+        "React Router v7",
+        "Recharts",
+        "Dexie.js",
+        "Supabase",
+        "Cloudflare Pages",
+        "Offline-First Architecture",
+      ],
+    },
+  },
+  {
+    id: 20,
+    title: "LyriClear",
+    description:
+      "Karaoke lyrics processor — uploads audio, generates word-level timed lyrics using Demucs + Whisper, and displays them in a karaoke-style player",
+    category: "web",
+    image: "/assets/lyriclear/image.png",
+    technologies: ["Angular 20", "TypeScript", "Tailwind CSS", "RxJS", "Demucs", "Whisper"],
+    github: "https://github.com/vbatecan/lyriclear-frontend",
+    live: "#",
+    icon: LayoutDashboard,
+    date: "2025",
+    repoStatus: "public",
+    liveStatus: "development",
+    details: {
+      overview:
+        "LyriClear is a web app that turns any song into a karaoke experience. Upload an audio file, and it strips vocals with Demucs, transcribes with Whisper, and aligns every word to the timeline — producing a karaoke-style display with synchronized word highlighting.",
+      keyFeatures: [
+        "Audio upload supporting MP3, WAV, and OPUS up to 80MB",
+        "Vocal separation via Demucs for instrumental playback",
+        "Speech-to-text transcription with Whisper for accurate lyrics",
+        "Word-level timestamp alignment for karaoke-style highlighting",
+        "Karaoke player with fullscreen lyrics view and progress tracking",
+        "Real-time processing status and timeline visualization",
+      ],
+      impact:
+        "Makes karaoke lyrics creation accessible to anyone — no equipment needed, just upload a song and sing along with perfectly timed words.",
+      skills: [
+        "Angular 20",
+        "TypeScript",
+        "Tailwind CSS",
+        "RxJS",
+        "Demucs",
+        "Whisper",
+        "Audio Processing",
+        "Lyrics Synchronization",
+      ],
+    },
+  },
+  {
+    id: 21,
+    title: "Scholar's Path",
+    description:
+      "Student productivity platform — career goal tracking, subject difficulty analytics, and AI-powered reviewer question generation for Filipino students",
+    category: "web",
+    image: "/assets/scholars-path/image.png",
+    technologies: ["Angular", "Python", "PostgreSQL", "pgvector", "JWT", "PDF Parsing", "JWT + Refresh Tokens", "AI Question Generation"],
+    github: "https://github.com/vbatecan/scholars-path",
+    live: "https://scholarspath.app",
+    icon: LayoutDashboard,
+    date: "2026",
+    repoStatus: "private",
+    liveStatus: "live",
+    details: {
+      overview:
+        "Scholar's Path is a student productivity system built for Filipino learners. It combines career goal tracking, subject difficulty analytics, and AI-powered reviewer generation — helping students make informed academic decisions and study smarter. The backend uses PostgreSQL with pgvector for embeddings, while the Angular frontend handles authentication, assessment workflows, and personalized recommendations.",
+      keyFeatures: [
+        "End-to-end auth: JWT access tokens + HTTP-only refresh tokens with IP/email rate limiting",
+        "Career Goal Module: curated career catalog with skill-area-to-subject mapping and career-aligned recommendation engine",
+        "Subject Difficulty Module: multi-component assessments (quiz, activity, exam), weak subject ranking with trend deltas, and career-readiness analysis",
+        "Reviewer Upload: PDF/PPT/DOCX/TXT upload with AI-generated questions tagged by difficulty (easy/medium/hard)",
+        "Dashboard with simulation sliders for real-time career alignment feedback",
+        "Topic-correlation impact cards with evidence thresholds for personalized study guidance",
+      ],
+      impact:
+        "Empowers Filipino students to make data-driven academic decisions — tracking their strengths and weaknesses while aligning every subject to their chosen career path.",
+      skills: [
+        "Angular",
+        "Python",
+        "PostgreSQL",
+        "pgvector",
+        "JWT",
+        "PDF Parsing",
+        "AI Question Generation",
+        "Career Guidance",
+        "Subject Analytics",
       ],
     },
   },
