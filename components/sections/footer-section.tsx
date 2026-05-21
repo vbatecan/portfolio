@@ -76,11 +76,9 @@ export const FooterSection = ({ scrollToSection }: FooterSectionProps) => {
             viewport={{ once: true }}
             className="flex items-center gap-2 font-mono text-xs text-gray-400"
           >
+            <span>All rights reserved.</span>
+            <span>© </span>
             <span>{currentYear}</span>
-            <span>·</span>
-            <span>Built with</span>
-            <Heart className="h-3 w-3 text-red-500" />
-            <span>and Java</span>
           </motion.div>
         </div>
       </div>

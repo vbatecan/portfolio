@@ -63,7 +63,7 @@ export const SkillsSection = () => {
               viewport={{ once: true }}
               className="group"
             >
-              <Card className={`h-full overflow-hidden bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm border-0 shadow-md hover:shadow-xl transition-all duration-300 rounded-xl ${
+              <Card className={`h-full min-h-[180px] overflow-hidden bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm border-0 shadow-md hover:shadow-xl transition-all duration-300 rounded-xl ${
                 skill.isSpecialty ? "ring-2 ring-primary/30" : ""
               }`}>
                 <CardContent className="p-4 h-full flex flex-col">

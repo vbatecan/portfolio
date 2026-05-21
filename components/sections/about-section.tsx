@@ -35,7 +35,7 @@ export const AboutSection = () => {
             <div className="relative">
               <div className="aspect-square bg-gradient-to-br from-primary/20 to-secondary/20 rounded-3xl overflow-hidden">
                 <img
-                  src="/assets/2.jpg?height=500&width=500"
+                  src="/bg_me.png?height=500&width=500"
                   alt="Vince Angelo Batecan"
                   className="w-full h-full object-cover"
                 />
