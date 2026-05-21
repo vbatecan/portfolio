@@ -17,7 +17,6 @@ import { StatsSection } from "@/components/sections/stats-section"
 import { CertificatesSection } from "@/components/sections/certificates-section"
 import { ContactSection } from "@/components/sections/contact-section"
 import { FooterSection } from "@/components/sections/footer-section"
-import { ChatInterface } from "@/components/chat/chat-interface"
 
 export default function Portfolio() {
   const [darkMode, setDarkMode] = useState(false)
@@ -51,9 +50,6 @@ export default function Portfolio() {
         {/* Navigation */}
         <Navbar darkMode={darkMode} toggleDarkMode={toggleDarkMode} scrollToSection={scrollToSection} />
 
-        {/* Chat Interface */}
-        <ChatInterface />
-ore S
         {/* All Sections */}
         <HeroSection scrollToSection={scrollToSection} />
         <AboutSection />
