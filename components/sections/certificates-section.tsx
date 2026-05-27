@@ -1,6 +1,5 @@
 "use client"
 
-import { motion } from "framer-motion"
 import { CalendarIcon, TrophyIcon, DocumentTextIcon } from "@heroicons/react/24/outline"
 import { Card } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
@@ -66,9 +65,6 @@ export const CertificatesSection = () => {
           </p>
           <h2 className="section-title mb-4">Certifications</h2>
           <div className="accent-line mb-6"></div>
-          <p className="section-subtitle">
-            Continuing education and skill verification.
-          </p>
         </div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -77,9 +73,8 @@ export const CertificatesSection = () => {
               <Card className="p-6 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm border-0 shadow-lg hover:shadow-xl transition-all duration-300 rounded-2xl h-full flex flex-col">
                 <div className="flex items-start gap-4 mb-4">
                   {cert.clickable ? (
-                    <motion.div
-                      whileHover={{ scale: 1.05 }}
-                      className="cursor-pointer relative shrink-0"
+                    <div
+                      className="cursor-pointer relative shrink-0 transition-transform duration-200 hover:scale-105"
                       onClick={() => window.open(cert.image, "_blank")}
                     >
                       <img
@@ -90,7 +85,7 @@ export const CertificatesSection = () => {
                       <div className="absolute inset-0 flex items-center justify-center bg-black/40 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity">
                         <span className="text-white text-xs font-mono">View</span>
                       </div>
-                    </motion.div>
+                    </div>
                   ) : (
                     <img
                       src={cert.image || "/placeholder.svg"}

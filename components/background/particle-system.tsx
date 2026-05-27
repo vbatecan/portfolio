@@ -44,7 +44,7 @@ export const ParticleSystem = () => {
           vy: (Math.random() - 0.5) * 1.25,
           size: Math.random() * 10 + 1.25,
           opacity: Math.random() * 0.6 + 0.1,
-          hue: Math.random() * 60 + 200,
+          hue: 0,
         })
       }
     }
@@ -73,7 +73,7 @@ export const ParticleSystem = () => {
         particle.y = Math.max(0, Math.min(canvas.height, particle.y))
 
         // Draw particle
-        ctx.fillStyle = `hsla(${particle.hue}, 70%, 60%, ${particle.opacity})`
+        ctx.fillStyle = `hsla(0, 0%, 50%, ${particle.opacity})`
         ctx.beginPath()
         ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2)
         ctx.fill()

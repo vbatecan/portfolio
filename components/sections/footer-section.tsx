@@ -1,6 +1,5 @@
 "use client"
 
-import { motion } from "framer-motion"
 import { useState, useEffect } from "react"
 import { EnvelopeIcon, HeartIcon, CommandLineIcon } from "@heroicons/react/24/outline"
 import { GithubIcon, LinkedinIcon } from "@/components/ui/brand-icons"
@@ -21,27 +20,15 @@ export const FooterSection = ({ scrollToSection }: FooterSectionProps) => {
       <div className="max-w-7xl mx-auto">
         <div className="flex flex-col md:flex-row justify-between items-center gap-6">
           {/* Logo / Name */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-            className="flex items-center gap-2"
-          >
+          <div className="flex items-center gap-2">
             <CommandLineIcon className="h-5 w-5 text-primary" />
             <span className="font-mono text-sm">
               vbatecan<span className="text-primary">.dev</span>
             </span>
-          </motion.div>
+          </div>
 
           {/* Social Links */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            viewport={{ once: true }}
-            className="flex gap-3"
-          >
+          <div className="flex gap-3">
             <a
               href="https://github.com/vbatecan"
               target="_blank"
@@ -67,20 +54,14 @@ export const FooterSection = ({ scrollToSection }: FooterSectionProps) => {
             >
               <EnvelopeIcon className="h-5 w-5" />
             </a>
-          </motion.div>
+          </div>
 
           {/* Copyright */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-            viewport={{ once: true }}
-            className="flex items-center gap-2 font-mono text-xs text-gray-400"
-          >
+          <div className="flex items-center gap-2 font-mono text-xs text-gray-400">
             <span>All rights reserved.</span>
             <span>© </span>
             <span>{currentYear}</span>
-          </motion.div>
+          </div>
         </div>
       </div>
     </footer>

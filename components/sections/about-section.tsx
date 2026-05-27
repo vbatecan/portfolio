@@ -1,6 +1,5 @@
 "use client"
 
-import { motion } from "framer-motion"
 import { MapPinIcon, EnvelopeIcon, CommandLineIcon } from "@heroicons/react/24/outline"
 import { GithubIcon, LinkedinIcon } from "@/components/ui/brand-icons"
 import { Button } from "@/components/ui/button"

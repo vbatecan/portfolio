@@ -1,6 +1,5 @@
 "use client"
 
-import { motion } from "framer-motion"
 import { GlobeAltIcon, ServerIcon, CircleStackIcon, BoltIcon, CpuChipIcon, ShieldCheckIcon } from "@heroicons/react/24/outline"
 import { Card } from "@/components/ui/card"
 
@@ -101,36 +100,20 @@ export const ServicesSection = () => {
   return (
     <section id="services" className="py-20 px-4 relative z-10 bg-white dark:bg-gray-900">
       <div className="max-w-7xl mx-auto">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
-          className="mb-16"
-        >
+        <div className="mb-16">
           <p className="font-mono text-sm text-secondary mb-2 tracking-widest uppercase">
             ~/services
           </p>
           <h2 className="section-title mb-4">My Services</h2>
           <div className="accent-line mb-6"></div>
-          <p className="section-subtitle">
-            From frontend to backend, hardware to cloud. I build complete systems that work.
-          </p>
-        </motion.div>
+        </div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {services.map((service, index) => {
             const Icon = service.icon
 
             return (
-              <motion.div
-                key={service.title}
-                initial={{ opacity: 0, y: 40, scale: 0.95 }}
-                whileInView={{ opacity: 1, y: 0, scale: 1 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                viewport={{ once: true }}
-                className="group"
-              >
+              <div key={service.title} className="group">
                 <Card className="h-full bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 shadow-sm rounded-xl overflow-hidden relative">
                   <div className="relative z-10 p-6 flex flex-col h-full">
                     <div className="flex items-start justify-between mb-4">
@@ -162,18 +145,12 @@ export const ServicesSection = () => {
                     </ul>
                   </div>
                 </Card>
-              </motion.div>
+              </div>
             )
           })}
         </div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
-          className="text-center mt-16"
-        >
+        <div className="text-center mt-16">
           <p className="text-gray-500 dark:text-gray-400 text-sm">Need a custom solution? Let&apos;s talk.</p>
           <button
             onClick={() => document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })}
@@ -181,7 +158,7 @@ export const ServicesSection = () => {
           >
             Get in touch
           </button>
-        </motion.div>
+        </div>
       </div>
     </section>
   )

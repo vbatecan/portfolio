@@ -1,6 +1,5 @@
 "use client"
 
-import { motion } from "framer-motion"
 import { PaperAirplaneIcon, CheckCircleIcon, EnvelopeIcon, ChatBubbleLeftRightIcon } from "@heroicons/react/24/outline"
 import { useForm, ValidationError } from "@formspree/react"
 import { Button } from "@/components/ui/button"
@@ -15,37 +14,22 @@ export const ContactSection = () => {
     return (
       <section id="contact" className="py-20 px-4 bg-gray-50/50 dark:bg-gray-800/50 relative z-10">
         <div className="max-w-4xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="text-center"
-          >
+          <div className="text-center">
             <Card className="p-12 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm border-0 shadow-xl rounded-3xl">
-              <motion.div
-                initial={{ scale: 0 }}
-                animate={{ scale: 1 }}
-                transition={{ delay: 0.2, type: "spring", stiffness: 200 }}
-                className="flex justify-center mb-6"
-              >
+              <div className="flex justify-center mb-6">
                 <div className="p-4">
                   <CheckCircleIcon className="h-12 w-12 text-primary" />
                 </div>
-              </motion.div>
+              </div>
 
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.4 }}
-                className="text-center"
-              >
+              <div className="text-center">
                 <h2 className="text-3xl font-bold mb-4">Message Sent</h2>
                 <p className="text-gray-600 dark:text-gray-300 max-w-md mx-auto">
                   Got it. I'll get back to you when I can.
                 </p>
-              </motion.div>
+              </div>
 
-              <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.6 }} className="mt-8">
+              <div className="mt-8">
                 <Button
                   onClick={() => window.location.reload()}
                   variant="outline"
@@ -53,9 +37,9 @@ export const ContactSection = () => {
                 >
                   Send Another
                 </Button>
-              </motion.div>
+              </div>
             </Card>
-          </motion.div>
+          </div>
         </div>
       </section>
     )
@@ -64,30 +48,16 @@ export const ContactSection = () => {
   return (
     <section id="contact" className="py-20 px-4 bg-gray-50/50 dark:bg-gray-800/50 relative z-10">
       <div className="max-w-4xl mx-auto">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
-          className="mb-16"
-        >
+        <div className="mb-16">
           <p className="font-mono text-sm text-secondary mb-2 tracking-widest uppercase">
             <ChatBubbleLeftRightIcon className="inline h-4 w-4 mr-2" />
             contact.init()
           </p>
           <h2 className="section-title mb-4">Get in Touch</h2>
           <div className="accent-line mb-6"></div>
-          <p className="section-subtitle">
-            Have a project or opportunity? Send a message. I check email regularly.
-          </p>
-        </motion.div>
+        </div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-          viewport={{ once: true }}
-        >
+        <div>
           <Card className="p-8 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm border-0 shadow-xl rounded-3xl">
             <form onSubmit={handleSubmit} className="space-y-6">
               <div className="grid md:grid-cols-2 gap-6">
@@ -159,18 +129,10 @@ export const ContactSection = () => {
                 className="w-full bg-primary hover:bg-primary/90 text-primary-foreground py-3 rounded-xl font-mono shadow-lg hover:shadow-xl transition-all duration-300 disabled:opacity-50"
               >
                 {state.submitting ? (
-                  <motion.span
-                    className="flex items-center gap-2"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                  >
-                    <motion.div
-                      className="h-4 w-4 border-2 border-white border-t-transparent rounded-full"
-                      animate={{ rotate: 360 }}
-                      transition={{ duration: 1, repeat: Number.POSITIVE_INFINITY, ease: "linear" }}
-                    />
+                  <span className="flex items-center gap-2">
+                    <div className="h-4 w-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
                     Sending...
-                  </motion.span>
+                  </span>
                 ) : (
                   <span className="flex items-center gap-2">
                     <PaperAirplaneIcon className="h-4 w-4" />
@@ -196,7 +158,7 @@ export const ContactSection = () => {
               </div>
             </div>
           </Card>
-        </motion.div>
+        </div>
       </div>
     </section>
   )

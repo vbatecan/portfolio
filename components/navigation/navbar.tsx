@@ -28,9 +28,7 @@ export const Navbar = ({ darkMode, toggleDarkMode, scrollToSection }: NavbarProp
     <nav className="fixed top-0 w-full bg-white/80 dark:bg-gray-900/80 backdrop-blur-md z-40 border-b border-gray-200/50 dark:border-gray-700/50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center py-4">
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
+          <div
             className="flex items-center gap-2"
             data-magnetic
           >
@@ -38,28 +36,26 @@ export const Navbar = ({ darkMode, toggleDarkMode, scrollToSection }: NavbarProp
             <span className="font-mono text-base font-bold text-foreground">
               vbatecan.dev
             </span>
-          </motion.div>
+          </div>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-6">
             {navItems.map((item) => (
-              <motion.button
+              <button
                 key={item.id}
                 onClick={() => scrollToSection(item.id)}
-                className="text-sm font-medium text-gray-600 dark:text-gray-400 hover:text-primary transition-colors relative group"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
+                className="text-sm font-medium text-gray-600 dark:text-gray-400 hover:text-primary transition-all duration-200 active:scale-95 relative group"
                 data-magnetic
               >
                 {item.label}
-                <motion.div className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary group-hover:w-full transition-all duration-300" />
-              </motion.button>
+                <div className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary group-hover:w-full transition-all duration-300" />
+              </button>
             ))}
-            <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }} data-magnetic>
-              <Button variant="ghost" size="sm" onClick={toggleDarkMode} className="p-2">
+            <div data-magnetic>
+              <Button variant="ghost" size="sm" onClick={toggleDarkMode} className="p-2 transition-transform hover:scale-110 active:scale-90">
                 {darkMode ? <SunIcon className="h-4 w-4" /> : <MoonIcon className="h-4 w-4" />}
               </Button>
-            </motion.div>
+            </div>
           </div>
 
           {/* Mobile Navigation */}

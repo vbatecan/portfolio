@@ -255,34 +255,19 @@ export const ProjectsSection = () => {
     <section id="projects" className="py-20 px-4 bg-gray-50/50 dark:bg-gray-800/50 relative z-10">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
-          className="mb-16"
-        >
+        <div className="mb-16">
           <p className="font-mono text-sm text-secondary mb-2 tracking-widest uppercase">
             <CodeBracketIcon className="inline h-4 w-4 mr-2" />
             portfolio
           </p>
           <h2 className="section-title mb-4">Featured Work</h2>
           <div className="accent-line mb-6"></div>
-          <p className="section-subtitle">
-            Real applications — not tutorials. Hardware projects, production APIs, and tools I actually built for real use cases.
-          </p>
-        </motion.div>
+        </div>
 
         {/* Filter Pills */}
-        <motion.div
-          className="flex flex-wrap gap-2 mb-12"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
-        >
+        <div className="flex flex-wrap gap-2 mb-12">
           {categories.map((category) => (
-            <motion.div key={category.id} whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+            <div key={category.id} className="transition-transform duration-200 hover:scale-105 active:scale-95">
               <Button
                 variant={activeFilter === category.id ? "default" : "outline"}
                 onClick={() => setActiveFilter(category.id)}
@@ -293,92 +278,82 @@ export const ProjectsSection = () => {
                 {category.name}
                 <span className="ml-2 text-xs opacity-60">({category.count})</span>
               </Button>
-            </motion.div>
+            </div>
           ))}
-        </motion.div>
+        </div>
 
         {/* Uniform Grid */}
-        <motion.div layout className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
-          <AnimatePresence>
-            {filteredProjects.map((project, index) => {
-              const liveStatusInfo = getStatusInfo(project.liveStatus)
-              const repoStatusInfo = getStatusInfo(project.repoStatus)
-              const LiveIcon = liveStatusInfo.icon
-              const RepoIcon = repoStatusInfo.icon
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+          {filteredProjects.map((project, index) => {
+            const liveStatusInfo = getStatusInfo(project.liveStatus)
+            const repoStatusInfo = getStatusInfo(project.repoStatus)
+            const LiveIcon = liveStatusInfo.icon
+            const RepoIcon = repoStatusInfo.icon
 
-              return (
-                <motion.div
-                  key={project.id}
-                  layout
-                  initial={{ opacity: 0, scale: 0.9, y: 50 }}
-                  animate={{ opacity: 1, scale: 1, y: 0 }}
-                  exit={{ opacity: 0, scale: 0.9, y: -50 }}
-                  transition={{ duration: 0.5, delay: index * 0.03 }}
-                  whileHover={{ y: -5, scale: 1.01 }}
-                  className="group cursor-pointer"
-                  onClick={() => setSelectedProject(project)}
-                >
-                  <Card className="h-full overflow-hidden bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm border-0 shadow-lg hover:shadow-2xl transition-all duration-500 rounded-2xl">
-                    <div className="relative overflow-hidden">
-                      <motion.img
-                        src={project.image || "/placeholder.svg"}
-                        alt={project.title}
-                        className="w-full object-cover h-40"
-                        whileHover={{ scale: 1.05 }}
-                        transition={{ duration: 0.5 }}
-                      />
-                      
-                      {/* Overlay */}
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                      
-                      {/* Status + Date badges */}
-                      <div className="absolute top-3 left-3 flex gap-2">
-                        <span className="font-mono text-xs px-2 py-1 bg-black/70 text-white rounded flex items-center gap-1">
-                          {liveStatusInfo.text}
-                        </span>
-                        <span className="font-mono text-xs px-2 py-1 bg-black/70 text-white rounded flex items-center gap-1">
-                          <RepoIcon className="h-3 w-3" />
-                          {project.repoStatus === "none" ? "—" : project.repoStatus}
-                        </span>
-                      </div>
-
-                      <div className="absolute top-3 right-3">
-                        <span className="font-mono text-xs px-3 py-1 bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm rounded text-gray-700 dark:text-gray-300">
-                          {project.date}
-                        </span>
-                      </div>
+            return (
+              <div
+                key={project.id}
+                className="group cursor-pointer transition-all duration-300 hover:-translate-y-1 hover:scale-[1.01]"
+                onClick={() => setSelectedProject(project)}
+              >
+                <Card className="h-full overflow-hidden bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm border-0 shadow-lg hover:shadow-2xl transition-all duration-500 rounded-2xl">
+                  <div className="relative overflow-hidden">
+                    <img
+                      src={project.image || "/placeholder.svg"}
+                      alt={project.title}
+                      className="w-full object-cover h-40 transition-transform duration-500 group-hover:scale-105"
+                    />
+                    
+                    {/* Overlay */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                    
+                    {/* Status + Date badges */}
+                    <div className="absolute top-3 left-3 flex gap-2">
+                      <span className="font-mono text-xs px-2 py-1 bg-black/70 text-white rounded flex items-center gap-1">
+                        {liveStatusInfo.text}
+                      </span>
+                      <span className="font-mono text-xs px-2 py-1 bg-black/70 text-white rounded flex items-center gap-1">
+                        <RepoIcon className="h-3 w-3" />
+                        {project.repoStatus === "none" ? "—" : project.repoStatus}
+                      </span>
                     </div>
 
-                    <CardHeader className="pb-2">
-                      <CardTitle className="text-base font-bold text-foreground flex items-center gap-2">
-                        {project.title}
-                      </CardTitle>
-                      <CardDescription className="text-sm text-gray-500 dark:text-gray-400 line-clamp-2">
-                        {project.description}
-                      </CardDescription>
-                    </CardHeader>
+                    <div className="absolute top-3 right-3">
+                      <span className="font-mono text-xs px-3 py-1 bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm rounded text-gray-700 dark:text-gray-300">
+                        {project.date}
+                      </span>
+                    </div>
+                  </div>
 
-                    <CardContent className="pt-0">
-                      {/* Tech stack - mono styled */}
-                      <div className="flex flex-wrap gap-1.5 mb-3">
-                        {project.technologies.slice(0, 3).map((tech) => (
-                          <span key={tech} className="tech-tag">
-                            {tech}
-                          </span>
-                        ))}
-                        {project.technologies.length > 3 && (
-                          <span className="tech-tag text-gray-400">
-                            +{project.technologies.length - 3}
-                          </span>
-                        )}
-                      </div>
-                    </CardContent>
-                  </Card>
-                </motion.div>
-              )
-            })}
-          </AnimatePresence>
-        </motion.div>
+                  <CardHeader className="pb-2">
+                    <CardTitle className="text-base font-bold text-foreground flex items-center gap-2">
+                      {project.title}
+                    </CardTitle>
+                    <CardDescription className="text-sm text-gray-500 dark:text-gray-400 line-clamp-2">
+                      {project.description}
+                    </CardDescription>
+                  </CardHeader>
+
+                  <CardContent className="pt-0">
+                    {/* Tech stack - mono styled */}
+                    <div className="flex flex-wrap gap-1.5 mb-3">
+                      {project.technologies.slice(0, 3).map((tech) => (
+                        <span key={tech} className="tech-tag">
+                          {tech}
+                        </span>
+                      ))}
+                      {project.technologies.length > 3 && (
+                        <span className="tech-tag text-gray-400">
+                          +{project.technologies.length - 3}
+                        </span>
+                      )}
+                    </div>
+                  </CardContent>
+                </Card>
+              </div>
+            )
+          })}
+        </div>
 
         {/* Project Modal */}
         <AnimatePresence>
