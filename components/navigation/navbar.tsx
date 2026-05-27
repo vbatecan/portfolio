@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
-import { Moon, Sun, Menu, X, Terminal } from "lucide-react"
+import { MoonIcon, SunIcon, Bars3Icon, XMarkIcon, CommandLineIcon } from "@heroicons/react/24/outline"
 import { Button } from "@/components/ui/button"
 
 interface NavbarProps {
@@ -34,7 +34,7 @@ export const Navbar = ({ darkMode, toggleDarkMode, scrollToSection }: NavbarProp
             className="flex items-center gap-2"
             data-magnetic
           >
-            <Terminal className="h-5 w-5 text-primary" />
+            <CommandLineIcon className="h-5 w-5 text-primary" />
             <span className="font-mono text-base font-bold text-foreground">
               vbatecan.dev
             </span>
@@ -57,7 +57,7 @@ export const Navbar = ({ darkMode, toggleDarkMode, scrollToSection }: NavbarProp
             ))}
             <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }} data-magnetic>
               <Button variant="ghost" size="sm" onClick={toggleDarkMode} className="p-2">
-                {darkMode ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
+                {darkMode ? <SunIcon className="h-4 w-4" /> : <MoonIcon className="h-4 w-4" />}
               </Button>
             </motion.div>
           </div>
@@ -65,7 +65,7 @@ export const Navbar = ({ darkMode, toggleDarkMode, scrollToSection }: NavbarProp
           {/* Mobile Navigation */}
           <div className="md:hidden flex items-center gap-2">
             <Button variant="ghost" size="sm" onClick={toggleDarkMode} className="p-2" data-magnetic>
-              {darkMode ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
+              {darkMode ? <SunIcon className="h-4 w-4" /> : <MoonIcon className="h-4 w-4" />}
             </Button>
             <Button
               variant="ghost"
@@ -74,7 +74,7 @@ export const Navbar = ({ darkMode, toggleDarkMode, scrollToSection }: NavbarProp
               className="p-2"
               data-magnetic
             >
-              {mobileMenuOpen ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
+              {mobileMenuOpen ? <XMarkIcon className="h-4 w-4" /> : <Bars3Icon className="h-4 w-4" />}
             </Button>
           </div>
         </div>

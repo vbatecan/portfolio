@@ -1,7 +1,7 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { Code2, FileCode } from "lucide-react"
+import { CodeBracketIcon, DocumentTextIcon } from "@heroicons/react/24/outline"
 
 const codeSnippets = [
   {
@@ -118,15 +118,9 @@ export const CodeSnippetsSection = () => {
   return (
     <section id="code" className="py-20 px-4 relative z-10 bg-white dark:bg-gray-900">
       <div className="max-w-6xl mx-auto">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
-          className="mb-16"
-        >
+        <div className="mb-16">
           <p className="font-mono text-sm text-secondary mb-2 tracking-widest uppercase">
-            <Code2 className="inline h-4 w-4 mr-2" />
+            <CodeBracketIcon className="inline h-4 w-4 mr-2" />
             featured logic
           </p>
           <h2 className="section-title mb-4">Real Code</h2>
@@ -134,23 +128,16 @@ export const CodeSnippetsSection = () => {
           <p className="section-subtitle">
             Not tutorials or toy examples. These snippets are from actual projects in production or active development.
           </p>
-        </motion.div>
+        </div>
 
         <div className="grid md:grid-cols-2 gap-6">
           {codeSnippets.map((snippet, index) => (
-            <motion.div
-              key={snippet.id}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: index * 0.1 }}
-              viewport={{ once: true }}
-              className="group"
-            >
+            <div key={snippet.id} className="group">
               <div className="bg-gray-900 rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-shadow duration-300">
                 {/* File header */}
                 <div className="flex items-center justify-between px-4 py-3 bg-gray-800 border-b border-gray-700">
                   <div className="flex items-center gap-3">
-                    <FileCode className="h-4 w-4 text-gray-400" />
+                    <DocumentTextIcon className="h-4 w-4 text-gray-400" />
                     <span className="font-mono text-sm text-gray-300">{snippet.file}</span>
                   </div>
                   <span className="font-mono text-xs px-2 py-1 bg-primary/20 text-primary rounded">
@@ -170,7 +157,7 @@ export const CodeSnippetsSection = () => {
                   <p className="text-sm text-gray-400">{snippet.description}</p>
                 </div>
               </div>
-            </motion.div>
+            </div>
           ))}
         </div>
       </div>

@@ -6,16 +6,16 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
 import { AnimatePresence, motion } from "framer-motion"
 import {
-  AlertCircle,
-  CheckCircle2,
-  ExternalLink,
-  Github,
-  Lock,
-  LockOpen,
-  Code2,
-  ChevronLeft,
-  ChevronRight,
-} from "lucide-react"
+  ExclamationCircleIcon,
+  CheckCircleIcon,
+  ArrowTopRightOnSquareIcon,
+  LockClosedIcon,
+  LockOpenIcon,
+  CodeBracketIcon,
+  ChevronLeftIcon,
+  ChevronRightIcon,
+} from "@heroicons/react/24/outline"
+import { GithubIcon } from "@/components/ui/brand-icons"
 import { useState } from "react"
 import { createPortal } from "react-dom"
 import { AllProjects, RepoStatus, LiveStatus } from "@/lib/data"
@@ -36,23 +36,23 @@ const categories = [
 const getStatusInfo = (status: LiveStatus | RepoStatus) => {
   switch (status) {
     case "live":
-      return { icon: CheckCircle2, color: "bg-green-500", text: "Live" }
+      return { icon: CheckCircleIcon, color: "bg-green-500", text: "Live" }
     case "offline":
-      return { icon: AlertCircle, color: "bg-gray-500", text: "Offline" }
+      return { icon: ExclamationCircleIcon, color: "bg-gray-500", text: "Offline" }
     case "development":
-      return { icon: AlertCircle, color: "bg-yellow-500", text: "WIP" }
+      return { icon: ExclamationCircleIcon, color: "bg-yellow-500", text: "WIP" }
     case "completed":
-      return { icon: CheckCircle2, color: "bg-blue-500", text: "Done" }
+      return { icon: CheckCircleIcon, color: "bg-blue-500", text: "Done" }
     case "archived":
-      return { icon: AlertCircle, color: "bg-gray-600", text: "Archived" }
+      return { icon: ExclamationCircleIcon, color: "bg-gray-600", text: "Archived" }
     case "public":
-      return { icon: LockOpen, color: "bg-blue-500", text: "Public" }
+      return { icon: LockOpenIcon, color: "bg-blue-500", text: "Public" }
     case "private":
-      return { icon: Lock, color: "bg-secondary", text: "Private" }
+      return { icon: LockClosedIcon, color: "bg-secondary", text: "Private" }
     case "none":
-      return { icon: AlertCircle, color: "bg-gray-400", text: "No Repo" }
+      return { icon: ExclamationCircleIcon, color: "bg-gray-400", text: "No Repo" }
     default:
-      return { icon: AlertCircle, color: "bg-gray-500", text: "?" }
+      return { icon: ExclamationCircleIcon, color: "bg-gray-500", text: "?" }
   }
 }
 
@@ -130,13 +130,13 @@ function ModalCarousel({
                 onClick={prev}
                 className="absolute left-3 top-1/2 -translate-y-1/2 w-8 h-8 bg-black/50 hover:bg-black/70 rounded-full flex items-center justify-center text-white transition-colors z-10"
               >
-                <ChevronLeft className="h-4 w-4" />
+                <ChevronLeftIcon className="h-4 w-4" />
               </button>
               <button
                 onClick={next}
                 className="absolute right-3 top-1/2 -translate-y-1/2 w-8 h-8 bg-black/50 hover:bg-black/70 rounded-full flex items-center justify-center text-white transition-colors z-10"
               >
-                <ChevronRight className="h-4 w-4" />
+                <ChevronRightIcon className="h-4 w-4" />
               </button>
 
               {/* Dot indicators */}
@@ -214,7 +214,7 @@ function ModalCarousel({
               }
             }}
           >
-            <Github className="h-4 w-4 mr-2" />
+            <GithubIcon className="h-4 w-4 mr-2" />
             {project.repoStatus === "private" ? "Request Access" : "View Code"}
           </Button>
           <Button
@@ -228,7 +228,7 @@ function ModalCarousel({
               }
             }}
           >
-            <ExternalLink className="h-4 w-4 mr-2" />
+            <ArrowTopRightOnSquareIcon className="h-4 w-4 mr-2" />
             {project.liveStatus === "live" ? "Live Demo" : "—"}
           </Button>
         </div>
@@ -263,7 +263,7 @@ export const ProjectsSection = () => {
           className="mb-16"
         >
           <p className="font-mono text-sm text-secondary mb-2 tracking-widest uppercase">
-            <Code2 className="inline h-4 w-4 mr-2" />
+            <CodeBracketIcon className="inline h-4 w-4 mr-2" />
             portfolio
           </p>
           <h2 className="section-title mb-4">Featured Work</h2>
@@ -334,7 +334,6 @@ export const ProjectsSection = () => {
                       {/* Status + Date badges */}
                       <div className="absolute top-3 left-3 flex gap-2">
                         <span className="font-mono text-xs px-2 py-1 bg-black/70 text-white rounded flex items-center gap-1">
-                          <span className={`status-dot ${project.liveStatus}`}></span>
                           {liveStatusInfo.text}
                         </span>
                         <span className="font-mono text-xs px-2 py-1 bg-black/70 text-white rounded flex items-center gap-1">

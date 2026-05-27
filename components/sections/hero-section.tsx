@@ -1,7 +1,7 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { ChevronDown, Terminal } from "lucide-react"
+import { ChevronDownIcon, CommandLineIcon } from "@heroicons/react/24/outline"
 import { Button } from "@/components/ui/button"
 
 interface HeroSectionProps {
@@ -111,7 +111,7 @@ export const HeroSection = ({ scrollToSection }: HeroSectionProps) => {
                 onClick={() => scrollToSection("projects")}
                 className="bg-primary hover:bg-primary/90 text-primary-foreground px-8 py-4 text-lg rounded-full shadow-lg hover:shadow-xl transition-all duration-300"
               >
-                <Terminal className="mr-2 h-5 w-5" />
+                <CommandLineIcon className="mr-2 h-5 w-5" />
                 View Projects
               </Button>
             </motion.div>
@@ -134,7 +134,7 @@ export const HeroSection = ({ scrollToSection }: HeroSectionProps) => {
           className="mt-20"
         >
           <motion.div animate={{ y: [0, 10, 0] }} transition={{ duration: 2, repeat: Number.POSITIVE_INFINITY }}>
-            <ChevronDown className="h-8 w-8 mx-auto text-gray-400" />
+            <ChevronDownIcon className="h-8 w-8 mx-auto text-gray-400" />
           </motion.div>
         </motion.div>
       </div>

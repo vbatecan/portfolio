@@ -4,7 +4,7 @@ import type React from "react"
 
 import { Component, type ReactNode } from "react"
 import { motion } from "framer-motion"
-import { RefreshCw, AlertTriangle } from "lucide-react"
+import { ArrowPathIcon, ExclamationTriangleIcon } from "@heroicons/react/24/outline"
 import { Button } from "@/components/ui/button"
 
 interface Props {
@@ -49,7 +49,7 @@ export class ErrorBoundary extends Component<Props, State> {
               transition={{ duration: 2, repeat: Number.POSITIVE_INFINITY }}
               className="mb-6"
             >
-              <AlertTriangle className="h-16 w-16 text-orange-500 mx-auto" />
+              <ExclamationTriangleIcon className="h-16 w-16 text-orange-500 mx-auto" />
             </motion.div>
             <h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">Oops! Something went wrong</h2>
             <p className="text-gray-600 dark:text-gray-300 mb-6">
@@ -59,7 +59,7 @@ export class ErrorBoundary extends Component<Props, State> {
               onClick={() => window.location.reload()}
               className="bg-primary hover:bg-primary/90 text-primary-foreground"
             >
-              <RefreshCw className="h-4 w-4 mr-2" />
+              <ArrowPathIcon className="h-4 w-4 mr-2" />
               Refresh Page
             </Button>
           </motion.div>

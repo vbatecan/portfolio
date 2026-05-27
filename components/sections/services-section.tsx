@@ -1,12 +1,12 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { Globe, Server, Database, Zap, Cpu, Shield } from "lucide-react"
+import { GlobeAltIcon, ServerIcon, CircleStackIcon, BoltIcon, CpuChipIcon, ShieldCheckIcon } from "@heroicons/react/24/outline"
 import { Card } from "@/components/ui/card"
 
 const services = [
   {
-    icon: Globe,
+    icon: GlobeAltIcon,
     title: "Full-Stack Web Development",
     subtitle: "Web, Mobile & SaaS Applications",
     description:
@@ -21,7 +21,7 @@ const services = [
     color: "blue",
   },
   {
-    icon: Server,
+    icon: ServerIcon,
     title: "Backend APIs & Microservices",
     subtitle: "REST APIs, GraphQL & Server Architecture",
     description:
@@ -36,7 +36,7 @@ const services = [
     color: "purple",
   },
   {
-    icon: Database,
+    icon: CircleStackIcon,
     title: "Database Design & Optimization",
     subtitle: "SQL + NoSQL Solutions",
     description:
@@ -51,7 +51,7 @@ const services = [
     color: "amber",
   },
   {
-    icon: Zap,
+    icon: BoltIcon,
     title: "Performance & Monitoring",
     subtitle: "Fast & Reliable Systems",
     description:
@@ -66,7 +66,7 @@ const services = [
     color: "yellow",
   },
   {
-    icon: Cpu,
+    icon: CpuChipIcon,
     title: "IoT & Hardware Integration",
     subtitle: "Embedded Systems & Device Control",
     description:
@@ -81,7 +81,7 @@ const services = [
     color: "green",
   },
   {
-    icon: Shield,
+    icon: ShieldCheckIcon,
     title: "Security & DevOps",
     subtitle: "Secure Deployments & CI/CD",
     description:
@@ -129,36 +129,33 @@ export const ServicesSection = () => {
                 whileInView={{ opacity: 1, y: 0, scale: 1 }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
                 viewport={{ once: true }}
-                whileHover={{ y: -5 }}
                 className="group"
               >
-                <Card className="h-full bg-white/60 dark:bg-gray-800/60 backdrop-blur-sm border border-white/20 dark:border-gray-700/20 shadow-lg hover:shadow-2xl transition-all duration-500 rounded-2xl overflow-hidden hover:ring-2 hover:ring-primary/20 relative">
-                  <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
-
+                <Card className="h-full bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 shadow-sm rounded-xl overflow-hidden relative">
                   <div className="relative z-10 p-6 flex flex-col h-full">
                     <div className="flex items-start justify-between mb-4">
-                      <div className="p-3 group-hover:scale-110 transition-all duration-300">
-                        <Icon className="h-6 w-6 text-primary" />
+                      <div className="p-2.5 border border-gray-200 dark:border-gray-800 rounded-xl bg-gray-50 dark:bg-gray-800 text-gray-800 dark:text-gray-200">
+                        <Icon className="h-5 w-5" />
                       </div>
-                      <span className="text-xs font-medium px-2 py-1 rounded-full bg-primary/10 dark:bg-primary/20 text-primary">
+                      <span className="text-[11px] font-mono font-medium px-2 py-0.5 rounded border border-gray-200 dark:border-gray-800 bg-gray-50 dark:bg-gray-800 text-gray-700 dark:text-gray-300">
                         {service.subtitle}
                       </span>
                     </div>
 
-                    <h3 className="text-xl font-bold mb-2 text-foreground group-hover:text-primary transition-colors">
+                    <h3 className="text-lg font-bold mb-2 text-gray-900 dark:text-white">
                       {service.title}
                     </h3>
 
-                    <p className="text-sm text-gray-600 dark:text-gray-300 mb-4 leading-relaxed flex-1">
+                    <p className="text-sm text-gray-600 dark:text-gray-400 mb-4 leading-relaxed flex-1">
                       {service.description}
                     </p>
 
-                    <div className="h-px bg-gradient-to-r from-transparent via-gray-200 dark:via-gray-700 to-transparent mb-4" />
+                    <div className="h-px bg-gray-200 dark:bg-gray-800 mb-4" />
 
                     <ul className="space-y-2">
                       {service.features.map((feature) => (
-                        <li key={feature} className="flex items-center gap-2 text-sm text-muted-foreground">
-                          <span className="w-1.5 h-1.5 rounded-full bg-primary"></span>
+                        <li key={feature} className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400">
+                          <span className="w-1.5 h-1.5 rounded-full bg-gray-400 dark:bg-gray-500"></span>
                           {feature}
                         </li>
                       ))}

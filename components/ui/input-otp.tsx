@@ -2,7 +2,6 @@
 
 import * as React from "react"
 import { OTPInput, OTPInputContext } from "input-otp"
-import { Dot } from "lucide-react"
 
 import { cn } from "@/lib/utils"
 
@@ -63,7 +62,9 @@ const InputOTPSeparator = React.forwardRef<
   React.ComponentPropsWithoutRef<"div">
 >(({ ...props }, ref) => (
   <div ref={ref} role="separator" {...props}>
-    <Dot />
+    <svg viewBox="0 0 24 24" fill="currentColor" className="h-4 w-4">
+      <circle cx="12" cy="12" r="3" />
+    </svg>
   </div>
 ))
 InputOTPSeparator.displayName = "InputOTPSeparator"

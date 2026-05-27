@@ -1,7 +1,7 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { Home, User, FolderGit2, Code2, MessageSquare, Sun, Moon } from "lucide-react"
+import { HomeIcon, UserIcon, FolderIcon, CodeBracketIcon, ChatBubbleLeftRightIcon, SunIcon, MoonIcon } from "@heroicons/react/24/outline"
 import { Button } from "@/components/ui/button"
 
 interface MobileNavProps {
@@ -11,12 +11,12 @@ interface MobileNavProps {
 }
 
 const navItems = [
-  { id: "home", label: "Home", icon: Home },
-  { id: "about", label: "About", icon: User },
-  { id: "services", label: "Services", icon: FolderGit2 },
-  { id: "projects", label: "Projects", icon: FolderGit2 },
-  { id: "skills", label: "Skills", icon: Code2 },
-  { id: "contact", label: "Contact", icon: MessageSquare },
+  { id: "home", label: "Home", icon: HomeIcon },
+  { id: "about", label: "About", icon: UserIcon },
+  { id: "services", label: "Services", icon: FolderIcon },
+  { id: "projects", label: "Projects", icon: FolderIcon },
+  { id: "skills", label: "Skills", icon: CodeBracketIcon },
+  { id: "contact", label: "Contact", icon: ChatBubbleLeftRightIcon },
 ]
 
 export const MobileNav = ({ darkMode, toggleDarkMode, scrollToSection }: MobileNavProps) => {
@@ -47,12 +47,12 @@ export const MobileNav = ({ darkMode, toggleDarkMode, scrollToSection }: MobileN
         >
           {darkMode ? (
             <>
-              <Sun className="h-5 w-5 text-gray-600 dark:text-gray-400" />
+              <SunIcon className="h-5 w-5 text-gray-600 dark:text-gray-400" />
               <span className="text-[10px] font-medium text-gray-600 dark:text-gray-400">Light</span>
             </>
           ) : (
             <>
-              <Moon className="h-5 w-5 text-gray-600 dark:text-gray-400" />
+              <MoonIcon className="h-5 w-5 text-gray-600 dark:text-gray-400" />
               <span className="text-[10px] font-medium text-gray-600 dark:text-gray-400">Dark</span>
             </>
           )}

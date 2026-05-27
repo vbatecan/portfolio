@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion"
 import { Card, CardContent } from "@/components/ui/card"
-import { BarChart3 } from "lucide-react"
+import { ChartBarIcon } from "@heroicons/react/24/outline"
 
 const wakatimeEmbeds = [
   "https://wakatime.com/share/@vbatecan/1b322618-a234-4abf-a40f-3db31b9a14aa.svg",
@@ -23,7 +23,7 @@ export const StatsSection = () => {
           className="mb-16"
         >
           <p className="font-mono text-sm text-secondary mb-2 tracking-widest uppercase">
-            <BarChart3 className="inline h-4 w-4 mr-2" />
+            <ChartBarIcon className="inline h-4 w-4 mr-2" />
             git log --stat
           </p>
           <h2 className="section-title mb-4">Activity Stats</h2>

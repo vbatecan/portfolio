@@ -1,7 +1,7 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { Send, CheckCircle, Mail, MessageSquare } from "lucide-react"
+import { PaperAirplaneIcon, CheckCircleIcon, EnvelopeIcon, ChatBubbleLeftRightIcon } from "@heroicons/react/24/outline"
 import { useForm, ValidationError } from "@formspree/react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -29,7 +29,7 @@ export const ContactSection = () => {
                 className="flex justify-center mb-6"
               >
                 <div className="p-4">
-                  <CheckCircle className="h-12 w-12 text-primary" />
+                  <CheckCircleIcon className="h-12 w-12 text-primary" />
                 </div>
               </motion.div>
 
@@ -72,7 +72,7 @@ export const ContactSection = () => {
           className="mb-16"
         >
           <p className="font-mono text-sm text-secondary mb-2 tracking-widest uppercase">
-            <MessageSquare className="inline h-4 w-4 mr-2" />
+            <ChatBubbleLeftRightIcon className="inline h-4 w-4 mr-2" />
             contact.init()
           </p>
           <h2 className="section-title mb-4">Get in Touch</h2>
@@ -173,7 +173,7 @@ export const ContactSection = () => {
                   </motion.span>
                 ) : (
                   <span className="flex items-center gap-2">
-                    <Send className="h-4 w-4" />
+                    <PaperAirplaneIcon className="h-4 w-4" />
                     Send Message
                   </span>
                 )}
@@ -190,7 +190,7 @@ export const ContactSection = () => {
                   href="mailto:vbatecan@gmail.com"
                   className="flex items-center gap-2 px-4 py-2 bg-gray-100 dark:bg-gray-700 rounded-lg text-sm font-mono hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors"
                 >
-                  <Mail className="h-4 w-4" />
+                  <EnvelopeIcon className="h-4 w-4" />
                   vbatecan@gmail.com
                 </a>
               </div>

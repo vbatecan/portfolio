@@ -2,7 +2,8 @@
 
 import { motion } from "framer-motion"
 import { useState, useEffect } from "react"
-import { Github, Linkedin, Mail, Heart, Terminal } from "lucide-react"
+import { EnvelopeIcon, HeartIcon, CommandLineIcon } from "@heroicons/react/24/outline"
+import { GithubIcon, LinkedinIcon } from "@/components/ui/brand-icons"
 
 interface FooterSectionProps {
   scrollToSection?: (sectionId: string) => void
@@ -27,7 +28,7 @@ export const FooterSection = ({ scrollToSection }: FooterSectionProps) => {
             viewport={{ once: true }}
             className="flex items-center gap-2"
           >
-            <Terminal className="h-5 w-5 text-primary" />
+            <CommandLineIcon className="h-5 w-5 text-primary" />
             <span className="font-mono text-sm">
               vbatecan<span className="text-primary">.dev</span>
             </span>
@@ -48,7 +49,7 @@ export const FooterSection = ({ scrollToSection }: FooterSectionProps) => {
               className="p-2 bg-gray-800 hover:bg-gray-700 rounded-lg transition-colors"
               aria-label="GitHub"
             >
-              <Github className="h-5 w-5" />
+              <GithubIcon className="h-5 w-5" />
             </a>
             <a
               href="https://www.linkedin.com/in/vince-batecan/"
@@ -57,14 +58,14 @@ export const FooterSection = ({ scrollToSection }: FooterSectionProps) => {
               className="p-2 bg-gray-800 hover:bg-gray-700 rounded-lg transition-colors"
               aria-label="LinkedIn"
             >
-              <Linkedin className="h-5 w-5" />
+              <LinkedinIcon className="h-5 w-5" />
             </a>
             <a
               href="mailto:vbatecan@gmail.com"
               className="p-2 bg-gray-800 hover:bg-gray-700 rounded-lg transition-colors"
               aria-label="Email"
             >
-              <Mail className="h-5 w-5" />
+              <EnvelopeIcon className="h-5 w-5" />
             </a>
           </motion.div>
 

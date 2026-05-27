@@ -1,7 +1,7 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { Calendar, Award, ScrollText } from "lucide-react"
+import { CalendarIcon, TrophyIcon, DocumentTextIcon } from "@heroicons/react/24/outline"
 import { Card } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 
@@ -59,15 +59,9 @@ export const CertificatesSection = () => {
   return (
     <section id="certificates" className="py-20 px-4 relative z-10 bg-gray-50/50 dark:bg-gray-800/50">
       <div className="max-w-6xl mx-auto">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
-          className="mb-16"
-        >
+        <div className="mb-16">
           <p className="font-mono text-sm text-secondary mb-2 tracking-widest uppercase">
-            <ScrollText className="inline h-4 w-4 mr-2" />
+            <DocumentTextIcon className="inline h-4 w-4 mr-2" />
             ls -la ./certificates/
           </p>
           <h2 className="section-title mb-4">Certifications</h2>
@@ -75,19 +69,11 @@ export const CertificatesSection = () => {
           <p className="section-subtitle">
             Continuing education and skill verification.
           </p>
-        </motion.div>
+        </div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {certificates.map((cert, index) => (
-            <motion.div
-              key={cert.title}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: index * 0.1 }}
-              viewport={{ once: true }}
-              whileHover={{ y: -5 }}
-              className="group"
-            >
+            <div key={cert.title} className="group">
               <Card className="p-6 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm border-0 shadow-lg hover:shadow-xl transition-all duration-300 rounded-2xl h-full flex flex-col">
                 <div className="flex items-start gap-4 mb-4">
                   {cert.clickable ? (
@@ -136,7 +122,7 @@ export const CertificatesSection = () => {
                 <div className="mt-auto pt-4 border-t border-gray-200 dark:border-gray-700">
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-1.5 text-xs text-gray-500 font-mono">
-                      <Calendar className="h-3 w-3" />
+                      <CalendarIcon className="h-3 w-3" />
                       {cert.date}
                     </div>
 
@@ -147,14 +133,14 @@ export const CertificatesSection = () => {
                         rel="noopener noreferrer"
                         className="flex items-center gap-1 text-xs text-primary hover:underline font-mono"
                       >
-                        <Award className="h-3 w-3" />
+                        <TrophyIcon className="h-3 w-3" />
                         Verify
                       </a>
                     )}
                   </div>
                 </div>
               </Card>
-            </motion.div>
+            </div>
           ))}
         </div>
       </div>
