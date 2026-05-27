@@ -1,11 +1,18 @@
 "use client"
 
-import { GlobeAltIcon, ServerIcon, CircleStackIcon, BoltIcon, CpuChipIcon, ShieldCheckIcon } from "@heroicons/react/24/outline"
 import { Card } from "@/components/ui/card"
+import { Swiper, SwiperSlide } from "swiper/react"
+import { EffectCards, Navigation, Pagination } from "swiper/modules"
+import { ArrowLeftIcon, ArrowRightIcon } from "@heroicons/react/24/outline"
+
+// Import Swiper styles
+import "swiper/css"
+import "swiper/css/effect-cards"
+import "swiper/css/navigation"
+import "swiper/css/pagination"
 
 const services = [
   {
-    icon: GlobeAltIcon,
     title: "Full-Stack Web Development",
     subtitle: "Web, Mobile & SaaS Applications",
     description:
@@ -17,10 +24,8 @@ const services = [
       "API integrations & third-party services",
       "Progressive Web Apps (PWA)",
     ],
-    color: "blue",
   },
   {
-    icon: ServerIcon,
     title: "Backend APIs & Microservices",
     subtitle: "REST APIs, GraphQL & Server Architecture",
     description:
@@ -32,10 +37,8 @@ const services = [
       "Microservices architecture",
       "Scalable cloud-native design",
     ],
-    color: "purple",
   },
   {
-    icon: CircleStackIcon,
     title: "Database Design & Optimization",
     subtitle: "SQL + NoSQL Solutions",
     description:
@@ -47,10 +50,8 @@ const services = [
       "Redis caching layers",
       "Data modeling & ER diagrams",
     ],
-    color: "amber",
   },
   {
-    icon: BoltIcon,
     title: "Performance & Monitoring",
     subtitle: "Fast & Reliable Systems",
     description:
@@ -62,10 +63,8 @@ const services = [
       "Logging with structured outputs",
       "Uptime monitoring & alerts",
     ],
-    color: "yellow",
   },
   {
-    icon: CpuChipIcon,
     title: "IoT & Hardware Integration",
     subtitle: "Embedded Systems & Device Control",
     description:
@@ -77,10 +76,8 @@ const services = [
       "Web-based control interfaces",
       "Firmware & embedded C++",
     ],
-    color: "green",
   },
   {
-    icon: ShieldCheckIcon,
     title: "Security & DevOps",
     subtitle: "Secure Deployments & CI/CD",
     description:
@@ -92,72 +89,118 @@ const services = [
       "Cloud deployment (AWS, GCP)",
       "SSL/TLS & infrastructure security",
     ],
-    color: "red",
   },
 ]
 
 export const ServicesSection = () => {
   return (
-    <section id="services" className="py-20 px-4 relative z-10 bg-white dark:bg-gray-900">
+    <section id="services" className="py-20 px-4 relative z-10 bg-white dark:bg-gray-900 border-t border-gray-100 dark:border-gray-800">
       <div className="max-w-7xl mx-auto">
-        <div className="mb-16">
-          <p className="font-mono text-sm text-secondary mb-2 tracking-widest uppercase">
-            ~/services
-          </p>
-          <h2 className="section-title mb-4">My Services</h2>
-          <div className="accent-line mb-6"></div>
-        </div>
+        <div className="grid lg:grid-cols-12 gap-12 items-center">
+          {/* Left Column: Heading, description, and navigation */}
+          <div className="lg:col-span-5 space-y-6">
+            <div>
+              <p className="font-mono text-sm text-secondary mb-2 tracking-widest uppercase text-primary/70">
+                ~/services
+              </p>
+              <h2 className="section-title mb-4">My Services</h2>
+              <div className="accent-line mb-6"></div>
+            </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {services.map((service, index) => {
-            const Icon = service.icon
+            <p className="text-gray-600 dark:text-gray-400 leading-relaxed text-base md:text-lg">
+              I build complete, secure, and highly optimized digital systems. Drag or swipe the cards to explore my capabilities across full-stack development, embedded hardware IoT, database engineering, and microservices.
+            </p>
 
-            return (
-              <div key={service.title} className="group">
-                <Card className="h-full bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 shadow-sm rounded-xl overflow-hidden relative">
-                  <div className="relative z-10 p-6 flex flex-col h-full">
-                    <div className="flex items-start justify-between mb-4">
-                      <div className="p-2.5 border border-gray-200 dark:border-gray-800 rounded-xl bg-gray-50 dark:bg-gray-800 text-gray-800 dark:text-gray-200">
-                        <Icon className="h-5 w-5" />
+            {/* Custom Navigation & Pagination */}
+            <div className="flex items-center gap-4 pt-4">
+              <button 
+                className="swiper-button-prev-custom p-3 rounded-full border border-gray-200 dark:border-gray-800 bg-gray-50 hover:bg-gray-100 dark:bg-gray-800 dark:hover:bg-gray-700 transition-all text-gray-800 dark:text-gray-200 shadow-sm active:scale-95 disabled:opacity-40 disabled:pointer-events-none"
+                aria-label="Previous service"
+              >
+                <ArrowLeftIcon className="h-5 w-5" />
+              </button>
+              <button 
+                className="swiper-button-next-custom p-3 rounded-full border border-gray-200 dark:border-gray-800 bg-gray-50 hover:bg-gray-100 dark:bg-gray-800 dark:hover:bg-gray-700 transition-all text-gray-800 dark:text-gray-200 shadow-sm active:scale-95 disabled:opacity-40 disabled:pointer-events-none"
+                aria-label="Next service"
+              >
+                <ArrowRightIcon className="h-5 w-5" />
+              </button>
+              <div className="swiper-pagination-custom font-mono text-sm text-secondary font-medium ml-2"></div>
+            </div>
+
+            {/* CTA Option */}
+            <div className="pt-4 border-t border-gray-100 dark:border-gray-800">
+              <p className="text-gray-500 dark:text-gray-400 text-sm">Need a custom end-to-end integration?</p>
+              <button
+                onClick={() => document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })}
+                className="mt-3 px-6 py-2.5 bg-primary text-primary-foreground rounded-full font-medium hover:opacity-90 transition-opacity text-sm font-mono shadow-md hover:shadow-lg"
+              >
+                contact.init()
+              </button>
+            </div>
+          </div>
+
+          {/* Right Column: Stacked Cards Deck */}
+          <div className="lg:col-span-7 flex justify-center w-full overflow-hidden py-8 px-4">
+            <div className="w-full max-w-[450px]">
+              <Swiper
+                effect={"cards"}
+                grabCursor={true}
+                modules={[EffectCards, Navigation, Pagination]}
+                navigation={{
+                  nextEl: ".swiper-button-next-custom",
+                  prevEl: ".swiper-button-prev-custom",
+                }}
+                pagination={{
+                  el: ".swiper-pagination-custom",
+                  type: "fraction",
+                }}
+                cardsEffect={{
+                  slideShadows: false,
+                  rotate: true,
+                  perSlideRotate: 3,
+                  perSlideOffset: 10,
+                }}
+                className="services-swiper"
+              >
+                {services.map((service, index) => (
+                  <SwiperSlide key={service.title} className="h-full">
+                    <Card className="h-full bg-white/90 dark:bg-gray-900/90 backdrop-blur-md border border-gray-200 dark:border-gray-800 shadow-2xl rounded-3xl p-8 flex flex-col justify-between min-h-[430px] transition-all duration-300">
+                      <div className="space-y-4">
+                        <div className="flex items-center justify-between">
+                          <span className="text-[11px] font-mono font-bold px-3 py-1 rounded-full border border-gray-200 dark:border-gray-800 bg-gray-50 dark:bg-gray-800 text-gray-700 dark:text-gray-300 tracking-wide uppercase">
+                            {service.subtitle}
+                          </span>
+                          <span className="font-mono text-xs text-secondary/60">
+                            [0{index + 1} / 0{services.length}]
+                          </span>
+                        </div>
+
+                        <h3 className="text-2xl font-black text-gray-900 dark:text-white tracking-tight leading-none pt-2">
+                          {service.title}
+                        </h3>
+
+                        <p className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed pt-2">
+                          {service.description}
+                        </p>
                       </div>
-                      <span className="text-[11px] font-mono font-medium px-2 py-0.5 rounded border border-gray-200 dark:border-gray-800 bg-gray-50 dark:bg-gray-800 text-gray-700 dark:text-gray-300">
-                        {service.subtitle}
-                      </span>
-                    </div>
 
-                    <h3 className="text-lg font-bold mb-2 text-gray-900 dark:text-white">
-                      {service.title}
-                    </h3>
-
-                    <p className="text-sm text-gray-600 dark:text-gray-400 mb-4 leading-relaxed flex-1">
-                      {service.description}
-                    </p>
-
-                    <div className="h-px bg-gray-200 dark:bg-gray-800 mb-4" />
-
-                    <ul className="space-y-2">
-                      {service.features.map((feature) => (
-                        <li key={feature} className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400">
-                          <span className="w-1.5 h-1.5 rounded-full bg-gray-400 dark:bg-gray-500"></span>
-                          {feature}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </Card>
-              </div>
-            )
-          })}
-        </div>
-
-        <div className="text-center mt-16">
-          <p className="text-gray-500 dark:text-gray-400 text-sm">Need a custom solution? Let&apos;s talk.</p>
-          <button
-            onClick={() => document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })}
-            className="mt-3 px-6 py-2 bg-primary text-primary-foreground rounded-full font-medium hover:opacity-90 transition-opacity"
-          >
-            Get in touch
-          </button>
+                      <div className="mt-6 pt-6 border-t border-gray-100 dark:border-gray-800">
+                        <ul className="grid grid-cols-1 gap-2.5">
+                          {service.features.map((feature) => (
+                            <li key={feature} className="flex items-center gap-3 text-sm text-gray-600 dark:text-gray-400">
+                              <span className="w-1.5 h-1.5 rounded-full bg-primary/40 dark:bg-primary/60 flex-shrink-0" />
+                              <span className="leading-snug">{feature}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    </Card>
+                  </SwiperSlide>
+                ))}
+              </Swiper>
+            </div>
+          </div>
         </div>
       </div>
     </section>
