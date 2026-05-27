@@ -108,7 +108,7 @@ export const AllProjects: Project[] = [
       ],
       impact:
         "Demonstrated considerable success in enhancing attendance accuracy and operational efficiency at Punturin Senior High School.",
-      skills: ["C++", "Arduino", "ESP32", "JavaScript", "HTML", "CSS", "Embedded Systems"],
+      skills: ["C++", "Arduino", "ESP32", "JavaScript", "HTML", "CSS"],
     },
   },
   {
@@ -139,7 +139,7 @@ export const AllProjects: Project[] = [
       ],
       impact:
         "Significantly improves operational efficiency and accuracy in sticker product order preparation, reducing time spent navigating large sticker collections.",
-      skills: ["Python", "PyTorch", "YOLO", "Machine Learning", "Computer Vision", "Ultralytics", "Roboflow"],
+      skills: ["Python", "PyTorch", "YOLO", "Ultralytics", "Roboflow"],
     },
   },
   {
@@ -169,7 +169,7 @@ export const AllProjects: Project[] = [
       ],
       impact:
         "Production-ready system for Orange Pi One providing versatile WiFi management for various commercial environments.",
-      skills: ["Python", "Flask", "Docker", "Linux", "Network Management", "REST API", "Containerization"],
+      skills: ["Python", "Flask", "Docker", "Linux", "REST API"],
     },
   },
   {
@@ -199,7 +199,7 @@ export const AllProjects: Project[] = [
       ],
       impact:
         "Provides a flexible and powerful API for shoe retailers and applications requiring comprehensive product data management and search capabilities.",
-      skills: ["Spring Boot", "PostgreSQL", "REST API", "Java", "Database Design"],
+      skills: ["Spring Boot", "PostgreSQL", "REST API", "Java"],
     },
   },
   {
@@ -209,7 +209,7 @@ export const AllProjects: Project[] = [
       "WiFi security testing tool with enhanced browser-based interface for network deauthentication testing",
     category: "security",
     image: "/assets/esp32-deauther/1.png?height=200&width=300",
-    technologies: ["C++", "Arduino", "ESP32", "Hardware"],
+    technologies: ["C++", "Arduino", "ESP32"],
     github: "https://github.com/vbatecan/ESP32-Deauther",
     live: "#",
     icon: Shield,
@@ -230,7 +230,7 @@ export const AllProjects: Project[] = [
       ],
       impact:
         "Enhanced accessibility for educational and security research purposes, making WiFi security testing more approachable for learning environments.",
-      skills: ["C++", "Arduino", "ESP32", "Hardware", "Network Security", "Web Interface"],
+      skills: ["C++", "Arduino", "ESP32"],
     },
   },
   {
@@ -260,7 +260,7 @@ export const AllProjects: Project[] = [
       ],
       impact:
         "Delivered a professional e-commerce solution that provides customers with a secure and intuitive online shopping experience for quality apparel.",
-      skills: ["PHP", "MySQL", "JavaScript", "HTML", "CSS", "E-commerce", "Database Design"],
+      skills: ["PHP", "MySQL", "JavaScript", "HTML", "CSS"],
     },
   },
   {
@@ -290,7 +290,7 @@ export const AllProjects: Project[] = [
       ],
       impact:
         "Created a valuable tool for cultivating informed and connected communities, enabling users to engage in thoughtful conversations and knowledge exchange.",
-      skills: ["PHP", "MySQL", "JavaScript", "HTML", "CSS", "Community Platform", "Real-time Communication"],
+      skills: ["PHP", "MySQL", "JavaScript", "HTML", "CSS"],
     },
   },
   {
@@ -321,7 +321,7 @@ export const AllProjects: Project[] = [
       ],
       impact:
         "Successfully delivered a professional web presence that effectively reflects the client's vision and branding objectives, encouraging product interest and customer engagement.",
-      skills: ["JavaScript", "HTML", "CSS", "Responsive Design", "Client Communication", "Brand Implementation"],
+      skills: ["JavaScript", "HTML", "CSS"],
     },
   },
   {
@@ -351,7 +351,7 @@ export const AllProjects: Project[] = [
       ],
       impact:
         "Streamlines enrollment processes in educational institutions, reducing administrative overhead and improving data accuracy for student management.",
-      skills: ["C#", "Visual Studio", "SQLite", "MySQL", "LocalDB", "Desktop Development", "Database Design"],
+      skills: ["C#", "Visual Studio", "SQLite", "MySQL", "LocalDB"],
     },
   },
   {
@@ -361,7 +361,7 @@ export const AllProjects: Project[] = [
       "Comprehensive solution for streamlining fast food operations including inventory, sales, staffing, and customer service management",
     category: "desktop",
     image: "/placeholder.svg?height=200&width=300",
-    technologies: ["VB.NET", "Visual Studio", "MySQL", "Desktop Application"],
+    technologies: ["VB.NET", "Visual Studio", "MySQL"],
     github: "https://github.com/vbatecan/AllyFastFood",
     live: "#",
     icon: ShoppingCart,
@@ -381,7 +381,7 @@ export const AllProjects: Project[] = [
       ],
       impact:
         "Optimizes day-to-day operations in fast food businesses, improving profitability and ensuring consistent, high-quality customer experiences.",
-      skills: ["VB.NET", "Visual Studio", "MySQL", "Desktop Application Development", "Business Process Management"],
+      skills: ["VB.NET", "Visual Studio", "MySQL"],
     },
   },
   {
@@ -391,7 +391,7 @@ export const AllProjects: Project[] = [
       "RESTful API for task management applications with full CRUD operations for creating, updating, deleting, and managing tasks",
     category: "api",
     image: "/placeholder.svg?height=200&width=300",
-    technologies: ["Spring Boot", "Java", "REST API", "Database"],
+    technologies: ["Spring Boot", "Java", "REST API"],
     github: "https://github.com/vbatecan/todolist_api",
     live: "#",
     icon: Server,
@@ -411,7 +411,7 @@ export const AllProjects: Project[] = [
       ],
       impact:
         "Simplifies Todo list app development by providing a robust backend API, eliminating the need for developers to build data management from scratch.",
-      skills: ["Spring Boot", "Java", "REST API", "Database Design", "API Development", "Backend Development"],
+      skills: ["Spring Boot", "Java", "REST API"],
     },
   },
   {
@@ -421,7 +421,7 @@ export const AllProjects: Project[] = [
       "RESTful API for patient management applications with full CRUD operations for creating, updating, deleting, and managing patients. Additionally, it includes authentication and authorization using JWT tokens. Implemented RBAC for role-based access control.",
     category: "api",
     image: "/assets/pms/1.png?height=200&width=300",
-    technologies: ["Spring Boot", "Java", "REST API", "Database", "PostgreSQL", "JWT", "RBAC"],
+    technologies: ["Spring Boot", "Java", "REST API", "PostgreSQL", "JWT", "RBAC"],
     github: "https://github.com/vbatecan/patient-management-system-backend",
     live: "#",
     icon: Server,
@@ -444,7 +444,7 @@ export const AllProjects: Project[] = [
       ],
       impact:
         "Accelerates the development of Patient Management Systems by providing a secure, scalable, and ready-to-use backend API, allowing developers to focus on building user-facing features instead of foundational data management logic.",
-      skills: ["Spring Boot", "Java", "REST API", "Database Design", "API Development", "Backend Development", "Authentication", "Authorization", "RBAC"],
+      skills: ["Spring Boot", "Java", "REST API", "PostgreSQL", "JWT", "RBAC"],
     },
   },
   {
@@ -453,7 +453,7 @@ export const AllProjects: Project[] = [
     description: "Image Tiler for Machine learning is for datasets that are too large to be processed by the model. It is a tool that can be used to tile the images into smaller pieces that can be processed by the model and improve accuracy to small objects. Roboflow has this feature but is not free. Therefore, I wrote this script for my own use.",
     category: "ai",
     image: "/assets/Image Tiler/1.png?height=200&width=300",
-    technologies: ["Python", "Roboflow", "Machine Learning", "Computer Vision"],
+    technologies: ["Python", "Roboflow", "Pillow"],
     github: "https://github.com/vbatecan/ml-image-tiler",
     live: "#",
     icon: Terminal,
@@ -474,7 +474,7 @@ export const AllProjects: Project[] = [
       ],
       impact:
         "Empowers machine learning practitioners to efficiently prepare large image datasets by automating the tiling process, enabling better model performance on small objects and reducing reliance on paid tools. Facilitates experimentation and scalability in computer vision projects.",
-      skills: ["Python", "Image Processing", "Machine Learning", "Computer Vision", "Command Line Tools"],
+      skills: ["Python", "Roboflow", "Pillow"],
     },
   },
   {
@@ -506,7 +506,7 @@ export const AllProjects: Project[] = [
       ],
       impact:
         "Speeds up scheduling and reduces administrative overhead while providing auditable history and reliable notifications.",
-      skills: ["Angular", "TypeScript", "Supabase", "Postgres", "Tailwind", "PrimeNG", "Serverless", "Testing", "Playwright"],
+      skills: ["Angular", "TypeScript", "Supabase", "PostgreSQL", "Tailwind", "PrimeNG", "Playwright", "pnpm"],
     },
   },
   {
@@ -563,8 +563,8 @@ export const AllProjects: Project[] = [
         "Zod",
         "Supabase",
         "PostgreSQL",
-        "Serverless",
         "Playwright",
+        "pnpm",
       ],
     },
   },
@@ -594,7 +594,7 @@ export const AllProjects: Project[] = [
         "Comprehensive error handling and structured logging"
       ],
       "impact": "Provides accurate, scalable Kaong ripeness assessments with improved maintainability, efficient resource usage, and production-ready configuration.",
-      "skills": ["Python", "Flask", "Computer Vision", "PyTorch", "YOLO", "Database Design", "WebSocket", "Logging"]
+      "skills": ["Python", "Flask", "PyTorch", "YOLO", "Ultralytics", "MySQL", "WebSocket"]
     }
   },
   {
@@ -635,7 +635,6 @@ export const AllProjects: Project[] = [
         "Chart.js",
         "FullCalendar",
         "Gemini AI",
-        "PDF Generation",
       ],
     },
   },
@@ -674,8 +673,6 @@ export const AllProjects: Project[] = [
         "RxJS",
         "Demucs",
         "Whisper",
-        "Audio Processing",
-        "Lyrics Synchronization",
       ],
     },
   },
@@ -686,7 +683,7 @@ export const AllProjects: Project[] = [
       "Student productivity platform — career goal tracking, subject difficulty analytics, and AI-powered reviewer question generation for Filipino students",
     category: "web",
     image: "/assets/scholars-path/image.png",
-    technologies: ["Angular", "Python", "PostgreSQL", "pgvector", "JWT", "PDF Parsing", "JWT + Refresh Tokens", "AI Question Generation"],
+    technologies: ["Angular", "Python", "PostgreSQL", "pgvector", "JWT"],
     github: "https://github.com/vbatecan/scholars-path",
     live: "https://scholarspath.app",
     icon: LayoutDashboard,
@@ -712,10 +709,6 @@ export const AllProjects: Project[] = [
         "PostgreSQL",
         "pgvector",
         "JWT",
-        "PDF Parsing",
-        "AI Question Generation",
-        "Career Guidance",
-        "Subject Analytics",
       ],
     },
   },

@@ -4,6 +4,7 @@ import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
+import { TechIcon } from "@/components/ui/tech-icon"
 import { AnimatePresence, motion } from "framer-motion"
 import {
   ExclamationCircleIcon,
@@ -190,7 +191,12 @@ function ModalCarousel({
               <h4 className="font-mono text-sm text-secondary mb-4 uppercase tracking-wide">Tech Stack</h4>
               <div className="flex flex-wrap gap-2 mb-6">
                 {project.details.skills.map((skill) => (
-                  <span key={skill} className="tech-tag">{skill}</span>
+                  <span key={skill} className="tech-tag flex items-center gap-1.5 px-2.5 py-1 text-xs">
+                    <div className="w-3.5 h-3.5 flex items-center justify-center">
+                      <TechIcon name={skill} />
+                    </div>
+                    <span>{skill}</span>
+                  </span>
                 ))}
               </div>
 
@@ -335,18 +341,22 @@ export const ProjectsSection = () => {
                   </CardHeader>
 
                   <CardContent className="pt-0">
-                    {/* Tech stack - mono styled */}
-                    <div className="flex flex-wrap gap-1.5 mb-3">
-                      {project.technologies.slice(0, 3).map((tech) => (
-                        <span key={tech} className="tech-tag">
-                          {tech}
-                        </span>
-                      ))}
-                      {project.technologies.length > 3 && (
-                        <span className="tech-tag text-gray-400">
-                          +{project.technologies.length - 3}
-                        </span>
-                      )}
+                    {/* Tech stack - visual icons with tooltips */}
+                    <div className="flex items-center flex-wrap gap-2 mb-3">
+                      <TooltipProvider>
+                        {project.technologies.map((tech) => (
+                          <Tooltip key={tech}>
+                            <TooltipTrigger asChild>
+                              <div className="w-7 h-7 p-1.5 rounded-lg bg-gray-50/80 dark:bg-gray-800/80 border border-gray-100 dark:border-gray-700/60 hover:border-primary/30 dark:hover:border-primary/40 hover:bg-white dark:hover:bg-gray-800 hover:scale-110 transition-all flex items-center justify-center cursor-help">
+                                <TechIcon name={tech} />
+                              </div>
+                            </TooltipTrigger>
+                            <TooltipContent>
+                              <p className="font-mono text-xs">{tech}</p>
+                            </TooltipContent>
+                          </Tooltip>
+                        ))}
+                      </TooltipProvider>
                     </div>
                   </CardContent>
                 </Card>
