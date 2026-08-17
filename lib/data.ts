@@ -722,7 +722,7 @@ export const AllProjects: Project[] = [
     images: ["/assets/pikash/1.jpg", "/assets/pikash/2.jpg", "/assets/pikash/3.jpg", "/assets/pikash/4.jpg", "/assets/pikash/5.jpg", "/assets/pikash/6.jpg", "/assets/pikash/7.jpg", "/assets/pikash/8.jpg"],
     technologies: ["React 19", "TypeScript", "Vite", "Capacitor", "SQLite", "Supabase", "Tailwind CSS", "Radix UI", "Shadcn/UI", "Redux Toolkit", "TanStack Query", "Recharts"],
     github: "#",
-    live: "#",
+    live: "https://play.google.com/store/apps/details?id=com.pikash.app",
     icon: Smartphone,
     date: "2024-2025",
     repoStatus: "private",
