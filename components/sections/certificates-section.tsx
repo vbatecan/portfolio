@@ -52,6 +52,15 @@ const certificates = [
     skills: ["Research", "Info Management"],
     clickable: true,
   },
+  {
+    title: "AI Labs CX Grand Prize Winner",
+    issuer: "AI Labs CX",
+    date: "2026",
+    image: "/certificates/hackthefuture_grandprize.png",
+    description: "Grand prize winner for Hack the Future 2026 — awarded with 1 year free AI Labs Chat access.",
+    skills: ["AI", "Hackathon", "Innovation", "Problem Solving"],
+    clickable: true,
+  }
 ]
 
 export const CertificatesSection = () => {
