@@ -37,23 +37,23 @@ const categories = [
 const getStatusInfo = (status: LiveStatus | RepoStatus) => {
   switch (status) {
     case "live":
-      return { icon: CheckCircleIcon, color: "bg-green-500", text: "Live" }
+      return { icon: CheckCircleIcon, color: "bg-emerald-500 text-white", text: "Live" }
     case "offline":
-      return { icon: ExclamationCircleIcon, color: "bg-gray-500", text: "Offline" }
+      return { icon: ExclamationCircleIcon, color: "bg-slate-500 text-white", text: "Offline" }
     case "development":
-      return { icon: ExclamationCircleIcon, color: "bg-yellow-500", text: "WIP" }
+      return { icon: ExclamationCircleIcon, color: "bg-amber-500 text-white", text: "WIP" }
     case "completed":
-      return { icon: CheckCircleIcon, color: "bg-blue-500", text: "Done" }
+      return { icon: CheckCircleIcon, color: "bg-sky-500 text-white", text: "Done" }
     case "archived":
-      return { icon: ExclamationCircleIcon, color: "bg-gray-600", text: "Archived" }
+      return { icon: ExclamationCircleIcon, color: "bg-zinc-600 text-white", text: "Archived" }
     case "public":
-      return { icon: LockOpenIcon, color: "bg-blue-500", text: "Public" }
+      return { icon: LockOpenIcon, color: "bg-blue-600 text-white", text: "Public" }
     case "private":
-      return { icon: LockClosedIcon, color: "bg-secondary", text: "Private" }
+      return { icon: LockClosedIcon, color: "bg-orange-600 text-white", text: "Private" }
     case "none":
-      return { icon: ExclamationCircleIcon, color: "bg-gray-400", text: "No Repo" }
+      return { icon: ExclamationCircleIcon, color: "bg-gray-500 text-white", text: "No Repo" }
     default:
-      return { icon: ExclamationCircleIcon, color: "bg-gray-500", text: "?" }
+      return { icon: ExclamationCircleIcon, color: "bg-gray-500 text-white", text: "?" }
   }
 }
 
@@ -315,10 +315,11 @@ export const ProjectsSection = () => {
                     
                     {/* Status + Date badges */}
                     <div className="absolute top-3 left-3 flex gap-2">
-                      <span className="font-mono text-xs px-2 py-1 bg-black/70 text-white rounded flex items-center gap-1">
+                      <span className={`font-mono text-xs px-2 py-1 rounded flex items-center gap-1 ${liveStatusInfo.color}`}>
+                        <liveStatusInfo.icon className="h-3 w-3" />
                         {liveStatusInfo.text}
                       </span>
-                      <span className="font-mono text-xs px-2 py-1 bg-black/70 text-white rounded flex items-center gap-1">
+                      <span className={`font-mono text-xs px-2 py-1 rounded flex items-center gap-1 ${repoStatusInfo.color}`}>
                         <RepoIcon className="h-3 w-3" />
                         {project.repoStatus === "none" ? "—" : project.repoStatus}
                       </span>
