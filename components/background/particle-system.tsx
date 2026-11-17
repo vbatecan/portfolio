@@ -15,7 +15,7 @@ export const ParticleSystem = () => {
       hue: number
     }>
   >([])
-  const animationRef = useRef<number>()
+  const animationRef = useRef<number | undefined>(undefined)
   const lastTimeRef = useRef(0)
 
   useEffect(() => {

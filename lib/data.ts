@@ -346,7 +346,7 @@ export const AllProjects: Project[] = [
     live: "#",
     icon: Wifi,
     date: "2024",
-    repoStatus: "development",
+    repoStatus: "public",
     liveStatus: "offline",
     details: {
       overview:
