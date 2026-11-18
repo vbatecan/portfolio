@@ -12,11 +12,11 @@ import { HomeStory } from "@/components/sections/home-story"
 import styles from "./page.module.css"
 
 const chapters = [
-  { id: "home", Section: IntroSection },
+  { id: "home", Section: IntroSection, independent: true },
   { id: "services", Section: ServicesSection, sequence: true },
   { id: "projects", Section: ProjectsSection, independent: true },
   { id: "skills", Section: SkillsSection, independent: true },
-  { id: "stats", Section: StatsSection },
+  { id: "stats", Section: StatsSection, independent: true },
   { id: "certificates", Section: CertificatesSection, sequence: true },
   { id: "contact", Section: ContactSection },
 ]

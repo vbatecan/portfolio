@@ -12,7 +12,7 @@ export const StatsSection = () => {
   return (
     <section className="py-20 px-4 relative z-10 bg-white dark:bg-gray-900 lg:py-8">
       <div className="max-w-7xl mx-auto lg:max-w-5xl">
-        <div className="mb-16 lg:mb-8" data-story-motion="headline">
+        <div className="mb-16 lg:mb-8">
           <p className="font-mono text-sm text-secondary mb-2 tracking-widest uppercase">
             <ChartBarIcon className="inline h-4 w-4 mr-2" />
             git log --stat
@@ -22,8 +22,8 @@ export const StatsSection = () => {
         </div>
 
         <div className="grid md:grid-cols-2 gap-6">
-          {wakatimeEmbeds.map((src, index) => (
-            <div key={src} data-story-motion="chart" data-story-step={index}>
+          {wakatimeEmbeds.map((src) => (
+            <div key={src}>
               <Card className="overflow-hidden border-0 shadow-lg rounded-2xl bg-gray-50 dark:bg-gray-800">
                 <CardContent className="p-4">
                   <figure className="m-0">
