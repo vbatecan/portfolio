@@ -135,7 +135,7 @@ export const ServicesSection = () => {
             <div className="pt-4 border-t border-gray-100 dark:border-gray-800">
               <p className="text-gray-500 dark:text-gray-400 text-sm">Need a custom end-to-end integration?</p>
               <button
-                onClick={() => document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })}
+                onClick={() => document.getElementById("contact")?.scrollIntoView()}
                 className="mt-3 px-6 py-2.5 bg-primary text-primary-foreground rounded-full font-medium hover:opacity-90 transition-opacity text-sm font-mono shadow-md hover:shadow-lg"
               >
                 contact.init()

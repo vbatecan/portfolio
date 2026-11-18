@@ -36,33 +36,61 @@ export function CursorLens() {
     const image = map.current
     if (!surface || !image) return
     const preference = matchMedia("(any-hover: hover) and (any-pointer: fine) and (prefers-reduced-motion: no-preference)")
+    let hasMap = image.hasAttribute("href")
+    let frame: number | undefined
+    let clientX = 0
+    let clientY = 0
 
-    function hide() {
-      surface!.hidden = true
+    const position = () => {
+      frame = undefined
+      surface.style.transform = `translate3d(${clientX - radius}px, ${clientY - radius}px, 0)`
     }
 
-    function move(event: PointerEvent) {
+    const hide = () => {
+      if (frame !== undefined) {
+        cancelAnimationFrame(frame)
+        frame = undefined
+      }
+      if (!surface.hidden) surface.hidden = true
+    }
+
+    const move = (event: PointerEvent) => {
       if (!preference.matches || event.pointerType !== "mouse") return hide()
-      if (!image!.hasAttribute("href")) {
+      if (!hasMap) {
         const data = createLensMap()
         if (!data) return
-        image!.setAttribute("href", data)
+        image.setAttribute("href", data)
+        hasMap = true
       }
-      surface!.style.transform = `translate3d(${event.clientX - radius}px, ${event.clientY - radius}px, 0)`
-      surface!.hidden = false
+      const moved = clientX !== event.clientX || clientY !== event.clientY
+      clientX = event.clientX
+      clientY = event.clientY
+      if (surface.hidden) {
+        position()
+        surface.hidden = false
+      } else if (moved && frame === undefined) {
+        frame = requestAnimationFrame(position)
+      }
     }
 
-    window.addEventListener("pointermove", move, { passive: true })
+    const updatePreference = () => {
+      hide()
+      if (preference.matches) window.addEventListener("pointermove", move, { passive: true })
+      else window.removeEventListener("pointermove", move)
+    }
+
+    updatePreference()
     document.documentElement.addEventListener("pointerleave", hide)
     window.addEventListener("blur", hide)
     window.addEventListener("keydown", hide)
-    preference.addEventListener("change", hide)
+    preference.addEventListener("change", updatePreference)
     return () => {
+      hide()
       window.removeEventListener("pointermove", move)
       document.documentElement.removeEventListener("pointerleave", hide)
       window.removeEventListener("blur", hide)
       window.removeEventListener("keydown", hide)
-      preference.removeEventListener("change", hide)
+      preference.removeEventListener("change", updatePreference)
     }
   }, [])
 

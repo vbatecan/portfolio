@@ -1,6 +1,6 @@
 "use client"
 
-import { motion } from "framer-motion"
+import { domAnimation, LazyMotion, m } from "framer-motion"
 
 const shapes = [
   { type: "circle", size: 60, color: "bg-slate-400", left: "27.8%", top: "40.4%", speed: 0.1 },
@@ -15,38 +15,40 @@ const shapes = [
 
 export const FloatingShapes = () => {
   return (
-    <div className="fixed inset-0 pointer-events-none overflow-hidden z-0">
-      {shapes.map((shape, index) => (
-        <motion.div
-          key={index}
-          className={`absolute ${shape.color} opacity-10 dark:opacity-20`}
-          style={{
-            width: shape.size,
-            height: shape.size,
-            left: shape.left,
-            top: shape.top,
-            clipPath:
-              shape.type === "triangle"
-                ? "polygon(50% 0%, 0% 100%, 100% 100%)"
-                : shape.type === "hexagon"
-                  ? "polygon(30% 0%, 70% 0%, 100% 50%, 70% 100%, 30% 100%, 0% 50%)"
-                  : shape.type === "circle"
-                    ? "circle(50%)"
-                    : "none",
-            borderRadius: shape.type === "square" ? "8px" : "0",
-          }}
-          animate={{
-            y: [-20, 20, -20],
-            x: [-10, 10, -10],
-            rotate: [0, 180, 360],
-          }}
-          transition={{
-            duration: 10 + index * shape.speed,
-            repeat: Number.POSITIVE_INFINITY,
-            ease: "linear",
-          }}
-        />
-      ))}
-    </div>
+    <LazyMotion features={domAnimation}>
+      <div className="fixed inset-0 pointer-events-none overflow-hidden z-0">
+        {shapes.map((shape, index) => (
+          <m.div
+            key={index}
+            className={`absolute ${shape.color} opacity-10 dark:opacity-20`}
+            style={{
+              width: shape.size,
+              height: shape.size,
+              left: shape.left,
+              top: shape.top,
+              clipPath:
+                shape.type === "triangle"
+                  ? "polygon(50% 0%, 0% 100%, 100% 100%)"
+                  : shape.type === "hexagon"
+                    ? "polygon(30% 0%, 70% 0%, 100% 50%, 70% 100%, 30% 100%, 0% 50%)"
+                    : shape.type === "circle"
+                      ? "circle(50%)"
+                      : "none",
+              borderRadius: shape.type === "square" ? "8px" : "0",
+            }}
+            animate={{
+              y: [-20, 20, -20],
+              x: [-10, 10, -10],
+              rotate: [0, 180, 360],
+            }}
+            transition={{
+              duration: 10 + index * shape.speed,
+              repeat: Number.POSITIVE_INFINITY,
+              ease: "linear",
+            }}
+          />
+        ))}
+      </div>
+    </LazyMotion>
   )
 }

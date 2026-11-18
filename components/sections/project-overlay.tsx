@@ -2,7 +2,7 @@
 
 import * as Dialog from "@radix-ui/react-dialog"
 import { XMarkIcon } from "@heroicons/react/24/outline"
-import { useCallback, useEffect, useRef, useState } from "react"
+import { useCallback, useEffect, useImperativeHandle, useRef, useState, type Ref } from "react"
 import type { Project } from "@/lib/data"
 import { ProjectDetailsContent } from "./project-details-content"
 import { animateProjectCover, canAnimateProjectCover, readProjectCover, type CoverFrame } from "./project-cover-flight"
@@ -35,7 +35,11 @@ interface Selection {
   start: CoverFrame | null
 }
 
-export function useProjectOverlay(reduced: boolean) {
+export interface ProjectOverlayHandle {
+  openProject: (project: Project, trigger: HTMLButtonElement, cover: HTMLElement) => void
+}
+
+export function ProjectOverlay({ reduced, ref }: { reduced: boolean; ref: Ref<ProjectOverlayHandle> }) {
   const [project, setProject] = useState<Project | null>(null)
   const selection = useRef<Selection | null>(null)
   const surface = useRef<HTMLDivElement | null>(null)
@@ -43,7 +47,7 @@ export function useProjectOverlay(reduced: boolean) {
   const flight = useRef<ReturnType<typeof flyCover> | null>(null)
   const closing = useRef(false)
 
-  function openProject(next: Project, trigger: HTMLButtonElement, cover: HTMLElement) {
+  const openProject = useCallback((next: Project, trigger: HTMLButtonElement, cover: HTMLElement) => {
     if (selection.current) return
     selection.current = {
       trigger,
@@ -53,7 +57,9 @@ export function useProjectOverlay(reduced: boolean) {
       start: canAnimateProjectCover() ? readProjectCover(cover) : null,
     }
     setProject(next)
-  }
+  }, [])
+
+  useImperativeHandle(ref, () => ({ openProject }), [openProject])
 
   const settle = useCallback(() => {
     flight.current?.dispose()
@@ -114,13 +120,14 @@ export function useProjectOverlay(reduced: boolean) {
     }
   }, [runFlight, settle])
 
-  const dialog = (
+  return (
     <Dialog.Root open={project !== null} onOpenChange={(open) => { if (!open) closeProject() }}>
       {project && (
         <Dialog.Portal>
-          <Dialog.Overlay className="fixed inset-0 z-[65]" />
+          <Dialog.Overlay data-lenis-prevent-wheel className="fixed inset-0 z-[65]" />
           <Dialog.Content
             ref={attachSurface}
+            data-lenis-prevent-wheel
             className="fixed inset-0 z-[70] flex min-w-0 flex-col overflow-hidden bg-background text-foreground outline-none"
             onOpenAutoFocus={(event) => {
               event.preventDefault()
@@ -155,6 +162,4 @@ export function useProjectOverlay(reduced: boolean) {
       )}
     </Dialog.Root>
   )
-
-  return { openProject, dialog }
 }

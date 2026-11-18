@@ -12,7 +12,7 @@ export const ContactSection = () => {
 
   if (state.succeeded) {
     return (
-      <section id="contact" className="py-20 px-4 bg-gray-50/50 dark:bg-gray-800/50 relative z-10">
+      <section id="contact" className="py-20 px-4 bg-gray-50/50 dark:bg-gray-800/50 relative z-10 lg:py-12">
         <div className="max-w-4xl mx-auto">
           <div className="text-center">
             <Card className="p-12 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm border-0 shadow-xl rounded-3xl">
@@ -46,7 +46,7 @@ export const ContactSection = () => {
   }
 
   return (
-    <section id="contact" className="py-20 px-4 bg-gray-50/50 dark:bg-gray-800/50 relative z-10">
+    <section id="contact" className="py-20 px-4 bg-gray-50/50 dark:bg-gray-800/50 relative z-10 lg:py-12">
       <div className="max-w-4xl mx-auto">
         <div className="mb-16">
           <p className="font-mono text-sm text-secondary mb-2 tracking-widest uppercase">

@@ -1,8 +1,7 @@
-"use client"
-
 import { CalendarIcon, TrophyIcon, DocumentTextIcon } from "@heroicons/react/24/outline"
 import { Card } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
+
+const ciscoImage = { src: "/assets/others/cisco.jpg?height=100&width=100", width: 1024, height: 1024 }
 
 const certificates = [
   {
@@ -11,7 +10,7 @@ const certificates = [
     date: "May 2025",
     credentialId: "58a30888-d92d-4cc3-87b3-4daa1f550789",
     credentialUrl: "https://www.credly.com/badges/58a30888-d92d-4cc3-87b3-4daa1f550789/linked_in_profile",
-    image: "/assets/others/cisco.jpg?height=100&width=100",
+    image: ciscoImage,
     description: "Hardware components, assembly, and troubleshooting fundamentals",
     skills: ["Hardware", "Assembly", "Troubleshooting"],
   },
@@ -21,7 +20,7 @@ const certificates = [
     date: "May 2025",
     credentialId: "32f6a9c2-a38f-4973-9567-ace1ccb8f1b1",
     credentialUrl: "https://www.credly.com/badges/32f6a9c2-a38f-4973-9567-ace1ccb8f1b1/linked_in_profile",
-    image: "/assets/others/cisco.jpg?height=100&width=100",
+    image: ciscoImage,
     description: "OS concepts: Windows, Linux, system administration, and command line",
     skills: ["Linux", "Windows", "SysAdmin", "CLI"],
   },
@@ -29,7 +28,7 @@ const certificates = [
     title: "Ethical Hacking Fundamentals",
     issuer: "EC-Council",
     date: "2025",
-    image: "/certificates/fundamentals_of_ethical_hacking.jpg",
+    image: { src: "/certificates/fundamentals_of_ethical_hacking.jpg", width: 1755, height: 1240 },
     description: "Ethical hacking methodologies, tools, and security fundamentals",
     skills: ["PenTesting", "Cybersecurity", "Security"],
     clickable: true,
@@ -38,7 +37,7 @@ const certificates = [
     title: "ACSS Code Start",
     issuer: "UE Caloocan",
     date: "October 2025",
-    image: "/certificates/ecert_acss.jpg",
+    image: { src: "/certificates/ecert_acss.jpg", width: 1755, height: 1242 },
     description: "Python, Java OOP, and computational concepts workshop",
     skills: ["Python", "Java", "OOP"],
     clickable: true,
@@ -47,7 +46,7 @@ const certificates = [
     title: "Library Science",
     issuer: "UE Caloocan",
     date: "2025",
-    image: "/certificates/library.jpg",
+    image: { src: "/certificates/library.jpg", width: 1500, height: 844 },
     description: "Library science and information management",
     skills: ["Research", "Info Management"],
     clickable: true,
@@ -56,7 +55,7 @@ const certificates = [
     title: "AI Labs CX Grand Prize Winner",
     issuer: "AI Labs CX",
     date: "2026",
-    image: "/certificates/hackthefuture_grandprize.png",
+    image: { src: "/certificates/hackthefuture_grandprize.png", width: 2048, height: 1085 },
     description: "Grand prize winner for Hack the Future 2026 — awarded with 1 year free AI Labs Chat access.",
     skills: ["AI", "Hackathon", "Innovation", "Problem Solving"],
     clickable: true,
@@ -65,9 +64,9 @@ const certificates = [
 
 export const CertificatesSection = () => {
   return (
-    <section id="certificates" className="py-20 px-4 relative z-10 bg-gray-50/50 dark:bg-gray-800/50">
+    <section id="certificates" className="py-20 px-4 relative z-10 bg-gray-50/50 dark:bg-gray-800/50 lg:py-8">
       <div className="max-w-6xl mx-auto">
-        <div className="mb-16">
+        <div className="mb-16 lg:mb-8">
           <p className="font-mono text-sm text-secondary mb-2 tracking-widest uppercase">
             <DocumentTextIcon className="inline h-4 w-4 mr-2" />
             ls -la ./certificates/
@@ -77,28 +76,34 @@ export const CertificatesSection = () => {
         </div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {certificates.map((cert, index) => (
+          {certificates.map((cert) => (
             <div key={cert.title} className="group">
               <Card className="p-6 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm border-0 shadow-lg hover:shadow-xl transition-all duration-300 rounded-2xl h-full flex flex-col">
                 <div className="flex items-start gap-4 mb-4">
                   {cert.clickable ? (
-                    <div
+                    <a
+                      href={cert.image.src}
+                      target="_blank"
+                      rel="noopener noreferrer"
                       className="cursor-pointer relative shrink-0 transition-transform duration-200 hover:scale-105"
-                      onClick={() => window.open(cert.image, "_blank")}
                     >
                       <img
-                        src={cert.image || "/placeholder.svg"}
+                        {...cert.image}
                         alt={cert.title}
+                        loading="lazy"
+                        decoding="async"
                         className="w-24 h-auto rounded-xl shadow-md"
                       />
                       <div className="absolute inset-0 flex items-center justify-center bg-black/40 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity">
                         <span className="text-white text-xs font-mono">View</span>
                       </div>
-                    </div>
+                    </a>
                   ) : (
                     <img
-                      src={cert.image || "/placeholder.svg"}
+                      {...cert.image}
                       alt={cert.title}
+                      loading="lazy"
+                      decoding="async"
                       className="w-16 h-auto rounded-lg shadow-md shrink-0"
                     />
                   )}

@@ -12,7 +12,6 @@ export const ParticleSystem = () => {
       vy: number
       size: number
       opacity: number
-      hue: number
     }>
   >([])
   const animationRef = useRef<number | undefined>(undefined)
@@ -28,56 +27,55 @@ export const ParticleSystem = () => {
     const resizeCanvas = () => {
       canvas.width = window.innerWidth
       canvas.height = window.innerHeight
+      ctx.fillStyle = "hsl(0, 0%, 50%)"
     }
 
-    // Initialize particles with better performance
     const initParticles = () => {
       particlesRef.current = []
-      const particleCount = Math.min(50, Math.floor(window.innerWidth / 40))
-      // const particleCount = 50;
+      const { width, height } = canvas
+      const particleCount = Math.min(50, Math.floor(width / 40))
 
       for (let i = 0; i < particleCount; i++) {
         particlesRef.current.push({
-          x: Math.random() * canvas.width,
-          y: Math.random() * canvas.height,
+          x: Math.random() * width,
+          y: Math.random() * height,
           vx: (Math.random() - 0.5) * 1.25,
           vy: (Math.random() - 0.5) * 1.25,
           size: Math.random() * 10 + 1.25,
           opacity: Math.random() * 0.6 + 0.1,
-          hue: 0,
         })
       }
     }
 
     const animate = (currentTime: number) => {
-      // Throttle to 30fps for particles
       if (currentTime - lastTimeRef.current < 10) {
         animationRef.current = requestAnimationFrame(animate)
         return
       }
       lastTimeRef.current = currentTime
 
-      ctx.clearRect(0, 0, canvas.width, canvas.height)
+      const { width, height } = canvas
+      ctx.clearRect(0, 0, width, height)
 
-      particlesRef.current.forEach((particle) => {
+      for (const particle of particlesRef.current) {
         // Update position
         particle.x += particle.vx
         particle.y += particle.vy
 
         // Bounce off edges
-        if (particle.x < 0 || particle.x > canvas.width) particle.vx *= -1
-        if (particle.y < 0 || particle.y > canvas.height) particle.vy *= -1
+        if (particle.x < 0 || particle.x > width) particle.vx *= -1
+        if (particle.y < 0 || particle.y > height) particle.vy *= -1
 
         // Keep particles in bounds
-        particle.x = Math.max(0, Math.min(canvas.width, particle.x))
-        particle.y = Math.max(0, Math.min(canvas.height, particle.y))
+        particle.x = Math.max(0, Math.min(width, particle.x))
+        particle.y = Math.max(0, Math.min(height, particle.y))
 
         // Draw particle
-        ctx.fillStyle = `hsla(0, 0%, 50%, ${particle.opacity})`
+        ctx.globalAlpha = particle.opacity
         ctx.beginPath()
         ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2)
         ctx.fill()
-      })
+      }
 
       animationRef.current = requestAnimationFrame(animate)
     }
@@ -86,6 +84,7 @@ export const ParticleSystem = () => {
     initParticles()
 
     const handleResize = () => {
+      if (canvas.width === window.innerWidth && canvas.height === window.innerHeight) return
       resizeCanvas()
       initParticles()
     }

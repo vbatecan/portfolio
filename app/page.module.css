@@ -1,0 +1,11 @@
+.sections > section {
+  min-block-size: 100vh;
+  min-block-size: 100dvh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.sections > section > div {
+  inline-size: 100%;
+}

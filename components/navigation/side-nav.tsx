@@ -28,22 +28,49 @@ export function SideNav() {
   useEffect(() => setMounted(true), [])
   useEffect(() => {
     if (path !== "/") return
-    const targets = sections.map(({ id }) => document.getElementById(id))
+    const targets = sections
+      .map(({ id }) => document.getElementById(id))
+      .filter((target) => target !== null)
+    let sectionTops: number[] = []
+    let active: string | undefined
+
     function update() {
-      const current = targets.filter(el => el && el.getBoundingClientRect().top <= innerHeight * 0.35).pop()
-      setSection(current?.id ?? "home")
+      const scrollTop = window.scrollY
+      const threshold = window.innerHeight * 0.35
+      let current = "home"
+      for (let index = targets.length - 1; index >= 0; index--) {
+        if (sectionTops[index] - scrollTop <= threshold) {
+          current = targets[index].id
+          break
+        }
+      }
+      if (current !== active) {
+        active = current
+        setSection(current)
+      }
     }
-    update()
+
+    function measure() {
+      const scrollTop = window.scrollY
+      sectionTops = targets.map((target) => target.getBoundingClientRect().top + scrollTop)
+      update()
+    }
+
+    // Section size changes, including late images and font swaps, can move the sections below them.
+    const observer = new ResizeObserver(measure)
+    for (const target of targets) observer.observe(target, { box: "border-box" })
+    measure()
     window.addEventListener("scroll", update, { passive: true })
-    window.addEventListener("resize", update)
+    window.addEventListener("resize", measure)
     return () => {
+      observer.disconnect()
       window.removeEventListener("scroll", update)
-      window.removeEventListener("resize", update)
+      window.removeEventListener("resize", measure)
     }
   }, [path])
 
   return (
-    <nav aria-label="Portfolio" className="fixed inset-y-0 left-0 z-40 flex w-12 flex-col items-center overflow-y-auto border-r border-border bg-background py-2 text-foreground sm:w-16">
+    <nav aria-label="Portfolio" data-lenis-prevent-wheel className="fixed inset-y-0 left-0 z-40 flex w-12 flex-col items-center overflow-y-auto border-r border-border bg-background py-2 text-foreground sm:w-16">
       <div className="my-auto flex flex-col items-center gap-1">
         {sections.map(({ id, name, icon: Icon }) => {
           const active = path === "/" ? section === id : path === "/projects" && id === "projects"

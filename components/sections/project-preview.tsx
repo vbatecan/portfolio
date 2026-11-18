@@ -40,7 +40,7 @@ export function usePreviewRipple() {
 }
 
 export function ProjectPreview({ project, alt = "", className, ripple }: {
-  project: Project
+  project: Pick<Project, "image">
   alt?: string
   className?: string
   ripple?: ReturnType<typeof usePreviewRipple>

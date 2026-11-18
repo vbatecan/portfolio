@@ -121,12 +121,9 @@ export function createScreenshotRipple() {
       uniforms[index * 3 + 1] = wave?.y ?? 0
       uniforms[index * 3 + 2] = wave ? Math.max(0, (now - wave.startedAt) / waveLifetime) : 1
     }
-    gl.viewport(0, 0, canvas.width, canvas.height)
-    gl.uniform2f(resolutionUniform, canvas.width, canvas.height)
-    gl.uniform2f(sizeUniform, imageWidth, imageHeight)
     gl.uniform3fv(waveUniform, uniforms)
     gl.drawArrays(gl.TRIANGLES, 0, 3)
-    canvas.hidden = false
+    if (canvas.hidden) canvas.hidden = false
     frame = requestAnimationFrame(render)
   }
 
@@ -168,6 +165,9 @@ export function createScreenshotRipple() {
       Object.assign(canvas.style, { left: `${left}px`, top: `${top}px`, width: `${width}px`, height: `${height}px` })
       imageWidth = width
       imageHeight = height
+      gl.viewport(0, 0, canvas.width, canvas.height)
+      gl.uniform2f(resolutionUniform, canvas.width, canvas.height)
+      gl.uniform2f(sizeUniform, imageWidth, imageHeight)
       container.appendChild(canvas)
     }
     if (waves.length === maxWaves) waves.shift()

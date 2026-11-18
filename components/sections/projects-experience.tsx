@@ -5,11 +5,12 @@ import { AnimatePresence, motion, useIsPresent, useScroll, useTransform } from "
 import { forwardRef, useCallback, useEffect, useId, useMemo, useRef, useState } from "react"
 import { flushSync } from "react-dom"
 import { Button } from "@/components/ui/button"
-import { AllProjects, getProjectViewingLinks, type LiveStatus, type Project } from "@/lib/data"
+import { AllProjects, type LiveStatus, type Project } from "@/lib/data"
 import { projectChapters } from "@/lib/project-chapters"
+import { getProjectViewingLinks } from "@/lib/project-links"
 import { ProjectCatalogHandoff } from "./project-catalog-handoff"
 import { animateProjectCover, canAnimateProjectCover, readProjectCover, useProjectReducedMotion } from "./project-cover-flight"
-import { useProjectOverlay } from "./project-overlay"
+import { ProjectOverlay, type ProjectOverlayHandle } from "./project-overlay"
 import { ProjectPreview, usePreviewRipple } from "./project-preview"
 import { chapterScrollEnd, ProjectStory } from "./project-story"
 import styles from "./projects-experience.module.css"
@@ -127,7 +128,10 @@ const ProjectCard = forwardRef<HTMLLIElement, {
 export function ProjectsExperience() {
   const [view, setView] = useState({ status: "all" as StatusFilter, category: "all", revision: 0 })
   const reduced = useProjectReducedMotion()
-  const { openProject, dialog } = useProjectOverlay(reduced)
+  const overlay = useRef<ProjectOverlayHandle>(null)
+  const openProject = useCallback<OpenProject>((project, trigger, cover) => {
+    overlay.current?.openProject(project, trigger, cover)
+  }, [])
   const ripple = usePreviewRipple()
   const story = useRef<HTMLElement>(null)
   const catalog = useRef<HTMLElement>(null)
@@ -252,7 +256,7 @@ export function ProjectsExperience() {
         </div>
       </section>
       <ProjectCatalogHandoff story={story} catalog={catalog} progress={handoff} visibleProjects={visibleIds} />
-      {dialog}
+      <ProjectOverlay ref={overlay} reduced={reduced} />
     </div>
   )
 }

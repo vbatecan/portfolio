@@ -49,13 +49,6 @@ export interface Project {
   };
 }
 
-export function getProjectViewingLinks({ live, liveStatus, demo }: Project) {
-  return {
-    live: liveStatus === "live" && live && live !== "#" ? live : null,
-    demo: demo && demo !== "#" ? demo : null,
-  }
-}
-
 export const AllProjects: Project[] = [
   {
     id: 24,
@@ -918,7 +911,7 @@ export const AllProjects: Project[] = [
     description:
       "High-performance, local-first personal finance companion with offline-first architecture, multi-currency support, and AI-powered expense tracking",
     category: "mobile",
-    image: "/assets/pikash/cover.png?height=200&width=300",
+    image: "/assets/pikash/cover.webp",
     images: ["/assets/pikash/1.jpg", "/assets/pikash/2.jpg", "/assets/pikash/3.jpg", "/assets/pikash/4.jpg", "/assets/pikash/5.jpg", "/assets/pikash/6.jpg", "/assets/pikash/7.jpg", "/assets/pikash/8.jpg"],
     technologies: ["React 19", "TypeScript", "Vite", "Capacitor", "SQLite", "Supabase", "Tailwind CSS", "Radix UI", "Shadcn/UI", "Redux Toolkit", "TanStack Query", "Recharts"],
     github: "#",

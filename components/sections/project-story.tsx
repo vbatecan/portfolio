@@ -9,6 +9,8 @@ import styles from "./project-story.module.css"
 
 type Chapter = (typeof projectChapters)[number]
 type StageSize = { width: number; height: number; entrance: number }
+type ChapterView = { current: number; phase: "chapters" | "pullback" | "overview"; compact: boolean }
+type HandoffPhase = "handoff" | "catalog" | undefined
 
 interface StoryActions {
   onOpen: (project: Project, trigger: HTMLButtonElement, cover: HTMLElement) => void
@@ -179,10 +181,11 @@ function ScrollStory({ track, scrollProgress, handoffProgress, onHandoffFocus, a
   const canvas = useRef<HTMLDivElement>(null)
   const chapterControls = useRef<(HTMLButtonElement | null)[]>([])
   const [size, setSize] = useState<StageSize>({ width: 0, height: 0, entrance: 0 })
-  const [current, setCurrent] = useState(0)
-  const [phase, setPhase] = useState<"chapters" | "pullback" | "overview">("chapters")
-  const [compact, setCompact] = useState(false)
-  const [handoffPhase, setHandoffPhase] = useState<"handoff" | "catalog">()
+  const [chapterView, setChapterView] = useState<ChapterView>({ current: 0, phase: "chapters", compact: false })
+  const lastChapterView = useRef(chapterView)
+  const { current, phase, compact } = chapterView
+  const [handoffPhase, setHandoffPhase] = useState<HandoffPhase>()
+  const lastHandoffPhase = useRef<HandoffPhase>(undefined)
   const chapterProgress = useTransform(scrollProgress, [0, chapterScrollEnd], [0, 1])
   const chromeFade = useTransform(handoffProgress, [0, 0.28], [1, 0])
   const backdropFade = useTransform(handoffProgress, [0.02, 0.84], [1, 0])
@@ -192,11 +195,15 @@ function ScrollStory({ track, scrollProgress, handoffProgress, onHandoffFocus, a
     const element = canvas.current
     const section = track.current
     if (!element || !section) return
-    const measure = () => setSize({
-      width: element.clientWidth,
-      height: element.clientHeight,
-      entrance: Math.max(0, window.scrollY + section.getBoundingClientRect().top),
-    })
+    let measured: StageSize | undefined
+    const measure = () => {
+      const width = element.clientWidth
+      const height = element.clientHeight
+      const entrance = Math.max(0, window.scrollY + section.getBoundingClientRect().top)
+      if (measured?.width === width && measured.height === height && measured.entrance === entrance) return
+      measured = { width, height, entrance }
+      setSize(measured)
+    }
     const observer = new ResizeObserver(measure)
     measure()
     observer.observe(element)
@@ -206,19 +213,30 @@ function ScrollStory({ track, scrollProgress, handoffProgress, onHandoffFocus, a
 
   useMotionValueEvent(chapterProgress, "change", (progress) => {
     const nextChapter = currentChapter(progress)
-    const focusedPanel = document.activeElement?.closest<HTMLElement>("[data-story-panel]")
-    if (progress < overviewEnd && canvas.current?.contains(focusedPanel ?? null)
-      && focusedPanel?.dataset.storyPanel !== projectChapters[nextChapter]?.status) {
-      chapterControls.current[nextChapter]?.focus({ preventScroll: true })
+    if (progress < overviewEnd) {
+      const focusedPanel = document.activeElement?.closest<HTMLElement>("[data-story-panel]")
+      if (canvas.current?.contains(focusedPanel ?? null)
+        && focusedPanel?.dataset.storyPanel !== projectChapters[nextChapter]?.status) {
+        chapterControls.current[nextChapter]?.focus({ preventScroll: true })
+      }
     }
-    setCurrent(nextChapter)
-    setPhase(progress >= overviewEnd ? "overview" : progress > slideEnd ? "pullback" : "chapters")
-    setCompact(progress > 0.9)
+
+    const nextPhase = progress >= overviewEnd ? "overview" : progress > slideEnd ? "pullback" : "chapters"
+    const nextCompact = progress > 0.9
+    const previous = lastChapterView.current
+    if (previous.current === nextChapter && previous.phase === nextPhase && previous.compact === nextCompact) return
+
+    lastChapterView.current = { current: nextChapter, phase: nextPhase, compact: nextCompact }
+    setChapterView(lastChapterView.current)
   })
 
   useMotionValueEvent(handoffProgress, "change", (progress) => {
     if (progress > 0 && track.current?.contains(document.activeElement)) onHandoffFocus()
-    setHandoffPhase(progress === 0 ? undefined : progress === 1 ? "catalog" : "handoff")
+    const nextPhase = progress === 0 ? undefined : progress === 1 ? "catalog" : "handoff"
+    if (nextPhase === lastHandoffPhase.current) return
+
+    lastHandoffPhase.current = nextPhase
+    setHandoffPhase(nextPhase)
   })
 
   function seek(progress: number) {

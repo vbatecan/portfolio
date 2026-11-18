@@ -8,7 +8,9 @@ import styles from "./project-details.module.css"
 
 const placeholder = "/placeholder.svg"
 
-function galleryImages(project: Project, fullScreen: boolean) {
+type GalleryProject = Pick<Project, "image" | "images" | "title">
+
+function galleryImages(project: GalleryProject, fullScreen: boolean) {
   if (!fullScreen) return project.images?.length ? project.images : [project.image || placeholder]
 
   const sources = [project.image || placeholder, ...(project.images ?? [])]
@@ -31,7 +33,7 @@ interface Selection {
 }
 
 export function ProjectScreenshotGallery({ project, fullScreen, reducedMotion }: {
-  project: Project
+  project: GalleryProject
   fullScreen: boolean
   reducedMotion: boolean
 }) {

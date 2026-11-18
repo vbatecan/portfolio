@@ -5,7 +5,7 @@ export function IntroSection() {
   return (
     <section id="home" aria-labelledby="intro-name" className="relative z-10 px-5 py-12 sm:px-10 md:py-24 lg:py-32">
       <div id="about" className="mx-auto grid max-w-6xl items-center gap-6 md:grid-cols-[minmax(0,1.5fr)_minmax(0,1fr)] md:gap-x-12">
-        <img src="/bg_me.png" width="460" height="460" alt="Vince Angelo Batecan" fetchPriority="high"
+        <img src="/bg_me.webp" width="460" height="460" alt="Vince Angelo Batecan" fetchPriority="high"
           className="size-24 rounded-xl object-cover sm:size-32 md:col-start-2 md:row-start-1 md:row-span-2 md:size-auto md:w-full md:rounded-2xl" />
         <header className="md:col-start-1 md:row-start-1 md:self-end">
           <p className="mb-3 flex items-center gap-2 font-mono text-xs text-muted-foreground">

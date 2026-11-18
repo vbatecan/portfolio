@@ -1,13 +1,11 @@
-"use client"
-
 import { Card, CardContent } from "@/components/ui/card"
 import { SkillsData, CoreSpecializations, CurrentlyLearning } from "@/lib/data"
 
 export const SkillsSection = () => {
   return (
-    <section id="skills" className="py-20 px-4 relative z-10 bg-gray-50/50 dark:bg-gray-800/50">
+    <section id="skills" className="py-20 px-4 relative z-10 bg-gray-50/50 dark:bg-gray-800/50 lg:py-8">
       <div className="max-w-7xl h-full mx-auto">
-        <div className="mb-16">
+        <div className="mb-16 lg:mb-6">
           <p className="font-mono text-sm text-secondary mb-2 tracking-widest uppercase">
             ~/skills
           </p>
@@ -16,8 +14,8 @@ export const SkillsSection = () => {
         </div>
 
         {/* Core Specializations - horizontal scroll on mobile */}
-        <div className="mb-16">
-          <h3 className="font-mono text-sm text-secondary mb-6 uppercase tracking-wide">
+        <div className="mb-16 lg:mb-6">
+          <h3 className="font-mono text-sm text-secondary mb-6 uppercase tracking-wide lg:mb-3">
             Core Stack
           </h3>
           <div className="flex flex-wrap gap-3">
@@ -33,10 +31,10 @@ export const SkillsSection = () => {
         </div>
 
         {/* Skills Grid - Bento style */}
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mb-16">
+        <div className="grid grid-cols-2 gap-4 mb-16 md:grid-cols-3 lg:grid-cols-4 lg:mb-6 [@media(min-width:80rem)_and_(max-height:54rem)]:grid-cols-6">
           {SkillsData.map((skill, index) => (
             <div key={skill.name} className="group">
-              <Card className={`h-full min-h-[180px] overflow-hidden bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm border-0 shadow-md hover:shadow-xl transition-all duration-300 rounded-xl ${
+              <Card className={`h-full min-h-[180px] overflow-hidden bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm border-0 shadow-md hover:shadow-xl transition-all duration-300 rounded-xl lg:min-h-40 ${
                 skill.isSpecialty ? "ring-2 ring-primary/30" : ""
               }`}>
                 <CardContent className="p-4 h-full flex flex-col">
@@ -87,7 +85,7 @@ export const SkillsSection = () => {
 
         {/* Currently Learning */}
         <div className="text-center">
-          <h3 className="font-mono text-sm text-secondary mb-6 uppercase tracking-wide">
+          <h3 className="font-mono text-sm text-secondary mb-6 uppercase tracking-wide lg:mb-3">
             // also learning
           </h3>
           <div className="flex flex-wrap justify-center gap-3">

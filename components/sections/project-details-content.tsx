@@ -5,12 +5,13 @@ import { Button } from "@/components/ui/button"
 import { DialogDescription, DialogTitle } from "@/components/ui/dialog"
 import { GithubIcon } from "@/components/ui/brand-icons"
 import { TechIcon } from "@/components/ui/tech-icon"
-import { getProjectViewingLinks, type Project } from "@/lib/data"
+import type { Project } from "@/lib/data"
+import { getProjectViewingLinks } from "@/lib/project-links"
 import { ProjectScreenshotGallery } from "./project-screenshot-gallery"
 import styles from "./project-details.module.css"
 
 export function ProjectDetailsContent({ project, fullScreen = false, reducedMotion = false }: {
-  project: Project
+  project: Omit<Project, "icon">
   fullScreen?: boolean
   reducedMotion?: boolean
 }) {
