@@ -35,6 +35,7 @@ const iconSlugs = new Map(Object.entries({
   "next.js": "nextjs",
   "node.js": "nodejs",
   oauth: "oauth",
+  oauth2: "oauth",
   php: "php",
   playwright: "playwright",
   pnpm: "pnpm",

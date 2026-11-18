@@ -1,4 +1,10 @@
-.sections > section {
+.chapter {
+  position: relative;
+  z-index: 10;
+  isolation: isolate;
+}
+
+.chapter > section {
   min-block-size: 100vh;
   min-block-size: 100dvh;
   display: flex;
@@ -6,6 +12,61 @@
   justify-content: center;
 }
 
-.sections > section > div {
+.chapter > section > div {
   inline-size: 100%;
+}
+
+.chapter [data-story-scroll-cue] {
+  display: none;
+}
+
+@media (min-width: 64rem) and (min-height: 38rem) and (prefers-reduced-motion: no-preference) {
+  .sections[data-pinned-story] {
+    overflow-anchor: none;
+  }
+
+  .chapter[data-story-pinned] {
+    --chapter-hold: min(68dvh, 640px);
+    margin-block-end: -100dvh;
+  }
+
+  .chapter[data-story-sequence][data-story-pinned] {
+    --chapter-hold: 150dvh;
+  }
+
+  .chapter[data-story-chapter="services"][data-story-pinned] {
+    --chapter-hold: 260dvh;
+  }
+
+  .chapter[data-story-pinned]::after {
+    content: "";
+    display: block;
+    block-size: calc(100dvh + var(--chapter-hold));
+    pointer-events: none;
+  }
+
+  .chapter[data-story-pinned]:last-child {
+    margin-block-end: 0;
+  }
+
+  .chapter[data-story-pinned]:last-child::after {
+    block-size: var(--chapter-hold);
+  }
+
+  .chapter[data-story-pinned] > section {
+    position: sticky;
+    inset-block-start: 0;
+  }
+
+  .chapter[data-story-pinned] [data-story-scroll-cue] {
+    display: flex;
+  }
+
+  .sections[data-pinned-story] .chapter:is([data-story-chapter="skills"], [data-story-chapter="certificates"], [data-story-chapter="contact"]) > section {
+    background-color: color-mix(in srgb, var(--color-gray-50), var(--color-white));
+  }
+
+  :global(.dark) .sections[data-pinned-story] .chapter:is([data-story-chapter="skills"], [data-story-chapter="certificates"], [data-story-chapter="contact"]) > section {
+    background-color: color-mix(in srgb, var(--color-gray-800), var(--color-gray-900));
+  }
 }

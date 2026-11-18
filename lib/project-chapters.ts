@@ -1,4 +1,12 @@
-import { AllProjects, type LiveStatus } from "@/lib/data"
+import { AllProjects, type LiveStatus, type Project } from "@/lib/data"
+
+export interface ProjectChapter {
+  status: LiveStatus
+  label: string
+  project: Omit<Project, "icon">
+  count: number
+  story: string
+}
 
 const chapters = [
   { status: "live", label: "Live", coverId: 22, story: "Pikash makes it possible to track expenses and manage money without an internet connection." },
@@ -8,10 +16,11 @@ const chapters = [
   { status: "archived", label: "Archived", coverId: 14, story: "Image Tiler splits oversize images into smaller pieces to help models detect small objects." },
 ] satisfies { status: LiveStatus; label: string; coverId: number; story: string }[]
 
-export const projectChapters = chapters.flatMap(({ status, label, coverId, story }) => {
+export const projectChapters: ProjectChapter[] = chapters.flatMap(({ status, label, coverId, story }) => {
   const projects = AllProjects.filter((project) => project.liveStatus === status)
   const cover = projects.find((project) => project.id === coverId)
   const project = cover ?? projects[0]
   if (!project) return []
-  return [{ status, label, project, count: projects.length, story: cover ? story : project.description }]
+  const { icon, ...details } = project
+  return [{ status, label, project: details, count: projects.length, story: cover ? story : project.description }]
 })

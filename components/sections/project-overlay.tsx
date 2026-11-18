@@ -28,6 +28,7 @@ function flyCover(from: CoverFrame, to: CoverFrame, surface: HTMLElement, covers
 }
 
 interface Selection {
+  projectId: number
   trigger: HTMLButtonElement
   cover: HTMLElement
   x: number
@@ -36,20 +37,25 @@ interface Selection {
 }
 
 export interface ProjectOverlayHandle {
-  openProject: (project: Project, trigger: HTMLButtonElement, cover: HTMLElement) => void
+  openProject: (project: Omit<Project, "icon">, trigger: HTMLButtonElement, cover: HTMLElement) => void
 }
 
-export function ProjectOverlay({ reduced, ref }: { reduced: boolean; ref: Ref<ProjectOverlayHandle> }) {
-  const [project, setProject] = useState<Project | null>(null)
+export function ProjectOverlay({ reduced, ref, findTrigger }: {
+  reduced: boolean
+  ref: Ref<ProjectOverlayHandle>
+  findTrigger?: (projectId: number) => HTMLButtonElement | null | undefined
+}) {
+  const [project, setProject] = useState<Omit<Project, "icon"> | null>(null)
   const selection = useRef<Selection | null>(null)
   const surface = useRef<HTMLDivElement | null>(null)
   const closeButton = useRef<HTMLButtonElement>(null)
   const flight = useRef<ReturnType<typeof flyCover> | null>(null)
   const closing = useRef(false)
 
-  const openProject = useCallback((next: Project, trigger: HTMLButtonElement, cover: HTMLElement) => {
+  const openProject = useCallback((next: Omit<Project, "icon">, trigger: HTMLButtonElement, cover: HTMLElement) => {
     if (selection.current) return
     selection.current = {
+      projectId: next.id,
       trigger,
       cover,
       x: window.scrollX,
@@ -139,7 +145,13 @@ export function ProjectOverlay({ reduced, ref }: { reduced: boolean; ref: Ref<Pr
               const opener = selection.current
               selection.current = null
               closing.current = false
-              if (!opener?.trigger.isConnected) return
+              if (!opener) return
+              if (!opener.trigger.isConnected || opener.trigger.getClientRects().length === 0) {
+                const replacement = findTrigger?.(opener.projectId)
+                replacement?.scrollIntoView({ block: "nearest", behavior: "instant" })
+                replacement?.focus({ preventScroll: true })
+                return
+              }
               if (opener.x !== window.scrollX || opener.y !== window.scrollY) {
                 window.scrollTo({ left: opener.x, top: opener.y, behavior: "instant" })
               }

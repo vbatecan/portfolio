@@ -1,5 +1,7 @@
-import { CalendarIcon, TrophyIcon, DocumentTextIcon } from "@heroicons/react/24/outline"
+import { Fragment } from "react"
+import { ArrowsPointingOutIcon, CalendarIcon, DocumentTextIcon, TrophyIcon } from "@heroicons/react/24/outline"
 import { Card } from "@/components/ui/card"
+import { CertificateTimeline } from "./certificate-timeline"
 
 const ciscoImage = { src: "/assets/others/cisco.jpg?height=100&width=100", width: 1024, height: 1024 }
 
@@ -63,95 +65,95 @@ const certificates = [
 ]
 
 export const CertificatesSection = () => {
+  const credentials = certificates.map(({ title, issuer, image, date }) => ({
+    title, issuer, image, year: date.slice(-4),
+  }))
+
   return (
-    <section id="certificates" className="py-20 px-4 relative z-10 bg-gray-50/50 dark:bg-gray-800/50 lg:py-8">
+    <section className="py-20 px-4 relative z-10 bg-gray-50/50 dark:bg-gray-800/50 lg:py-6">
       <div className="max-w-6xl mx-auto">
-        <div className="mb-16 lg:mb-8">
+        <CertificateTimeline credentials={credentials} heading={<div className="mb-10 lg:mb-8">
           <p className="font-mono text-sm text-secondary mb-2 tracking-widest uppercase">
             <DocumentTextIcon className="inline h-4 w-4 mr-2" />
             ls -la ./certificates/
           </p>
-          <h2 className="section-title mb-4">Certifications</h2>
+          <h2 className="section-title mb-4">What I’ve Earned Along the Way</h2>
           <div className="accent-line mb-6"></div>
-        </div>
+        </div>}>
+          {certificates.map((cert, index) => {
+            const preview = (
+              <img
+                {...cert.image}
+                alt=""
+                loading="lazy"
+                decoding="async"
+                className="max-h-64 w-full rounded-xl object-contain md:max-h-20"
+              />
+            )
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {certificates.map((cert) => (
-            <div key={cert.title} className="group">
-              <Card className="p-6 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm border-0 shadow-lg hover:shadow-xl transition-all duration-300 rounded-2xl h-full flex flex-col">
-                <div className="flex items-start gap-4 mb-4">
-                  {cert.clickable ? (
-                    <a
-                      href={cert.image.src}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="cursor-pointer relative shrink-0 transition-transform duration-200 hover:scale-105"
-                    >
-                      <img
-                        {...cert.image}
-                        alt={cert.title}
-                        loading="lazy"
-                        decoding="async"
-                        className="w-24 h-auto rounded-xl shadow-md"
-                      />
-                      <div className="absolute inset-0 flex items-center justify-center bg-black/40 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity">
-                        <span className="text-white text-xs font-mono">View</span>
+            return (
+              <Fragment key={cert.title}>
+                {(index === 0 || credentials[index].year !== credentials[index - 1].year) && (
+                  <h3 className="font-mono text-sm font-semibold text-muted-foreground">{credentials[index].year}</h3>
+                )}
+                <article>
+                  <Card className="flex h-full flex-col rounded-2xl border-0 bg-white/80 p-4 shadow-lg backdrop-blur-sm transition-shadow duration-300 hover:shadow-xl dark:bg-gray-800/80">
+                    <div className="mb-3 flex flex-col gap-3 md:flex-row md:items-start">
+                      <div className="w-full shrink-0 md:w-28">
+                        {cert.clickable ? (
+                          <a
+                            href={cert.image.src}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            aria-label={`Open ${cert.title} at full size`}
+                            className="group/preview relative block rounded-xl bg-muted/50 outline-offset-4 focus-visible:outline-2 focus-visible:outline-ring"
+                          >
+                            {preview}
+                            <span className="absolute right-2 bottom-2 rounded-full bg-background/90 p-1.5 text-foreground shadow-sm transition-colors group-hover/preview:bg-background">
+                              <ArrowsPointingOutIcon aria-hidden="true" className="size-3.5" />
+                            </span>
+                          </a>
+                        ) : preview}
                       </div>
-                    </a>
-                  ) : (
-                    <img
-                      {...cert.image}
-                      alt={cert.title}
-                      loading="lazy"
-                      decoding="async"
-                      className="w-16 h-auto rounded-lg shadow-md shrink-0"
-                    />
-                  )}
-                  
-                  <div className="flex-1 min-w-0">
-                    <h3 className="font-bold text-sm mb-1 text-foreground line-clamp-2">
-                      {cert.title}
-                    </h3>
-                    <p className="text-xs text-secondary font-mono">{cert.issuer}</p>
-                  </div>
-                </div>
-
-                <p className="text-sm text-gray-600 dark:text-gray-400 mb-4 flex-1">
-                  {cert.description}
-                </p>
-
-                <div className="flex flex-wrap gap-1.5 mb-4">
-                  {cert.skills.map((skill) => (
-                    <span key={skill} className="tech-tag text-xs">
-                      {skill}
-                    </span>
-                  ))}
-                </div>
-
-                <div className="mt-auto pt-4 border-t border-gray-200 dark:border-gray-700">
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-1.5 text-xs text-gray-500 font-mono">
-                      <CalendarIcon className="h-3 w-3" />
-                      {cert.date}
+                      <div className="min-w-0 flex-1">
+                        <h3 className="mb-1 text-sm font-bold text-foreground">{cert.title}</h3>
+                        <p className="font-mono text-xs text-secondary">{cert.issuer}</p>
+                      </div>
                     </div>
 
-                    {cert.credentialUrl && (
-                      <a
-                        href={cert.credentialUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex items-center gap-1 text-xs text-primary hover:underline font-mono"
-                      >
-                        <TrophyIcon className="h-3 w-3" />
-                        Verify
-                      </a>
-                    )}
-                  </div>
-                </div>
-              </Card>
-            </div>
-          ))}
-        </div>
+                    <p className="mb-3 flex-1 text-sm text-gray-600 dark:text-gray-400">{cert.description}</p>
+
+                    <div className="mb-3 flex flex-wrap gap-1.5">
+                      {cert.skills.map((skill) => (
+                        <span key={skill} className="tech-tag text-xs">
+                          {skill}
+                        </span>
+                      ))}
+                    </div>
+
+                    <div className="mt-auto flex items-center justify-between border-t border-gray-200 pt-3 dark:border-gray-700">
+                      <div className="flex items-center gap-1.5 font-mono text-xs text-gray-500">
+                        <CalendarIcon aria-hidden="true" className="h-3 w-3" />
+                        {cert.date}
+                      </div>
+                      {cert.credentialUrl && (
+                        <a
+                          href={cert.credentialUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex items-center gap-1 font-mono text-xs text-primary hover:underline"
+                        >
+                          <TrophyIcon aria-hidden="true" className="h-3 w-3" />
+                          Verify
+                        </a>
+                      )}
+                    </div>
+                  </Card>
+                </article>
+              </Fragment>
+            )
+          })}
+        </CertificateTimeline>
       </div>
     </section>
   )

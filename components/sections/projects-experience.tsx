@@ -6,7 +6,7 @@ import { forwardRef, useCallback, useEffect, useId, useMemo, useRef, useState } 
 import { flushSync } from "react-dom"
 import { Button } from "@/components/ui/button"
 import { AllProjects, type LiveStatus, type Project } from "@/lib/data"
-import { projectChapters } from "@/lib/project-chapters"
+import { projectChapters, type ProjectChapter } from "@/lib/project-chapters"
 import { getProjectViewingLinks } from "@/lib/project-links"
 import { ProjectCatalogHandoff } from "./project-catalog-handoff"
 import { animateProjectCover, canAnimateProjectCover, readProjectCover, useProjectReducedMotion } from "./project-cover-flight"
@@ -16,7 +16,7 @@ import { chapterScrollEnd, ProjectStory } from "./project-story"
 import styles from "./projects-experience.module.css"
 
 type StatusFilter = LiveStatus | "all"
-type OpenProject = (project: Project, trigger: HTMLButtonElement, cover: HTMLElement) => void
+type OpenProject = (project: ProjectChapter["project"], trigger: HTMLButtonElement, cover: HTMLElement) => void
 
 const categoryNames: Record<string, string> = {
   ai: "AI/ML",
@@ -205,8 +205,8 @@ export function ProjectsExperience() {
 
   return (
     <div className={styles.experience}>
-      <ProjectStory track={story} scrollProgress={scrollYProgress} handoffProgress={handoff}
-        onHandoffFocus={() => catalog.current?.focus({ preventScroll: true })}
+      <ProjectStory chapters={projectChapters} track={story} scrollProgress={scrollYProgress}
+        handoff={{ progress: handoff, onFocus: () => catalog.current?.focus({ preventScroll: true }) }}
         onOpen={openProject} onBrowseGroup={browseGroup} />
       <section id="catalog" ref={catalog} tabIndex={-1} aria-labelledby="catalog-title" className={styles.catalog}>
         <div className={`${styles.layout} ${styles.header}`}>

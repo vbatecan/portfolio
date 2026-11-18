@@ -1,0 +1,167 @@
+.section {
+  padding: clamp(2.25rem, 6vh, 4.5rem) clamp(1rem, 3vw, 2rem);
+}
+
+.layout,
+.editorial {
+  display: grid;
+  gap: 1.25rem;
+}
+
+.layout {
+  align-items: center;
+}
+
+.editorial {
+  align-content: center;
+  max-width: 36rem;
+}
+
+.narration {
+  display: grid;
+}
+
+.intro,
+.narrationStep {
+  grid-area: 1 / 1;
+}
+
+.intro {
+  color: hsl(var(--muted-foreground));
+  line-height: 1.6;
+}
+
+.narrationStep {
+  display: none;
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  visibility: hidden;
+}
+
+.controls[data-enhanced="true"] {
+  visibility: visible;
+}
+
+.arrow {
+  display: grid;
+  place-items: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  background: hsl(var(--background));
+  border: 1px solid hsl(var(--border));
+  border-radius: 50%;
+}
+
+.arrow:hover:enabled {
+  background: hsl(var(--muted));
+}
+
+.arrow:disabled {
+  opacity: 0.35;
+}
+
+.viewport {
+  min-width: 0;
+  padding-block: 1rem;
+  overflow-x: auto;
+  overscroll-behavior-inline: contain;
+  scroll-snap-type: x mandatory;
+}
+
+.rail {
+  --card-width: min(84%, 30rem);
+  --card-gap: clamp(0.75rem, 2.5vw, 1.75rem);
+  display: flex;
+  gap: var(--card-gap);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.rail::before,
+.rail::after {
+  content: "";
+  flex: 0 0 max(0px, calc((100% - var(--card-width)) / 2 - var(--card-gap)));
+}
+
+.slide {
+  position: relative;
+  flex: 0 0 var(--card-width);
+  scroll-snap-align: center;
+  min-width: 0;
+}
+
+.card {
+  display: flex;
+  height: 100%;
+  min-height: clamp(20rem, 52vh, 28rem);
+  flex-direction: column;
+  justify-content: space-between;
+  gap: clamp(1rem, 3vw, 2rem);
+  padding: clamp(1rem, 3vw, 2rem);
+  border-radius: 1.5rem;
+  border-color: hsl(var(--border));
+  box-shadow: 0 0.75rem 2.25rem -1.5rem hsl(var(--foreground) / 0.55);
+}
+
+.techList {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(6rem, 100%), 1fr));
+  gap: 0.75rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid hsl(var(--border));
+}
+
+.tech {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  color: hsl(var(--muted-foreground));
+  font-size: 0.75rem;
+  font-weight: 550;
+}
+
+@media (min-width: 64rem) {
+  .layout {
+    grid-template-columns: minmax(0, 4fr) minmax(0, 7fr);
+    gap: clamp(2rem, 5vw, 5rem);
+  }
+
+  .viewport {
+    padding-block: 3.25rem;
+  }
+}
+
+:global([data-story-pinned]) .viewport {
+  overflow: hidden;
+  scroll-snap-type: none;
+}
+
+:global([data-story-pinned]) .slide {
+  z-index: var(--stack-order);
+}
+
+:global([data-story-pinned]) .slide[aria-current="true"] {
+  z-index: 7;
+}
+
+:global([data-story-pinned]) .intro {
+  visibility: hidden;
+}
+
+:global([data-story-pinned]) .narrationStep {
+  display: block;
+  visibility: hidden;
+}
+
+:global([data-story-pinned]) .narrationStep[data-active="true"] {
+  visibility: visible;
+}
+
+:global([data-story-pinned]) .cardDescription {
+  display: none;
+}

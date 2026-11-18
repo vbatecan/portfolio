@@ -12,7 +12,7 @@ export const ContactSection = () => {
 
   if (state.succeeded) {
     return (
-      <section id="contact" className="py-20 px-4 bg-gray-50/50 dark:bg-gray-800/50 relative z-10 lg:py-12">
+      <section className="py-20 px-4 bg-gray-50/50 dark:bg-gray-800/50 relative z-10 lg:py-12">
         <div className="max-w-4xl mx-auto">
           <div className="text-center">
             <Card className="p-12 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm border-0 shadow-xl rounded-3xl">
@@ -46,18 +46,18 @@ export const ContactSection = () => {
   }
 
   return (
-    <section id="contact" className="py-20 px-4 bg-gray-50/50 dark:bg-gray-800/50 relative z-10 lg:py-12">
+    <section className="py-20 px-4 bg-gray-50/50 dark:bg-gray-800/50 relative z-10 lg:py-12">
       <div className="max-w-4xl mx-auto">
-        <div className="mb-16">
+        <div className="mb-16" data-story-motion="headline">
           <p className="font-mono text-sm text-secondary mb-2 tracking-widest uppercase">
             <ChatBubbleLeftRightIcon className="inline h-4 w-4 mr-2" />
             contact.init()
           </p>
-          <h2 className="section-title mb-4">Get in Touch</h2>
+          <h2 className="section-title mb-4">Let’s Build Something</h2>
           <div className="accent-line mb-6"></div>
         </div>
 
-        <div>
+        <div data-story-motion="form">
           <Card className="p-8 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm border-0 shadow-xl rounded-3xl">
             <form onSubmit={handleSubmit} className="space-y-6">
               <div className="grid md:grid-cols-2 gap-6">
