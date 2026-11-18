@@ -2,10 +2,10 @@
 
 import { ArrowDownIcon, ArrowUpRightIcon } from "@heroicons/react/24/outline"
 import { AnimatePresence, motion, useIsPresent, useScroll, useTransform } from "framer-motion"
-import { forwardRef, useCallback, useEffect, useMemo, useRef, useState } from "react"
+import { forwardRef, useCallback, useEffect, useId, useMemo, useRef, useState } from "react"
 import { flushSync } from "react-dom"
 import { Button } from "@/components/ui/button"
-import { AllProjects, type LiveStatus, type Project } from "@/lib/data"
+import { AllProjects, getProjectViewingLinks, type LiveStatus, type Project } from "@/lib/data"
 import { projectChapters } from "@/lib/project-chapters"
 import { ProjectCatalogHandoff } from "./project-catalog-handoff"
 import { animateProjectCover, canAnimateProjectCover, readProjectCover, useProjectReducedMotion } from "./project-cover-flight"
@@ -17,7 +17,6 @@ import styles from "./projects-experience.module.css"
 type StatusFilter = LiveStatus | "all"
 type OpenProject = (project: Project, trigger: HTMLButtonElement, cover: HTMLElement) => void
 
-const pageSize = 9
 const categoryNames: Record<string, string> = {
   ai: "AI/ML",
   api: "API",
@@ -77,6 +76,8 @@ const ProjectCard = forwardRef<HTMLLIElement, {
   ripple: ReturnType<typeof usePreviewRipple>
 }>(function ProjectCard({ project, index, animate, onOpen, ripple }, ref) {
   const present = useIsPresent()
+  const { live, demo } = getProjectViewingLinks(project)
+  const availabilityId = useId()
   return (
     <motion.li
       ref={ref}
@@ -90,12 +91,13 @@ const ProjectCard = forwardRef<HTMLLIElement, {
       animate={{
         opacity: 1,
         y: 0,
-        transition: { duration: animate ? 0.26 : 0, delay: animate ? (index % pageSize) * 0.022 : 0, ease: cardEase },
+        transition: { duration: animate ? 0.26 : 0, delay: animate ? Math.min(index * 0.022, 0.18) : 0, ease: cardEase },
       }}
       exit={animate ? { opacity: 0, y: -7, transition: { duration: 0.17 } } : undefined}
       transition={{ layout: { duration: 0.33, ease: cardEase } }}
     >
       <button type="button" className={styles.card} aria-label={`View project: ${project.title}`}
+        aria-describedby={live || demo ? availabilityId : undefined}
         onClick={(event) => {
           const trigger = event.currentTarget
           const cover = trigger.querySelector<HTMLElement>("[data-project-cover]")
@@ -105,7 +107,15 @@ const ProjectCard = forwardRef<HTMLLIElement, {
         <span className={styles.caption}>
           <span>
             <span className={styles.title}>{project.title}</span>
-            <span className={styles.type}>{categoryLabel(project.category)}</span>
+            <span className={styles.meta}>
+              <span className={styles.type}>{categoryLabel(project.category)}</span>
+              {(live || demo) && (
+                <span id={availabilityId} className={styles.availability}>
+                  {live && <span className={styles.badge}>Live</span>}
+                  {demo && <span className={styles.badge}>Demo</span>}
+                </span>
+              )}
+            </span>
           </span>
           <ArrowUpRightIcon aria-hidden="true" />
         </span>
@@ -115,7 +125,7 @@ const ProjectCard = forwardRef<HTMLLIElement, {
 })
 
 export function ProjectsExperience() {
-  const [view, setView] = useState({ status: "all" as StatusFilter, category: "all", limit: pageSize, revision: 0 })
+  const [view, setView] = useState({ status: "all" as StatusFilter, category: "all", revision: 0 })
   const reduced = useProjectReducedMotion()
   const { openProject, dialog } = useProjectOverlay(reduced)
   const ripple = usePreviewRipple()
@@ -129,8 +139,7 @@ export function ProjectsExperience() {
     (view.status === "all" || project.liveStatus === view.status)
     && (view.category === "all" || project.category === view.category),
   ), [view.status, view.category])
-  const displayed = useMemo(() => matching.slice(0, view.limit), [matching, view.limit])
-  const visibleIds = useMemo(() => displayed.map(({ id }) => id), [displayed])
+  const visibleIds = useMemo(() => matching.map(({ id }) => id), [matching])
 
   const finishShortcut = useCallback(() => {
     shortcut.current?.flight.dispose()
@@ -161,19 +170,7 @@ export function ProjectsExperience() {
     if (catalog.current && catalog.current.getBoundingClientRect().top < -1) {
       catalog.current.scrollIntoView({ behavior: "instant", block: "start" })
     }
-    setView((current) => ({ ...current, status, category, limit: pageSize }))
-  }
-
-  function showMore() {
-    const firstNew = matching[view.limit]
-    if (!firstNew) return
-    const nextLimit = view.limit + pageSize
-    if (nextLimit < matching.length) {
-      setView((current) => ({ ...current, limit: nextLimit }))
-      return
-    }
-    flushSync(() => setView((current) => ({ ...current, limit: nextLimit })))
-    catalog.current?.querySelector<HTMLButtonElement>(`[data-project-card="${firstNew.id}"] button`)?.focus({ preventScroll: true })
+    setView((current) => ({ ...current, status, category }))
   }
 
   function browseGroup(status: LiveStatus, source: HTMLElement | null) {
@@ -182,7 +179,7 @@ export function ProjectsExperience() {
     finishShortcut()
     ripple.stop()
     const origin = source && canAnimateProjectCover() ? readProjectCover(source) : null
-    flushSync(() => setView(({ revision }) => ({ status, category: "all", limit: pageSize, revision: revision + 1 })))
+    flushSync(() => setView(({ revision }) => ({ status, category: "all", revision: revision + 1 })))
     landAtCatalog(destination)
     const cover = destination.querySelector<HTMLElement>("[data-project-card] [data-project-cover]")
     const target = origin && cover ? readProjectCover(cover) : null
@@ -232,11 +229,11 @@ export function ProjectsExperience() {
         </div>
         <div className={`${styles.layout} ${styles.results}`}>
           <p className={styles.count} role="status">
-            {matching.length > 0 ? `Showing ${displayed.length} of ${matching.length} projects` : "0 projects"}
+            {matching.length} {matching.length === 1 ? "project" : "projects"}
           </p>
           <ul className={styles.grid} aria-label="Projects">
             <AnimatePresence initial={false} mode={reduced ? "sync" : "popLayout"} key={view.revision}>
-              {displayed.map((project, index) => (
+              {matching.map((project, index) => (
                 <ProjectCard key={project.id} project={project} index={index} animate={!reduced} onOpen={openFromCatalog} ripple={ripple} />
               ))}
             </AnimatePresence>
@@ -250,11 +247,6 @@ export function ProjectsExperience() {
               }}>
                 Clear filters
               </Button>
-            </div>
-          )}
-          {displayed.length < matching.length && (
-            <div className={styles.append}>
-              <Button variant="outline" onClick={showMore}>Show more</Button>
             </div>
           )}
         </div>

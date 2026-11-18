@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button"
 import { DialogDescription, DialogTitle } from "@/components/ui/dialog"
 import { GithubIcon } from "@/components/ui/brand-icons"
 import { TechIcon } from "@/components/ui/tech-icon"
-import type { Project } from "@/lib/data"
+import { getProjectViewingLinks, type Project } from "@/lib/data"
 import { ProjectScreenshotGallery } from "./project-screenshot-gallery"
 import styles from "./project-details.module.css"
 
@@ -15,7 +15,7 @@ export function ProjectDetailsContent({ project, fullScreen = false, reducedMoti
   reducedMotion?: boolean
 }) {
   const hasRepoLink = project.github !== "#" && project.repoStatus !== "none"
-  const hasLiveLink = project.live !== "#" && project.liveStatus === "live"
+  const { live, demo } = getProjectViewingLinks(project)
   const stack = (
     <div>
       <h3 className={fullScreen ? styles.label : "mb-2 text-sm font-semibold"}>Tech stack</h3>
@@ -29,7 +29,7 @@ export function ProjectDetailsContent({ project, fullScreen = false, reducedMoti
       </ul>
     </div>
   )
-  const links = (hasRepoLink || hasLiveLink) && (
+  const links = (hasRepoLink || live || demo) && (
     <>
       {hasRepoLink && (
         <Button asChild>
@@ -39,11 +39,19 @@ export function ProjectDetailsContent({ project, fullScreen = false, reducedMoti
           </a>
         </Button>
       )}
-      {hasLiveLink && (
+      {live && (
         <Button asChild variant="outline">
-          <a href={project.live} target="_blank" rel="noopener noreferrer">
+          <a href={live} target="_blank" rel="noopener noreferrer">
             <ArrowTopRightOnSquareIcon aria-hidden="true" className="mr-2 size-4" />
-            Live demo
+            Open live project
+          </a>
+        </Button>
+      )}
+      {demo && (
+        <Button asChild variant="outline">
+          <a href={demo} target="_blank" rel="noopener noreferrer">
+            <ArrowTopRightOnSquareIcon aria-hidden="true" className="mr-2 size-4" />
+            View demo
           </a>
         </Button>
       )}

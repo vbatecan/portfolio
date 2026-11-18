@@ -34,6 +34,7 @@ export interface Project {
   technologies: string[];
   github: string;
   live: string;
+  demo?: string;
   icon: any;
   date: string;
   updatedAt?: string;
@@ -46,6 +47,13 @@ export interface Project {
     impact: string;
     skills: string[];
   };
+}
+
+export function getProjectViewingLinks({ live, liveStatus, demo }: Project) {
+  return {
+    live: liveStatus === "live" && live && live !== "#" ? live : null,
+    demo: demo && demo !== "#" ? demo : null,
+  }
 }
 
 export const AllProjects: Project[] = [
