@@ -1,6 +1,7 @@
 "use client"
 
 import { useState, useEffect } from "react"
+import { useTheme } from "next-themes"
 
 import { FloatingShapes } from "@/components/background/floating-shapes"
 import { ParticleSystem } from "@/components/background/particle-system"
@@ -19,18 +20,14 @@ import { ContactSection } from "@/components/sections/contact-section"
 import { FooterSection } from "@/components/sections/footer-section"
 
 export default function Portfolio() {
-  const [darkMode, setDarkMode] = useState(false)
+  const [mounted, setMounted] = useState(false)
+  const { resolvedTheme, setTheme } = useTheme()
+  const darkMode = mounted && resolvedTheme === "dark"
 
-  useEffect(() => {
-    if (darkMode) {
-      document.documentElement.classList.add("dark")
-    } else {
-      document.documentElement.classList.remove("dark")
-    }
-  }, [darkMode])
+  useEffect(() => setMounted(true), [])
 
   const toggleDarkMode = () => {
-    setDarkMode(!darkMode)
+    setTheme(resolvedTheme === "dark" ? "light" : "dark")
   }
 
   const scrollToSection = (sectionId: string) => {
@@ -41,7 +38,7 @@ export default function Portfolio() {
   }
 
   return (
-    <div className={`min-h-screen transition-colors duration-300 ${darkMode ? "dark" : ""}`}>
+    <div className="min-h-screen transition-colors duration-300">
       <div className="bg-white dark:bg-gray-900 text-gray-900 dark:text-white relative overflow-hidden">
         {/* Background Effects */}
         <FloatingShapes />

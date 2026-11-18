@@ -7,8 +7,16 @@ import { TechIcon } from "@/components/ui/tech-icon"
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
 import { AllProjects, type LiveStatus, type Project } from "@/lib/data"
 import { createScreenshotRipple } from "@/lib/screenshot-ripple"
-import { ArrowTopRightOnSquareIcon, ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline"
+import { cn } from "@/lib/utils"
+import { ArrowRightIcon, ArrowTopRightOnSquareIcon, ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline"
+import Link from "next/link"
 import { useEffect, useRef, useState, type PointerEvent } from "react"
+
+const featuredProjects = [
+  22, // Pikash
+  26, // Still Island
+  28, // LoopLab
+].flatMap((id) => AllProjects.filter((project) => project.id === id))
 
 const statusGroups = [
   { status: "live", label: "Live" },
@@ -54,7 +62,7 @@ function usePreviewRipple() {
     }
   }, [])
 
-  function move(event: PointerEvent<HTMLDivElement>) {
+  function move(event: PointerEvent<HTMLSpanElement>) {
     if (!motionAllowed.current || event.pointerType !== "mouse") return
     const container = event.currentTarget
     const image = container.querySelector("img")
@@ -189,40 +197,144 @@ function ProjectDetails({ project, returnFocus }: { project: Project; returnFocu
   )
 }
 
-export const ProjectsSection = () => {
-  const [activeFilter, setActiveFilter] = useState("all")
+function useProjectDetails() {
   const [selectedProject, setSelectedProject] = useState<Project | null>(null)
   const opener = useRef<HTMLButtonElement>(null)
+
+  function openProject(project: Project, trigger: HTMLButtonElement) {
+    opener.current = trigger
+    setSelectedProject(project)
+  }
+
+  const dialog = (
+    <Dialog open={selectedProject !== null} onOpenChange={(open) => !open && setSelectedProject(null)}>
+      {selectedProject && (
+        <ProjectDetails
+          key={selectedProject.id}
+          project={selectedProject}
+          returnFocus={() => opener.current?.focus({ preventScroll: true })}
+        />
+      )}
+    </Dialog>
+  )
+
+  return { openProject, dialog }
+}
+
+function ProjectPreview({ project, alt = "", className, ripple }: {
+  project: Project
+  alt?: string
+  className?: string
+  ripple?: ReturnType<typeof usePreviewRipple>
+}) {
+  return (
+    <span
+      className={cn("relative block aspect-[16/10] overflow-hidden rounded-lg bg-muted", className)}
+      onPointerEnter={ripple?.move}
+      onPointerMove={ripple?.move}
+      onPointerLeave={ripple?.stop}
+      onPointerCancel={ripple?.stop}
+    >
+      <img
+        src={project.image || placeholder}
+        alt={alt}
+        loading="lazy"
+        decoding="async"
+        className="absolute inset-0 h-full w-full object-contain"
+        onError={({ currentTarget }) => {
+          if (currentTarget.getAttribute("src") !== placeholder) currentTarget.src = placeholder
+        }}
+      />
+    </span>
+  )
+}
+
+export function ProjectsSection() {
+  const { openProject, dialog } = useProjectDetails()
+
+  return (
+    <section id="projects" aria-labelledby="projects-title" className="relative z-10 scroll-mt-[4.5rem] bg-background px-4 py-12 sm:px-6 md:py-16">
+      <div className="mx-auto max-w-7xl">
+        <h2 id="projects-title" className="section-title mb-6">Featured Work</h2>
+        <ul className="grid gap-3 md:grid-cols-3 md:gap-5">
+          {featuredProjects.map((project) => (
+            <li key={project.id}>
+              <button
+                type="button"
+                aria-label={`View project: ${project.title}`}
+                className="flex h-full w-full items-center gap-3 rounded-lg border border-border p-2.5 text-left transition-colors hover:bg-muted/50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring md:flex-col md:items-stretch md:p-3"
+                onClick={(event) => openProject(project, event.currentTarget)}
+              >
+                <ProjectPreview project={project} className="w-24 shrink-0 sm:w-32 md:w-full" />
+                <span className="flex min-w-0 flex-1 items-center justify-between gap-2 md:px-1 md:pb-1">
+                  <span>
+                    <span className="block font-bold tracking-tight md:text-xl">{project.title}</span>
+                    <span className="mt-1 line-clamp-2 text-xs leading-relaxed text-muted-foreground md:line-clamp-none md:text-sm">
+                      {project.description}
+                    </span>
+                  </span>
+                  <ChevronRightIcon aria-hidden="true" className="size-4 shrink-0 text-muted-foreground" />
+                </span>
+              </button>
+            </li>
+          ))}
+        </ul>
+        <Button asChild variant="outline" className="mt-5">
+          <Link href="/projects">
+            View all {AllProjects.length} projects
+            <ArrowRightIcon aria-hidden="true" />
+          </Link>
+        </Button>
+        {dialog}
+      </div>
+    </section>
+  )
+}
+
+export function ProjectsCatalog() {
+  const [activeFilter, setActiveFilter] = useState("all")
+  const { openProject, dialog } = useProjectDetails()
   const ripple = usePreviewRipple()
+  const results = useRef<HTMLDivElement>(null)
+  const filterAnimation = useRef<Animation | null>(null)
 
   const filteredProjects = AllProjects
     .filter((project) => activeFilter === "all" || project.category === activeFilter)
     .sort((a, b) => (b.updatedAt ?? "").localeCompare(a.updatedAt ?? ""))
 
-  return (
-    <section id="projects" aria-labelledby="projects-title" className="relative z-10 bg-background px-4 py-20 sm:px-6">
-      <div className="mx-auto max-w-7xl">
-        <h2 id="projects-title" className="section-title mb-6">Featured Work</h2>
-        <div role="group" aria-label="Filter projects by category" className="mb-10 flex flex-wrap gap-2">
-          {categories.map((category) => (
-            <Button
-              key={category.id}
-              type="button"
-              size="sm"
-              variant={activeFilter === category.id ? "default" : "outline"}
-              aria-pressed={activeFilter === category.id}
-              className="rounded-full"
-              onClick={() => {
-                ripple.stop()
-                setActiveFilter(category.id)
-              }}
-            >
-              {category.name}
-              <span className="ml-1.5 text-xs opacity-70">({category.count})</span>
-            </Button>
-          ))}
-        </div>
+  function selectCategory(category: string) {
+    if (category === activeFilter) return
+    ripple.stop()
+    setActiveFilter(category)
+    filterAnimation.current?.cancel()
+    if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      filterAnimation.current = results.current?.animate(
+        [{ opacity: 0.65 }, { opacity: 1 }],
+        { duration: 180, easing: "ease-out" },
+      ) ?? null
+    }
+  }
 
+  return (
+    <>
+      <div role="group" aria-label="Filter projects by category" className="mb-10 flex flex-wrap gap-2">
+        {categories.map((category) => (
+          <Button
+            key={category.id}
+            type="button"
+            size="sm"
+            variant={activeFilter === category.id ? "default" : "outline"}
+            aria-pressed={activeFilter === category.id}
+            className="rounded-full"
+            onClick={() => selectCategory(category.id)}
+          >
+            {category.name}
+            <span className="ml-1.5 text-xs opacity-70">({category.count})</span>
+          </Button>
+        ))}
+      </div>
+
+      <div ref={results}>
         <TooltipProvider>
           {statusGroups.map(({ status, label }) => {
             const group = filteredProjects.filter((project) => project.liveStatus === status)
@@ -230,36 +342,19 @@ export const ProjectsSection = () => {
 
             return (
               <section key={status} aria-labelledby={`projects-${status}`} className="mb-12 last:mb-0">
-                <h3 id={`projects-${status}`} className="border-b border-border pb-3 text-base font-semibold tracking-tight">
+                <h2 id={`projects-${status}`} className="border-b border-border pb-3 text-base font-semibold tracking-tight">
                   {label}
-                </h3>
+                </h2>
                 <ul>
                   {group.map((project) => (
                     <li
                       key={project.id}
                       className="grid items-center gap-5 border-b border-border py-6 md:grid-cols-[minmax(0,3fr)_minmax(0,2fr)] md:gap-10 md:py-8 lg:gap-14"
                     >
-                      <div
-                        className="relative aspect-[16/10] overflow-hidden rounded-lg bg-muted"
-                        onPointerEnter={ripple.move}
-                        onPointerMove={ripple.move}
-                        onPointerLeave={ripple.stop}
-                        onPointerCancel={ripple.stop}
-                      >
-                        <img
-                          src={project.image || placeholder}
-                          alt={`${project.title} preview`}
-                          loading="lazy"
-                          decoding="async"
-                          className="absolute inset-0 h-full w-full object-contain"
-                          onError={({ currentTarget }) => {
-                            if (currentTarget.getAttribute("src") !== placeholder) currentTarget.src = placeholder
-                          }}
-                        />
-                      </div>
+                      <ProjectPreview project={project} alt={`${project.title} preview`} ripple={ripple} />
                       <div>
                         <p className="mb-2 font-mono text-xs text-muted-foreground">{project.date}</p>
-                        <h4 className="mb-2 text-2xl font-bold tracking-tight lg:text-3xl">{project.title}</h4>
+                        <h3 className="mb-2 text-2xl font-bold tracking-tight lg:text-3xl">{project.title}</h3>
                         <p className="max-w-[55ch] text-sm leading-relaxed text-muted-foreground lg:text-base">{project.description}</p>
                         <ul aria-label="Technologies" className="mb-5 mt-4 flex flex-wrap gap-2">
                           {project.technologies.map((tech) => (
@@ -280,9 +375,8 @@ export const ProjectsSection = () => {
                           type="button"
                           aria-label={`View project: ${project.title}`}
                           onClick={(event) => {
-                            opener.current = event.currentTarget
                             ripple.stop()
-                            setSelectedProject(project)
+                            openProject(project, event.currentTarget)
                           }}
                         >
                           View project
@@ -295,17 +389,9 @@ export const ProjectsSection = () => {
             )
           })}
         </TooltipProvider>
-
-        <Dialog open={selectedProject !== null} onOpenChange={(open) => !open && setSelectedProject(null)}>
-          {selectedProject && (
-            <ProjectDetails
-              key={selectedProject.id}
-              project={selectedProject}
-              returnFocus={() => opener.current?.focus({ preventScroll: true })}
-            />
-          )}
-        </Dialog>
       </div>
-    </section>
+
+      {dialog}
+    </>
   )
 }
