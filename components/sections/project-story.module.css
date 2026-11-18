@@ -1,0 +1,292 @@
+.stage {
+  position: sticky;
+  top: 0;
+  z-index: 4;
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  height: 100dvh;
+  padding-block: 0.6rem;
+}
+
+.stage[inert] {
+  pointer-events: none;
+}
+
+.backdrop {
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  background: light-dark(#f0f3ef, #161b1a);
+}
+
+.overviewTitle {
+  position: absolute;
+  inset: 35% 1rem auto;
+  font-size: clamp(2.25rem, 6.5vw, 7rem);
+  font-weight: 800;
+  letter-spacing: -0.07em;
+  line-height: 1;
+  text-align: center;
+  pointer-events: none;
+}
+
+@media (max-width: 823px), (max-height: 520px) {
+  .overviewTitle {
+    display: none;
+  }
+}
+
+.controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: clamp(0.45rem, 2vw, 1.4rem);
+}
+
+.chapterControls {
+  display: flex;
+  align-items: center;
+}
+
+.chapterButton,
+.overviewButton {
+  display: grid;
+  min-width: 2.2rem;
+  min-height: 2.75rem;
+  place-items: center;
+  color: hsl(var(--muted-foreground));
+  cursor: pointer;
+  border-radius: 3px;
+}
+
+.chapterButton {
+  font-family: var(--font-mono), monospace;
+  font-size: 0.75rem;
+  background: linear-gradient(currentColor, currentColor) center 85% / 0.85rem 1px no-repeat;
+}
+
+.chapterButton[aria-current],
+.overviewButton[aria-pressed="true"] {
+  color: hsl(var(--foreground));
+  font-weight: 700;
+}
+
+.chapterButton[aria-current] {
+  background-size: 1.35rem 2px;
+}
+
+.overviewButton {
+  display: flex;
+  justify-content: center;
+  gap: 0.35rem;
+  padding-inline: 0.45rem;
+  font-size: 0.78rem;
+}
+
+.overviewButton svg,
+.scrollPrompt svg {
+  width: 1rem;
+  height: 1rem;
+}
+
+.canvas {
+  position: relative;
+  overflow: clip;
+  min-width: 0;
+}
+
+.panel,
+.staticPanel {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  background: hsl(var(--background));
+  border: 1px solid hsl(var(--border));
+  border-radius: 6px;
+}
+
+.panel {
+  position: absolute;
+  inset: 0 auto auto 0;
+  width: 84%;
+  height: min(calc(100% - 8rem), 37rem);
+}
+
+.projectButton {
+  display: flex;
+  width: 100%;
+  min-height: 0;
+  flex: 1;
+  flex-direction: column;
+  text-align: left;
+  cursor: pointer;
+}
+
+.cover {
+  display: grid;
+  width: 100%;
+  min-height: 0;
+  flex: 1;
+  overflow: hidden;
+  place-items: center;
+  border-radius: 5px 5px 0 0;
+  background: var(--project-art, hsl(var(--muted)));
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  object-fit: contain;
+  padding: 3%;
+}
+
+.captionClip {
+  display: block;
+  width: 100%;
+  flex: none;
+  overflow: hidden;
+}
+
+.projectName {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.65rem;
+  padding: 0.85rem clamp(0.75rem, 2.4vw, 2rem) 0.22rem;
+  font-size: clamp(1.05rem, 3.1vw, 2.8rem);
+  font-weight: 700;
+  letter-spacing: -0.055em;
+  line-height: 1.06;
+}
+
+.projectName svg,
+.groupButton svg {
+  width: 1.1rem;
+  height: 1.1rem;
+  flex: none;
+}
+
+.caption {
+  padding: 0.25rem clamp(0.75rem, 2.4vw, 2rem) 0.75rem;
+  color: hsl(var(--muted-foreground));
+  font-size: clamp(0.8rem, 1.25vw, 1rem);
+  line-height: 1.4;
+}
+
+.groupButton {
+  display: flex;
+  width: 100%;
+  min-height: 2.75rem;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.3rem;
+  padding: 0.5rem clamp(0.75rem, 2.4vw, 2rem);
+  border-top: 1px solid hsl(var(--border));
+  font-size: 0.8rem;
+  font-weight: 650;
+  text-align: left;
+  cursor: pointer;
+}
+
+.groupButton small {
+  margin-inline-start: 0.6rem;
+  color: hsl(var(--muted-foreground));
+  font-size: 0.75rem;
+  font-weight: 400;
+}
+
+.panel[data-compact="true"] .groupButton {
+  padding-inline: clamp(0.42rem, 1vw, 0.8rem);
+}
+
+.panel[data-compact="true"] .groupButton small {
+  display: block;
+  margin: 0;
+  font-size: 0.67rem;
+}
+
+.projectButton:focus-visible,
+.chapterButton:focus-visible,
+.overviewButton:focus-visible,
+.groupButton:focus-visible {
+  z-index: 1;
+  outline: 2px solid hsl(var(--ring));
+  outline-offset: -3px;
+}
+
+.groupButton:hover,
+.chapterButton:hover,
+.overviewButton:hover {
+  background-color: hsl(var(--accent));
+  color: hsl(var(--accent-foreground));
+}
+
+.projectButton:hover .projectName {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.14em;
+}
+
+.scrollPrompt {
+  display: flex;
+  min-height: 2rem;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  color: hsl(var(--muted-foreground));
+  font-size: 0.72rem;
+}
+
+.staticIndex {
+  display: none;
+}
+
+.staticPanel .cover {
+  aspect-ratio: 3 / 2;
+}
+
+.staticPanel .projectName {
+  font-size: 1.15rem;
+}
+
+@media (max-width: 410px) {
+  .overviewButton span {
+    display: none;
+  }
+}
+
+@media (max-height: 520px) and (min-width: 550px) {
+  .panel[data-compact="false"] {
+    display: grid;
+    grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
+    grid-template-rows: minmax(0, 1fr) auto;
+  }
+
+  .panel[data-compact="false"] .projectButton {
+    grid-row: 1 / -1;
+    border-right: 1px solid hsl(var(--border));
+  }
+
+  .panel[data-compact="false"] .captionClip {
+    align-self: center;
+  }
+
+  .panel[data-compact="false"] .cover {
+    border-top-right-radius: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .track {
+    display: none;
+  }
+
+  .staticIndex {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr));
+    gap: 0.75rem;
+    padding: clamp(0.75rem, 3vw, 3rem);
+  }
+}
