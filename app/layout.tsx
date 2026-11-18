@@ -3,6 +3,8 @@ import type { Metadata } from "next"
 import { Plus_Jakarta_Sans, Fira_Code } from "next/font/google"
 import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
+import { CursorLens } from "@/components/cursor-lens"
+import { SideNav } from "@/components/navigation/side-nav"
 
 const plusJakarta = Plus_Jakarta_Sans({ subsets: ["latin"] })
 const firaCode = Fira_Code({ 
@@ -32,7 +34,9 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body className={`${plusJakarta.className} ${firaCode.variable}`}>
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>
-          {children}
+          <SideNav />
+          <div className="pl-12 sm:pl-16">{children}</div>
+          <CursorLens />
         </ThemeProvider>
       </body>
     </html>

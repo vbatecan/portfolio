@@ -253,7 +253,7 @@ export function ProjectsSection() {
   const { openProject, dialog } = useProjectDetails()
 
   return (
-    <section id="projects" aria-labelledby="projects-title" className="relative z-10 scroll-mt-[4.5rem] bg-background px-4 py-12 sm:px-6 md:py-16">
+    <section id="projects" aria-labelledby="projects-title" className="relative z-10 bg-background px-4 py-12 sm:px-6 md:py-16">
       <div className="mx-auto max-w-7xl">
         <h2 id="projects-title" className="section-title mb-6">Featured Work</h2>
         <ul className="grid gap-3 md:grid-cols-3 md:gap-5">

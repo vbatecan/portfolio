@@ -2,7 +2,6 @@ import type { Metadata } from "next"
 import Link from "next/link"
 import { ArrowLeftIcon } from "@heroicons/react/24/outline"
 import { ProjectsCatalog } from "@/components/sections/projects-section"
-import { CursorLens } from "@/components/cursor-lens"
 import { Button } from "@/components/ui/button"
 
 export const metadata: Metadata = {
@@ -22,7 +21,6 @@ export default function ProjectsPage() {
         <h1 className="section-title mb-6">Projects</h1>
         <ProjectsCatalog />
       </div>
-      <CursorLens />
     </main>
   )
 }

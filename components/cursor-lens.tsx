@@ -2,7 +2,7 @@
 
 import { useEffect, useRef } from "react"
 
-const diameter = 128
+const diameter = 48
 const radius = diameter / 2
 
 // Red and green encode horizontal and vertical sampling offsets.
@@ -34,7 +34,7 @@ export function CursorLens() {
   useEffect(() => {
     const surface = lens.current
     const image = map.current
-    if (!surface || !image || !CSS.supports("backdrop-filter", "url(#project-lens)")) return
+    if (!surface || !image) return
     const preference = matchMedia("(any-hover: hover) and (any-pointer: fine) and (prefers-reduced-motion: no-preference)")
 
     function hide() {
@@ -72,7 +72,7 @@ export function CursorLens() {
         <defs>
           <filter id="project-lens" x="0" y="0" width={diameter} height={diameter} filterUnits="userSpaceOnUse" colorInterpolationFilters="sRGB">
             <feImage ref={map} x="0" y="0" width={diameter} height={diameter} result="offsets" />
-            <feDisplacementMap in="SourceGraphic" in2="offsets" scale="36" xChannelSelector="R" yChannelSelector="G" />
+            <feDisplacementMap in="SourceGraphic" in2="offsets" scale="18" xChannelSelector="R" yChannelSelector="G" />
           </filter>
         </defs>
       </svg>
@@ -85,7 +85,7 @@ export function CursorLens() {
           width: diameter,
           height: diameter,
           backdropFilter: "url(#project-lens)",
-          boxShadow: "inset 0 0 0 1px rgb(128 128 128 / 30%), inset 0 2px 3px rgb(255 255 255 / 18%)",
+          boxShadow: "inset 0 0 0 1px rgb(30 36 43 / 60%), inset 0 0 0 2px rgb(255 255 255 / 68%), 0 1px 4px rgb(0 0 0 / 16%)",
         }}
       />
     </>
