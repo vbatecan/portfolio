@@ -56,6 +56,7 @@ interface Chapter {
   top: number
   height: number
   hold: number
+  overlap: number
   pinned: boolean
   hasNext: boolean
   independent: boolean
@@ -82,6 +83,7 @@ export function HomeStory() {
 
     const reduced = matchMedia("(prefers-reduced-motion: reduce)")
     const wide = matchMedia("(min-width: 64rem) and (min-height: 38rem)")
+    const compact = matchMedia("(width < 64rem)")
     const tracks = [...story.querySelectorAll<HTMLElement>("[data-story-chapter]")]
     const chapters = tracks.map((track, index): Chapter => ({
       track,
@@ -96,6 +98,7 @@ export function HomeStory() {
       top: 0,
       height: 0,
       hold: 0,
+      overlap: 0,
       pinned: false,
       hasNext: index < tracks.length - 1,
       independent: track.hasAttribute("data-story-independent"),
@@ -107,6 +110,7 @@ export function HomeStory() {
     let activeChapter: Chapter | undefined
     let reducedMode = reduced.matches
     let wideMode = wide.matches
+    let compactMode = compact.matches
 
     function draw() {
       frame = undefined
@@ -115,8 +119,7 @@ export function HomeStory() {
 
       for (const chapter of chapters) {
         const distance = scroll - chapter.top
-        const overlap = chapter.pinned && chapter.hasNext ? viewport : 0
-        const inView = distance > -viewport && distance < chapter.height - overlap
+        const inView = distance > -viewport && distance < chapter.height - chapter.overlap
         if (chapter.sequence) {
           publishHomeChapterProgress(chapter.track, {
             progress: chapter.pinned ? clamp(distance / chapter.hold) : 0,
@@ -160,7 +163,7 @@ export function HomeStory() {
     }
 
     function handleScroll() {
-      if (reducedMode === reduced.matches && wideMode === wide.matches) recordChapter()
+      if (reducedMode === reduced.matches && wideMode === wide.matches && compactMode === compact.matches) recordChapter()
       if (!reduced.matches) requestDraw()
     }
 
@@ -168,7 +171,8 @@ export function HomeStory() {
       viewport = window.innerHeight
       for (const chapter of chapters) {
         for (const layer of chapter.layers) reset(layer)
-        chapter.track.toggleAttribute("data-story-pinned", !reduced.matches && wide.matches && !chapter.independent)
+        const canPin = wide.matches || (compact.matches && chapter.track.id === "services")
+        chapter.track.toggleAttribute("data-story-pinned", !reduced.matches && canPin && !chapter.independent)
       }
       // Measure the enhanced layout, where the storyboard and final grid share one stage.
       for (const chapter of chapters) {
@@ -181,7 +185,8 @@ export function HomeStory() {
       chapters.forEach(chapter => {
         chapter.top = chapter.track.getBoundingClientRect().top + scroll
         chapter.height = chapter.track.offsetHeight
-        chapter.hold = chapter.height - chapter.scene.offsetHeight - (chapter.hasNext ? viewport : 0)
+        chapter.overlap = chapter.pinned && chapter.hasNext && wide.matches ? viewport : 0
+        chapter.hold = chapter.height - chapter.scene.offsetHeight - chapter.overlap
         if (chapter.sequence) setHomeChapterRange(chapter.track, chapter.top, chapter.hold)
         for (const layer of chapter.layers) {
           const bounds = layer.element.getBoundingClientRect()
@@ -207,9 +212,10 @@ export function HomeStory() {
     }
 
     function updatePreference() {
-      if (reducedMode === reduced.matches && wideMode === wide.matches) return
+      if (reducedMode === reduced.matches && wideMode === wide.matches && compactMode === compact.matches) return
       reducedMode = reduced.matches
       wideMode = wide.matches
+      compactMode = compact.matches
       measure(activeChapter)
     }
 
@@ -229,7 +235,7 @@ export function HomeStory() {
     }
 
     // Native fragment scrolling may have started before the pinned tracks take up space.
-    const initialAnchor = wideMode && !reducedMode
+    const initialAnchor = (wideMode || compactMode) && !reducedMode
       ? chapters.find(chapter => location.hash === `#${chapter.track.id}`)
       : undefined
     const resize = new ResizeObserver(handleResize)
@@ -237,6 +243,7 @@ export function HomeStory() {
     measure(initialAnchor)
     reduced.addEventListener("change", updatePreference)
     wide.addEventListener("change", updatePreference)
+    compact.addEventListener("change", updatePreference)
     window.addEventListener("scroll", handleScroll, { passive: true })
     window.addEventListener("resize", handleResize)
     story.addEventListener("focusin", handleFocus)
@@ -248,6 +255,7 @@ export function HomeStory() {
       resize.disconnect()
       reduced.removeEventListener("change", updatePreference)
       wide.removeEventListener("change", updatePreference)
+      compact.removeEventListener("change", updatePreference)
       window.removeEventListener("scroll", handleScroll)
       window.removeEventListener("resize", handleResize)
       story.removeEventListener("focusin", handleFocus)

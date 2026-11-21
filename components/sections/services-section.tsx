@@ -121,6 +121,7 @@ export function ServicesSection() {
   const [active, setActive] = useState(0)
   const [enhanced, setEnhanced] = useState(false)
   const [pinned, setPinned] = useState(false)
+  const [wideLayout, setWideLayout] = useState(false)
 
   useEffect(() => {
     const viewport = viewportRef.current
@@ -129,6 +130,7 @@ export function ServicesSection() {
     if (!viewport || !rail || !chapter) return
 
     const cards = Array.from(rail.children) as HTMLElement[]
+    const wide = window.matchMedia("(min-width: 64rem)")
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)")
     let chapterProgress = 0
     let isPinned = chapter.hasAttribute("data-story-pinned")
@@ -143,20 +145,26 @@ export function ServicesSection() {
       setActive(index)
     }
 
+    const clearTransforms = () => {
+      rail.style.removeProperty("transform")
+      cards.forEach((card) => card.style.removeProperty("transform"))
+    }
+
     const draw = () => {
       if (!isPinned || !isVisible || !spacing || chapterProgress === drawnProgress) return
       drawnProgress = chapterProgress
       const spread = clamp(chapterProgress / spreadEnd)
       const spreadEase = spread * spread * (3 - 2 * spread)
       const position = clamp((chapterProgress - spreadEnd) / (lastStop - spreadEnd)) * lastIndex
+      const fanSize = wide.matches ? 1 : 0.45
       rail.style.transform = `translate3d(${-position * spacing}px, 0, 0)`
       cards.forEach((card, index) => {
         const [fanX, fanY, fanTilt, fanScale] = fan[index]
         const offset = index - position
         const distance = Math.min(1, Math.abs(offset))
-        const x = mix(fanX - index * spacing, 0, spreadEase)
-        const y = mix(fanY, distance * 16, spreadEase)
-        const tilt = mix(fanTilt, Math.sign(offset) * distance * 5, spreadEase)
+        const x = mix(fanX * fanSize - index * spacing, 0, spreadEase)
+        const y = mix(fanY, distance * 16, spreadEase) * fanSize
+        const tilt = mix(fanTilt, Math.sign(offset) * distance * 5, spreadEase) * fanSize
         const scale = mix(fanScale, 1 - distance * 0.06, spreadEase)
         card.style.transform = `translate3d(${x}px, ${y}px, 0) rotate(${tilt}deg) scale(${scale})`
       })
@@ -164,7 +172,7 @@ export function ServicesSection() {
     }
 
     const syncNativeScroll = () => {
-      if (isPinned || !spacing) return
+      if (!wide.matches || isPinned || !spacing) return
       updateActive(Math.min(lastIndex, Math.round(viewport.scrollLeft / spacing)))
     }
 
@@ -177,11 +185,11 @@ export function ServicesSection() {
         setPinned(pinned)
         if (pinned) {
           viewport.scrollLeft = 0
+          spacing = cards[1].offsetLeft - cards[0].offsetLeft
           drawnProgress = -1
         } else {
-          rail.style.removeProperty("transform")
-          cards.forEach((card) => card.style.removeProperty("transform"))
-          viewport.scrollLeft = selected * spacing
+          clearTransforms()
+          if (wide.matches) viewport.scrollLeft = selected * (cards[1].offsetLeft - cards[0].offsetLeft)
         }
       }
       draw()
@@ -192,6 +200,7 @@ export function ServicesSection() {
     }
 
     const measure = () => {
+      if (!isPinned && !wide.matches) return
       spacing = cards[1].offsetLeft - cards[0].offsetLeft
       drawnProgress = -1
       if (isPinned) draw()
@@ -202,9 +211,14 @@ export function ServicesSection() {
       if (index < 0 || index > lastIndex) return
       if (isPinned) {
         goToChapterProgress(chapter, mix(spreadEnd, lastStop, index / lastIndex))
-      } else {
+      } else if (wide.matches) {
         viewport.scrollTo({ left: index * spacing, behavior: reducedMotion.matches ? "instant" : "smooth" })
       }
+    }
+
+    const syncLayout = () => {
+      setWideLayout(wide.matches)
+      measure()
     }
 
     const resize = typeof ResizeObserver === "function" ? new ResizeObserver(measure) : undefined
@@ -212,17 +226,20 @@ export function ServicesSection() {
     else window.addEventListener("resize", measure)
     chapter.addEventListener("homechapterprogress", onChapterProgress)
     viewport.addEventListener("scroll", syncNativeScroll, { passive: true })
+    wide.addEventListener("change", syncLayout)
     setEnhanced(true)
     setPinned(isPinned)
     const initialProgress = getHomeChapterProgress(chapter)
     if (initialProgress) syncChapter(initialProgress)
-    measure()
+    syncLayout()
 
     return () => {
+      clearTransforms()
       resize?.disconnect()
       window.removeEventListener("resize", measure)
       chapter.removeEventListener("homechapterprogress", onChapterProgress)
       viewport.removeEventListener("scroll", syncNativeScroll)
+      wide.removeEventListener("change", syncLayout)
     }
   }, [])
 
@@ -253,23 +270,22 @@ export function ServicesSection() {
             <span aria-label={`Service ${active + 1} of ${services.length}`} className="ml-2 font-mono text-sm text-muted-foreground">
               {active + 1} / {services.length}
             </span>
+            <span className={styles.scrollCue} aria-hidden="true">Scroll to explore</span>
           </div>
-          <a href="#contact" className="inline-flex w-fit items-center gap-2 rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground hover:opacity-90">
-            Get in touch <ArrowRightIcon aria-hidden="true" className="size-4" />
-          </a>
         </div>
-        <div ref={viewportRef} className={styles.viewport} role="region" tabIndex={pinned ? -1 : 0} aria-label="Service cards">
-          <ol ref={railRef} className={styles.rail}>
+        <div ref={viewportRef} className={styles.viewport} role={wideLayout ? "region" : undefined}
+          tabIndex={wideLayout && !pinned ? 0 : undefined} aria-label={wideLayout ? "Service cards" : undefined}>
+          <ol ref={railRef} className={styles.rail} role="list">
             {services.map(({ icon: Icon, ...service }, index) => (
               <li
                 key={service.title}
                 className={styles.slide}
                 style={{ "--stack-order": services.length - index } as CSSProperties}
-                aria-current={index === active ? "true" : undefined}
+                aria-current={(pinned || wideLayout) && index === active ? "true" : undefined}
                 data-service-card
               >
                 <Card className={styles.card}>
-                  <div>
+                  <div className={styles.cardCopy}>
                     <Icon aria-hidden="true" className="mb-5 size-9 text-muted-foreground" />
                     <p className="mb-2 font-mono text-xs text-muted-foreground">{service.subtitle}</p>
                     <h3 className="text-2xl font-black leading-tight tracking-tight">{service.title}</h3>
@@ -288,6 +304,9 @@ export function ServicesSection() {
             ))}
           </ol>
         </div>
+        <a href="#contact" className={`${styles.contactLink} inline-flex min-h-11 w-fit items-center gap-2 rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground hover:opacity-90`}>
+          Get in touch <ArrowRightIcon aria-hidden="true" className="size-4" />
+        </a>
       </div>
     </section>
   )

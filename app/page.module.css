@@ -20,6 +20,27 @@
   display: none;
 }
 
+@media (width < 64rem) {
+  .chapter[data-story-chapter="services"] > section {
+    min-block-size: auto;
+  }
+}
+
+@media (width < 64rem) and (prefers-reduced-motion: no-preference) {
+  .chapter[data-story-chapter="services"][data-story-pinned] > section {
+    position: sticky;
+    inset-block-start: 0;
+    min-block-size: 100svh;
+  }
+
+  .chapter[data-story-chapter="services"][data-story-pinned]::after {
+    content: "";
+    display: block;
+    block-size: 220svh;
+    pointer-events: none;
+  }
+}
+
 @media (min-width: 64rem) and (min-height: 38rem) and (prefers-reduced-motion: no-preference) {
   .sections[data-pinned-story] {
     overflow-anchor: none;

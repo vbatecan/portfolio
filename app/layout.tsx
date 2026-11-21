@@ -37,7 +37,7 @@ export default function RootLayout({
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>
           <SideNav />
           <SmoothScroll />
-          <div className="pl-12 sm:pl-16">{children}</div>
+          <div className="lg:pl-16">{children}</div>
           <CursorLens />
         </ThemeProvider>
       </body>

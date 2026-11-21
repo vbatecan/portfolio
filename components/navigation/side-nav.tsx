@@ -2,9 +2,9 @@
 
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState, type MouseEvent } from "react"
 import { useTheme } from "next-themes"
-import { AcademicCapIcon, BriefcaseIcon, ChartBarIcon, CodeBracketIcon, EnvelopeIcon, FolderIcon, HomeIcon, MoonIcon, SunIcon } from "@heroicons/react/24/outline"
+import { AcademicCapIcon, Bars3Icon, BriefcaseIcon, ChartBarIcon, CodeBracketIcon, EnvelopeIcon, FolderIcon, HomeIcon, MoonIcon, SunIcon } from "@heroicons/react/24/outline"
 
 const sections = [
   { id: "home", name: "Introduction", icon: HomeIcon },
@@ -21,6 +21,8 @@ const control = "grid size-11 shrink-0 place-items-center rounded-lg hover:bg-mu
 export function SideNav() {
   const path = usePathname()
   const [section, setSection] = useState("home")
+  const menu = useRef<HTMLDetailsElement>(null)
+  const menuTrigger = useRef<HTMLElement>(null)
   const { resolvedTheme, setTheme } = useTheme()
   const [mounted, setMounted] = useState(false)
   const dark = mounted && resolvedTheme === "dark"
@@ -69,25 +71,66 @@ export function SideNav() {
     }
   }, [path])
 
+  function closeMenu(focusTarget = menuTrigger.current) {
+    if (menu.current) menu.current.open = false
+    focusTarget?.focus({ preventScroll: true })
+  }
+
+  function followMenuLink(event: MouseEvent<HTMLAnchorElement>, id: string) {
+    if (event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return
+    closeMenu(path === "/" ? document.getElementById(id) ?? menuTrigger.current : menuTrigger.current)
+  }
+
+  function renderLinks(mobile: boolean) {
+    return sections.map(({ id, name, icon: Icon }) => {
+      const active = path === "/" ? section === id : path === "/projects" && id === "projects"
+      const label = mobile ? name : undefined
+      const linkClass = mobile
+        ? "flex min-h-11 items-center gap-3 rounded-lg px-3 text-sm font-semibold hover:bg-muted focus-visible:outline-2 focus-visible:outline-ring"
+        : control
+      return (
+        <Link key={id} href={`/#${id}`} aria-label={mobile ? undefined : name} title={mobile ? undefined : name}
+          aria-current={active ? "location" : undefined}
+          onClick={mobile ? (event) => followMenuLink(event, id) : undefined}
+          className={`${linkClass} ${active ? "bg-foreground text-background hover:bg-foreground" : "text-muted-foreground"}`}>
+          <Icon aria-hidden="true" className="size-5 shrink-0" />
+          {label}
+        </Link>
+      )
+    })
+  }
+
+  const themeToggle = (
+    <button type="button" className={control} aria-label={themeLabel} title={themeLabel}
+      onClick={() => setTheme(dark ? "light" : "dark")}>
+      {dark ? <SunIcon aria-hidden="true" className="size-5" /> : <MoonIcon aria-hidden="true" className="size-5" />}
+    </button>
+  )
+
   return (
-    <nav aria-label="Portfolio" data-lenis-prevent-wheel className="fixed inset-y-0 left-0 z-40 flex w-12 flex-col items-center overflow-y-auto border-r border-border bg-background py-2 text-foreground sm:w-16">
-      <div className="my-auto flex flex-col items-center gap-1">
-        {sections.map(({ id, name, icon: Icon }) => {
-          const active = path === "/" ? section === id : path === "/projects" && id === "projects"
-          return (
-            <Link key={id} href={`/#${id}`} aria-label={name} title={name} aria-current={active ? "location" : undefined}
-              className={`${control} ${active ? "bg-foreground text-background hover:bg-foreground" : "text-muted-foreground"}`}>
-              <Icon aria-hidden="true" className="size-5" />
-            </Link>
-          )
-        })}
-        <div className="mt-1 border-t border-border pt-2">
-          <button type="button" className={control} aria-label={themeLabel} title={themeLabel}
-            onClick={() => setTheme(dark ? "light" : "dark")}>
-            {dark ? <SunIcon className="size-5" /> : <MoonIcon className="size-5" />}
-          </button>
+    <>
+      <header className="relative z-40 flex items-center justify-between border-b border-border bg-background px-4 py-1 text-foreground lg:hidden"
+        onKeyDown={(event) => {
+          if (event.key !== "Escape" || !menu.current?.open) return
+          event.preventDefault()
+          closeMenu()
+        }}>
+        <details ref={menu}>
+          <summary ref={menuTrigger} className="flex min-h-11 cursor-pointer list-none items-center gap-2 rounded-lg px-2 text-sm font-semibold hover:bg-muted focus-visible:outline-2 focus-visible:outline-ring [&::-webkit-details-marker]:hidden">
+            <Bars3Icon aria-hidden="true" className="size-5" /> Menu
+          </summary>
+          <nav aria-label="Portfolio" className="absolute inset-x-0 top-full grid max-h-[calc(100dvh-3.5rem)] gap-1 overflow-y-auto border-b border-border bg-background p-3 shadow-lg sm:grid-cols-2">
+            {renderLinks(true)}
+          </nav>
+        </details>
+        {themeToggle}
+      </header>
+      <nav aria-label="Portfolio" data-lenis-prevent-wheel className="fixed inset-y-0 left-0 z-40 hidden w-16 flex-col items-center overflow-y-auto border-r border-border bg-background py-2 text-foreground lg:flex">
+        <div className="my-auto flex flex-col items-center gap-1">
+          {renderLinks(false)}
+          <div className="mt-1 border-t border-border pt-2">{themeToggle}</div>
         </div>
-      </div>
-    </nav>
+      </nav>
+    </>
   )
 }

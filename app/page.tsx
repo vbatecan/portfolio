@@ -29,7 +29,7 @@ export default function Portfolio() {
       <main className={styles.sections} data-portfolio-story>
         <HomeStory />
         {chapters.map(({ id, Section, sequence, independent }) => (
-          <div key={id} id={id} className={styles.chapter} data-story-chapter={id}
+          <div key={id} id={id} tabIndex={-1} className={styles.chapter} data-story-chapter={id}
             data-story-sequence={sequence ? "" : undefined} data-story-independent={independent ? "" : undefined}>
             <Section />
           </div>
